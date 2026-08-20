@@ -5,13 +5,17 @@ This file records only information that still needs client confirmation or appro
 ## Global profile and publishing
 
 - [ ] Confirm the canonical production domain.
+- [ ] Supply the approved short and full biography copy.
 - [ ] Supply the approved public résumé file or public résumé URL.
 - [ ] Confirm any additional public social links beyond LinkedIn.
+- [ ] Confirm any public location wording and availability/contact call to action.
+- [ ] Confirm the final SEO title and description.
 - [ ] Confirm final social-share image/art direction.
 - [ ] Confirm the preferred accessible description and approved crop(s) for the supplied portrait.
 
 ## Project media
 
+- [ ] Confirm the editorial status, work type and approved short summary for each launch project.
 - [ ] Supply approved cover and gallery media for each featured project.
 - [ ] Supply final public video URLs and public project links where available.
 - [ ] Confirm meaningful alt-text context for approved project media.
@@ -40,7 +44,6 @@ This file records only information that still needs client confirmation or appro
 
 ## CMS setup
 
-- [ ] Provide or authorise creation of the Sanity project and production dataset.
-- [ ] Confirm whether Studio should live in this repository under `/studio` and how it should be hosted/access-controlled.
+- [ ] Provide or authorise creation of the Sanity project and public-readable production dataset.
+- [ ] Confirm the separate Studio hosting option and preferred Studio URL.
 - [ ] Confirm which editors need Studio access; do not put credentials in Git.
-

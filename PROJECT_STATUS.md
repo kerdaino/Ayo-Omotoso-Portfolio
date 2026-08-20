@@ -2,7 +2,7 @@
 
 ## Current phase
 
-Phase 2C — Sanity Connection & Verified Foundation Seed (complete; awaiting review).
+Phase 2D — Public Homepage Visual Foundation (complete; awaiting review).
 
 ## Completed work
 
@@ -30,10 +30,17 @@ Phase 2C — Sanity Connection & Verified Foundation Seed (complete; awaiting re
 - Uploaded the supplied original `public/images/ayo-portrait.jpeg` asset and attached it to Profile with factual alt text.
 - Verified the prepared public query functions against published content: Profile, Experience and LinkedIn resolve; all Project queries remain empty by design.
 - Verified the local Studio compiles and serves, with Profile, Projects, Experience and Social Links represented in its configured structure.
+- Replaced the foundation placeholder with a production header, Sanity-driven editorial hero and verified proof strip.
+- Translated the approved beige concept into a warm paper canvas, oversized mixed display typography, restrained pink/orange/aqua/cobalt/lime accents and lightweight collage details.
+- Added an export-compatible responsive Sanity portrait using explicit 480px, 800px and 1100px CDN crops; the local portrait is not used by rendered production markup.
+- Added a small client-only pointer response for decorative hero layers while keeping all content, CMS reads and composition server-rendered.
+- Added structural reduced-motion handling that removes entrance and parallax transforms, plus coarse-pointer/mobile layouts that reduce overlap and disable pointer movement.
+- Added honest pending states for Selected Work, About and Resume instead of broken links; Contact uses the verified Profile email.
+- Added contextual proof labels that distinguish Ayo's career experience from verified WorkSpan contributions.
 
 ## Next action
 
-Stop for review. Do not begin homepage, project UI, project content entry, deployment, webhook configuration or domain work without explicit approval.
+Stop for visual review. Do not begin Selected Work, About, the remaining homepage, project UI/content, deployment, webhook configuration or domain work without explicit approval.
 
 ## Test/build status
 
@@ -48,19 +55,26 @@ Stop for review. Do not begin homepage, project UI, project content entry, deplo
 - Browser screenshot/responsive QA: not run because no browser surface was available in this environment; requires human/browser review.
 - Phase 2B disconnected CMS fallback remains available when the project ID is absent.
 - Environment note: this runner's system resolver could not resolve the project-specific Sanity API hostname even though public DNS did. Live verification used a temporary process-only resolver bridge that was removed afterward; no DNS workaround is part of the repository.
+- Phase 2D `npm run lint`: passed (2026-08-21).
+- Phase 2D `npm run typecheck`: passed (2026-08-21).
+- Phase 2D `npm run build`: passed from a clean generated cache; `/` and `/_not-found` remain static exports (2026-08-21).
+- Phase 2D `git diff --check`: passed (2026-08-21).
+- Static HTML inspection: passed for CMS identity, hero content, Sanity portrait URL/alt, verified email contact and all four proof points (2026-08-21).
+- Static HTTP smoke check: passed with `200 OK` and the expected production markup (2026-08-21).
 
 ## Unresolved technical decisions
 
 - Confirm the canonical production domain before canonical and social metadata are completed.
 - Confirm the Studio hosting preference, Studio URL and authorised editors.
 - Complete one signed-in human Studio walkthrough (Profile singleton, project groupings, Experience and Social Links) because an interactive browser surface was unavailable here.
+- Complete Phase 2D visual QA at 375px, 430px, 768px, 1024px, 1280px and 1440px+; browser automation remained unavailable in this environment.
 - Confirm whether the Cloudflare Pages build should use the static `out/` directory directly or an organisation-specific deployment adapter/workflow.
-- Motion is intentionally not installed. Add it only when an approved interaction needs more than native CSS.
-- Full primary navigation is deferred until its page/section destinations exist, avoiding dead links in the Phase 2A shell.
+- Motion remains intentionally uninstalled; the approved first interaction layer uses native pointer events and CSS only.
+- Activate the pending Selected Work, About and Resume controls only when their real destinations or approved résumé resource exist.
 
 ## Boundaries observed
 
-- No homepage sections, project pages, Project documents, Studio deployment, public-site deployment or webhook configuration were added.
+- No Selected Work, About, capability, experience, CTA/footer, project page, Project document, Studio deployment, public-site deployment or webhook configuration was added.
 - No client facts, project metrics, case-study outcomes, collaborators, media or URLs were invented.
 - No server actions, runtime API routes, request middleware, dynamic server rendering or draft-preview dependencies were introduced.
 - No read token or authenticated query dependency was added to the public frontend.

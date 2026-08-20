@@ -1,26 +1,48 @@
+import { SiteHeader } from "@/components/layout/SiteHeader";
+import { Hero } from "@/components/sections/Hero";
+import { ProofStrip } from "@/components/sections/ProofStrip";
 import { Container } from "@/components/ui/Container";
-import { siteProfile } from "@/lib/site";
+import { getProfile } from "@/sanity/queries";
 
-export default function Home() {
-  const [opening, closing] = siteProfile.heroStatement.split("Many Worlds");
+export default async function Home() {
+  const profile = await getProfile().catch((error: unknown) => {
+    console.error(
+      "The published Sanity Profile could not be loaded during this build.",
+      error,
+    );
+    return null;
+  });
+
+  if (!profile?.portrait || !profile.portraitAlt) {
+    return (
+      <>
+        <SiteHeader />
+        <main id="main-content" className="cms-state">
+          <Container size="content">
+            <p className="cms-state__eyebrow">Portfolio content unavailable</p>
+            <h1>Ayo&apos;s published profile is awaiting CMS configuration.</h1>
+            <p>
+              No placeholder biography or portrait has been substituted. Please
+              reconnect the published Sanity Profile and rebuild the site.
+            </p>
+          </Container>
+        </main>
+      </>
+    );
+  }
 
   return (
-    <main id="main-content" className="foundation-page">
-      <section aria-labelledby="foundation-title">
-        <Container className="foundation-intro">
-          <p className="eyebrow">{siteProfile.professionalTitle}</p>
-          <h1 id="foundation-title" className="display-title">
-            {opening}
-            <span>{`Many Worlds${closing}`}</span>
-          </h1>
-          <p className="foundation-intro__supporting">{siteProfile.supportingLine}</p>
-          <div className="foundation-intro__accent" aria-hidden="true">
-            <span />
-            <span />
-            <span />
-          </div>
-        </Container>
-      </section>
-    </main>
+    <>
+      <SiteHeader
+        publicName={profile.publicName}
+        professionalTitle={profile.professionalTitle}
+        email={profile.email}
+        resumeUrl={profile.resume?.fileUrl ?? profile.resume?.externalUrl}
+      />
+      <main id="main-content">
+        <Hero profile={profile} />
+        <ProofStrip />
+      </main>
+    </>
   );
 }

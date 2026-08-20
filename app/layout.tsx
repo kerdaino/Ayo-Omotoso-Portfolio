@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Bebas_Neue, Inter, Playfair_Display } from "next/font/google";
 
-import { SiteHeader } from "@/components/layout/SiteHeader";
 import { siteDescription, siteProfile } from "@/lib/site";
 
 import "./globals.css";
@@ -39,7 +38,9 @@ export const viewport: Viewport = {
   themeColor: "#f5f0e6",
 };
 
-export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+export default function RootLayout({
+  children,
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <html
       lang="en"
@@ -49,10 +50,8 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <a className="skip-link" href="#main-content">
           Skip to main content
         </a>
-        <SiteHeader />
         {children}
       </body>
     </html>
   );
 }
-

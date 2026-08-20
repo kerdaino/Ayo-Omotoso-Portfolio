@@ -5,13 +5,13 @@ This file records only information that still needs client confirmation or appro
 ## Global profile and publishing
 
 - [ ] Confirm the canonical production domain.
-- [ ] Supply the approved short and full biography copy.
+- [ ] Supply approved full biography copy if the later About experience needs more than the verified short biography.
 - [ ] Supply the approved public résumé file or public résumé URL.
 - [ ] Confirm any additional public social links beyond LinkedIn.
 - [ ] Confirm any public location wording and availability/contact call to action.
 - [ ] Confirm the final SEO title and description.
 - [ ] Confirm final social-share image/art direction.
-- [ ] Confirm the preferred accessible description and approved crop(s) for the supplied portrait.
+- [ ] Confirm whether any additional portrait crops are required beyond the uploaded original; current alt text is `Portrait of Ayo Omotoso.`
 
 ## Project media
 
@@ -40,10 +40,8 @@ This file records only information that still needs client confirmation or appro
 ## Experience
 
 - [ ] Supply approved short role descriptions for the curated experience entries.
-- [ ] Confirm the preferred public date granularity for overlapping current roles.
 
 ## CMS setup
 
-- [ ] Provide or authorise creation of the Sanity project and public-readable production dataset.
 - [ ] Confirm the separate Studio hosting option and preferred Studio URL.
 - [ ] Confirm which editors need Studio access; do not put credentials in Git.

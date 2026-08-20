@@ -7,11 +7,13 @@
     "build": "next build",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
-    "studio:dev": "cd studio && sanity dev",
-    "sanity:check": "cd studio && sanity schemas validate --level warning",
-    "sanity:schema": "cd studio && sanity schemas extract --path schema.json --enforce-required-fields --force",
-    "sanity:types": "cd studio && sanity typegen generate",
-    "sanity:validate": "npm run sanity:check && npm run sanity:schema && npm run sanity:types"
+    "studio:dev": "node scripts/run-sanity.mjs dev",
+    "sanity:check": "node scripts/run-sanity.mjs schemas validate --level warning",
+    "sanity:schema": "node scripts/run-sanity.mjs schemas extract --path schema.json --enforce-required-fields --force",
+    "sanity:types": "node scripts/run-sanity.mjs typegen generate",
+    "sanity:validate": "npm run sanity:check && npm run sanity:schema && npm run sanity:types",
+    "sanity:seed": "node scripts/run-sanity.mjs exec ../scripts/seed-sanity-foundation.ts --with-user-token",
+    "sanity:seed:commit": "node scripts/run-sanity.mjs exec ../scripts/seed-sanity-foundation.ts --with-user-token -- --commit"
   },
   "engines": {
     "node": ">=22.12.0"

@@ -13,3 +13,4 @@ coverage/
 .vercel/
 .wrangler/
 studio/dist/
+studio/.sanity/

@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { MobileNavigation } from "@/components/layout/MobileNavigation";
 import { Container } from "@/components/ui/Container";
 
 type SiteHeaderProps = {
@@ -46,7 +47,10 @@ export function SiteHeader({
           <span className="site-brand">Portfolio</span>
         )}
 
-        <nav className="site-nav" aria-label="Primary navigation">
+        <nav
+          className="site-nav site-nav--desktop"
+          aria-label="Primary navigation"
+        >
           <ul className="site-nav__list">
             <li>
               <PendingNavigationItem>Selected Work</PendingNavigationItem>
@@ -77,6 +81,8 @@ export function SiteHeader({
             </li>
           </ul>
         </nav>
+
+        <MobileNavigation email={email} resumeUrl={resumeUrl} />
       </Container>
     </header>
   );

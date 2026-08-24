@@ -2,7 +2,7 @@
 
 ## Current phase
 
-Phase 2D — Public Homepage Visual Foundation (complete; awaiting review).
+Phase 2D.1 — Hero / Header Visual Refinement (complete; awaiting review).
 
 ## Completed work
 
@@ -37,10 +37,15 @@ Phase 2D — Public Homepage Visual Foundation (complete; awaiting review).
 - Added structural reduced-motion handling that removes entrance and parallax transforms, plus coarse-pointer/mobile layouts that reduce overlap and disable pointer movement.
 - Added honest pending states for Selected Work, About and Resume instead of broken links; Contact uses the verified Profile email.
 - Added contextual proof labels that distinguish Ayo's career experience from verified WorkSpan contributions.
+- Tightened the desktop hero into one centred composition by reducing excess padding and grid stretch, increasing the headline/header hierarchy and scaling the portrait responsively against the viewport height.
+- Reconnected the desktop actions to the supporting copy while retaining their honest pending state until Selected Work and About are approved.
+- Replaced the tall mobile identity/navigation stack with a compact Ayo Omotoso and Menu row; the professional title remains in the hero as the primary identity moment.
+- Added a small accessible mobile navigation disclosure with a labelled button, `aria-expanded`, `aria-controls`, Escape-to-close handling, normal destination links and an obvious Contact action.
+- Refined the mobile hero rhythm and CTA proportions without shrinking or replacing the Sanity portrait collage, changing the headline treatment or altering the proof-strip structure.
 
 ## Next action
 
-Stop for visual review. Do not begin Selected Work, About, the remaining homepage, project UI/content, deployment, webhook configuration or domain work without explicit approval.
+Stop for Phase 2D.1 visual review. Do not begin Selected Work, About, the remaining homepage, project UI/content, deployment, webhook configuration or domain work without explicit approval.
 
 ## Test/build status
 
@@ -61,13 +66,19 @@ Stop for visual review. Do not begin Selected Work, About, the remaining homepag
 - Phase 2D `git diff --check`: passed (2026-08-21).
 - Static HTML inspection: passed for CMS identity, hero content, Sanity portrait URL/alt, verified email contact and all four proof points (2026-08-21).
 - Static HTTP smoke check: passed with `200 OK` and the expected production markup (2026-08-21).
+- Phase 2D.1 `npm run lint`: passed (2026-08-24).
+- Phase 2D.1 `npm run typecheck`: passed (2026-08-24).
+- Phase 2D.1 `npm run build`: passed; `/` and `/_not-found` remain static exports (2026-08-24).
+- Phase 2D.1 `git diff --check`: passed (2026-08-24).
+- Phase 2D.1 development and exported-static HTTP smoke checks: passed with `200 OK`; both responses retained the CMS identity, hero statement, Sanity portrait, collapsed menu button, verified contact and all four proof points (2026-08-24).
+- Phase 2D.1 browser automation: unavailable because no in-app or extension browser was connected; manual viewport review remains required at 350px, 375px, 430px, 768px, 1024px, 1280px and 1440px+ (2026-08-24).
 
 ## Unresolved technical decisions
 
 - Confirm the canonical production domain before canonical and social metadata are completed.
 - Confirm the Studio hosting preference, Studio URL and authorised editors.
 - Complete one signed-in human Studio walkthrough (Profile singleton, project groupings, Experience and Social Links) because an interactive browser surface was unavailable here.
-- Complete Phase 2D visual QA at 375px, 430px, 768px, 1024px, 1280px and 1440px+; browser automation remained unavailable in this environment.
+- Complete Phase 2D.1 visual QA at 350px, 375px, 430px, 768px, 1024px, 1280px and 1440px+; browser automation remained unavailable in this environment.
 - Confirm whether the Cloudflare Pages build should use the static `out/` directory directly or an organisation-specific deployment adapter/workflow.
 - Motion remains intentionally uninstalled; the approved first interaction layer uses native pointer events and CSS only.
 - Activate the pending Selected Work, About and Resume controls only when their real destinations or approved résumé resource exist.

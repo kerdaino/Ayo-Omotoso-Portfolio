@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useRef, useState, type KeyboardEvent } from "react";
 
 type MobileNavigationProps = {
@@ -62,7 +63,13 @@ export function MobileNavigation({
         >
           <ul className="mobile-nav__list">
             <li>
-              <PendingNavigationItem>Selected Work</PendingNavigationItem>
+              <Link
+                className="site-nav__link"
+                href="/#selected-work"
+                onClick={() => setIsOpen(false)}
+              >
+                Selected Work
+              </Link>
             </li>
             <li>
               <PendingNavigationItem>About</PendingNavigationItem>

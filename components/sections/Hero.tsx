@@ -134,7 +134,7 @@ export function Hero({ profile }: HeroProps) {
         </ParallaxArtwork>
 
         <div className="hero__actions" aria-label="Portfolio actions">
-          <ActionLink>View Selected Work</ActionLink>
+          <ActionLink href="#selected-work">View Selected Work</ActionLink>
           <ActionLink variant="secondary">About Ayo</ActionLink>
         </div>
       </Container>

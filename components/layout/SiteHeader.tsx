@@ -53,7 +53,9 @@ export function SiteHeader({
         >
           <ul className="site-nav__list">
             <li>
-              <PendingNavigationItem>Selected Work</PendingNavigationItem>
+              <Link className="site-nav__link" href="/#selected-work">
+                Selected Work
+              </Link>
             </li>
             <li>
               <PendingNavigationItem>About</PendingNavigationItem>

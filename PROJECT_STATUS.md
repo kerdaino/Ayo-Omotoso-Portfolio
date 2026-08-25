@@ -2,7 +2,7 @@
 
 ## Current phase
 
-Phase 2D.1 — Hero / Header Visual Refinement (complete; awaiting review).
+Phase 2E.1 — Selected Work Architecture (complete; awaiting review).
 
 ## Completed work
 
@@ -42,10 +42,17 @@ Phase 2D.1 — Hero / Header Visual Refinement (complete; awaiting review).
 - Replaced the tall mobile identity/navigation stack with a compact Ayo Omotoso and Menu row; the professional title remains in the hero as the primary identity moment.
 - Added a small accessible mobile navigation disclosure with a labelled button, `aria-expanded`, `aria-controls`, Escape-to-close handling, normal destination links and an obvious Contact action.
 - Refined the mobile hero rhythm and CTA proportions without shrinking or replacing the Sanity portrait collage, changing the headline treatment or altering the proof-strip structure.
+- Added a server-rendered Selected Work section below the proof strip using the existing published-only `getFeaturedProjects()` and `getAllProjects()` queries.
+- Added featured-first deduplication and separate Culture and Commerce groups; category groups are omitted when they have no published projects.
+- Added a reusable project card that supports the published cover image and alt text, title, category, work type, year, short summary, factual editorial status and CSS-only hover/focus treatment.
+- Added an explicit project-image unavailable state rather than substituting fake media when a cover or meaningful alt text has not been published.
+- Added a quiet homepage CMS empty state because the current dataset still has no published Project documents.
+- Added the static-export-compatible `/work/[slug]` foundation with build-time params from published project slugs, item metadata and a deliberately minimal project summary/status page; full case-study content remains deferred.
+- Activated the existing Selected Work header, mobile-menu and hero controls so they now lead to the real homepage section; About and Resume remain honest pending states.
 
 ## Next action
 
-Stop for Phase 2D.1 visual review. Do not begin Selected Work, About, the remaining homepage, project UI/content, deployment, webhook configuration or domain work without explicit approval.
+Stop for Phase 2E.1 review. Do not begin full case-study pages, About, the remaining homepage, deployment, webhook configuration or domain work without explicit approval.
 
 ## Test/build status
 
@@ -72,6 +79,11 @@ Stop for Phase 2D.1 visual review. Do not begin Selected Work, About, the remain
 - Phase 2D.1 `git diff --check`: passed (2026-08-24).
 - Phase 2D.1 development and exported-static HTTP smoke checks: passed with `200 OK`; both responses retained the CMS identity, hero statement, Sanity portrait, collapsed menu button, verified contact and all four proof points (2026-08-24).
 - Phase 2D.1 browser automation: unavailable because no in-app or extension browser was connected; manual viewport review remains required at 350px, 375px, 430px, 768px, 1024px, 1280px and 1440px+ (2026-08-24).
+- Phase 2E.1 `npm run lint`: passed (2026-08-24).
+- Phase 2E.1 `npm run typecheck`: passed (2026-08-24).
+- Phase 2E.1 `npm run build`: passed; `/`, `/_not-found` and the slug-ready work route remain statically generated (2026-08-24).
+- Because no Project documents are published, Next.js receives one reserved build-only slug that immediately renders `notFound()`; it is not linked or presented as portfolio content and will disappear from generated params when the first real project is published.
+- Phase 2E.1 exported-static HTTP smoke check: passed with `200 OK`; the homepage includes the Selected Work empty state and working section links, retains all four proof points, and contains no project cards, category groups or reserved-slug links while the CMS is empty (2026-08-24).
 
 ## Unresolved technical decisions
 
@@ -79,13 +91,14 @@ Stop for Phase 2D.1 visual review. Do not begin Selected Work, About, the remain
 - Confirm the Studio hosting preference, Studio URL and authorised editors.
 - Complete one signed-in human Studio walkthrough (Profile singleton, project groupings, Experience and Social Links) because an interactive browser surface was unavailable here.
 - Complete Phase 2D.1 visual QA at 350px, 375px, 430px, 768px, 1024px, 1280px and 1440px+; browser automation remained unavailable in this environment.
+- Complete Selected Work card/category and generated detail-route visual QA when the first approved Project fixtures are published; the current empty dataset can validate only the empty state and route architecture.
 - Confirm whether the Cloudflare Pages build should use the static `out/` directory directly or an organisation-specific deployment adapter/workflow.
 - Motion remains intentionally uninstalled; the approved first interaction layer uses native pointer events and CSS only.
 - Activate the pending Selected Work, About and Resume controls only when their real destinations or approved résumé resource exist.
 
 ## Boundaries observed
 
-- No Selected Work, About, capability, experience, CTA/footer, project page, Project document, Studio deployment, public-site deployment or webhook configuration was added.
+- No About, capability, experience, CTA/footer, full case-study content, Project document, Studio deployment, public-site deployment or webhook configuration was added.
 - No client facts, project metrics, case-study outcomes, collaborators, media or URLs were invented.
 - No server actions, runtime API routes, request middleware, dynamic server rendering or draft-preview dependencies were introduced.
 - No read token or authenticated query dependency was added to the public frontend.

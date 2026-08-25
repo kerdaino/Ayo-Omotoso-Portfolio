@@ -1,17 +1,38 @@
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { Hero } from "@/components/sections/Hero";
 import { ProofStrip } from "@/components/sections/ProofStrip";
+import { SelectedWork } from "@/components/sections/SelectedWork";
 import { Container } from "@/components/ui/Container";
-import { getProfile } from "@/sanity/queries";
+import {
+  getAllProjects,
+  getFeaturedProjects,
+  getProfile,
+} from "@/sanity/queries";
 
 export default async function Home() {
-  const profile = await getProfile().catch((error: unknown) => {
-    console.error(
-      "The published Sanity Profile could not be loaded during this build.",
-      error,
-    );
-    return null;
-  });
+  const [profile, featuredProjects, allProjects] = await Promise.all([
+    getProfile().catch((error: unknown) => {
+      console.error(
+        "The published Sanity Profile could not be loaded during this build.",
+        error,
+      );
+      return null;
+    }),
+    getFeaturedProjects().catch((error: unknown) => {
+      console.error(
+        "Featured projects could not be loaded during this build.",
+        error,
+      );
+      return [];
+    }),
+    getAllProjects().catch((error: unknown) => {
+      console.error(
+        "Published projects could not be loaded during this build.",
+        error,
+      );
+      return [];
+    }),
+  ]);
 
   if (!profile?.portrait || !profile.portraitAlt) {
     return (
@@ -42,6 +63,10 @@ export default async function Home() {
       <main id="main-content">
         <Hero profile={profile} />
         <ProofStrip />
+        <SelectedWork
+          featuredProjects={featuredProjects}
+          allProjects={allProjects}
+        />
       </main>
     </>
   );

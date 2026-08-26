@@ -7,10 +7,41 @@ import { getCliClient } from "sanity/cli";
 const API_VERSION = "2026-08-20";
 const PROFILE_ID = "profile";
 const LINKEDIN_ID = "social-link-linkedin";
+const PROJECT_IDS = [
+  "project-one-take-studio-sessions",
+  "project-becoming-garvicii",
+  "project-masicka-ruger-oxlade-location",
+  "project-guchi-single-covers",
+] as const;
 const PORTRAIT_PATH = resolve(
   process.cwd(),
   "../public/images/ayo-portrait.jpeg",
 );
+
+function textBlock(key: string, text: string) {
+  return {
+    _key: key,
+    _type: "block",
+    style: "normal",
+    markDefs: [],
+    children: [
+      {
+        _key: `${key}-text`,
+        _type: "span",
+        marks: [],
+        text,
+      },
+    ],
+  } as const;
+}
+
+function bulletList(keyPrefix: string, items: readonly string[]) {
+  return items.map((item, index) => ({
+    ...textBlock(`${keyPrefix}-${index + 1}`, item),
+    level: 1,
+    listItem: "bullet",
+  }));
+}
 
 async function main() {
   const shouldCommit = process.argv.includes("--commit");
@@ -102,16 +133,133 @@ async function main() {
     },
   ] as const;
 
+  const projectDocuments = [
+    {
+      _id: PROJECT_IDS[0],
+      _type: "project",
+      title: "One Take Studio Sessions",
+      slug: {
+        _type: "slug",
+        current: "one-take-studio-sessions",
+      },
+      year: 2026,
+      category: "culture",
+      status: "completed",
+      workType: "Studio Sessions / Content Production",
+      role: [
+        textBlock(
+          "role",
+          "Director of Creative Strategy — Engage/MAD",
+        ),
+      ],
+      shortSummary:
+        "A completed Engage Studios session project featuring 11 artists and producing 55 pieces of content across performances and supporting material.",
+      verifiedResults: bulletList("result", [
+        "11 artists",
+        "55 total content pieces",
+        "11 performances",
+        "44 supporting content pieces",
+      ]),
+      featured: true,
+      displayOrder: 1,
+    },
+    {
+      _id: PROJECT_IDS[1],
+      _type: "project",
+      title: "Becoming Garvicii Vlog",
+      slug: {
+        _type: "slug",
+        current: "becoming-garvicii",
+      },
+      year: 2026,
+      category: "culture",
+      status: "completed",
+      workType: "Vlog Series / Creative Content",
+      role: [textBlock("role", "Creator / Director of Creative Strategy")],
+      shortSummary:
+        "A vlog series created to close out Garvicii’s previous project, introduce the next phase of his career and give audiences a stronger view of his journey.",
+      verifiedResults: bulletList("result", [
+        "2 vlog episodes",
+        "2 promotional videos",
+        "15 photoshoot images",
+      ]),
+      featured: true,
+      displayOrder: 2,
+    },
+    {
+      _id: PROJECT_IDS[2],
+      _type: "project",
+      title: "Masicka ft. Ruger & Oxlade — Location Sourcing",
+      slug: {
+        _type: "slug",
+        current: "masicka-ruger-oxlade-location-sourcing",
+      },
+      year: 2026,
+      category: "culture",
+      status: "completed",
+      workType: "Music Video Location Sourcing",
+      role: [textBlock("role", "Location Sourcing")],
+      shortSummary:
+        "A location-sourcing assignment after Def Jam requested assistance securing a location for a music video featuring Masicka, Ruger and Oxlade.",
+      execution: bulletList("execution", [
+        "Location sourcing completed",
+        "Finished output: music video",
+      ]),
+      featured: true,
+      displayOrder: 3,
+    },
+    {
+      _id: PROJECT_IDS[3],
+      _type: "project",
+      title: "Guchi Single Covers",
+      slug: {
+        _type: "slug",
+        current: "guchi-single-covers",
+      },
+      year: 2026,
+      category: "culture",
+      status: "completed",
+      workType: "Single Cover Creative Planning",
+      role: [
+        textBlock(
+          "role",
+          "Creative Planning / Director of Creative Strategy",
+        ),
+      ],
+      shortSummary:
+        "Creative planning for Guchi’s single-cover direction as part of her release work.",
+      collaborators: [
+        {
+          _key: "jennifer",
+          _type: "collaborator",
+          name: "Jennifer",
+        },
+      ],
+      featured: true,
+      displayOrder: 4,
+    },
+  ] as const;
+
   const foundationDocuments = [
     profileDocument,
     linkedInDocument,
     ...experienceDocuments,
   ];
+  const plannedDocuments = [...foundationDocuments, ...projectDocuments];
 
-  const foundationIds = foundationDocuments.map((document) => document._id);
+  const plannedIds = plannedDocuments.map((document) => document._id);
   const existingDocuments = await client.fetch<
     Array<{ _id: string; _type: string }>
-  >(`*[_id in $ids]{_id, _type}`, { ids: foundationIds });
+  >(`*[_id in $ids] | order(_id asc){_id, _type}`, { ids: plannedIds });
+  const existingPortraitAssetId = await client.fetch<string | null>(
+    `*[_type == "profile" && _id == $profileId][0].portrait.asset._ref`,
+    { profileId: PROFILE_ID },
+  );
+  const unplannedProjectDocuments = await client.fetch<
+    Array<{ _id: string; title?: string }>
+  >(`*[_type == "project" && !(_id in $ids)] | order(_id asc){_id, title}`, {
+    ids: [...PROJECT_IDS],
+  });
   const datasetDocuments =
     await client.fetch<Array<{ _type: string }>>(`*[]{_type}`);
   const datasetDocumentTypes = datasetDocuments.reduce<Record<string, number>>(
@@ -133,13 +281,16 @@ async function main() {
           clientConfig.projectId === process.env.SANITY_STUDIO_PROJECT_ID,
         configuredDatasetMatchesEnvironment:
           clientConfig.dataset === process.env.SANITY_STUDIO_DATASET,
-        existingFoundationDocuments: existingDocuments,
-        plannedDocuments: foundationDocuments.map(({ _id, _type }) => ({
+        existingPlannedDocuments: existingDocuments,
+        plannedDocuments: plannedDocuments.map(({ _id, _type }) => ({
           _id,
           _type,
         })),
+        plannedProjectPayload: projectDocuments,
+        unplannedProjectDocuments,
         portraitAvailable: existsSync(PORTRAIT_PATH),
-        projectsPlanned: 0,
+        existingPortraitAssetId,
+        projectsPlanned: projectDocuments.length,
       },
       null,
       2,
@@ -155,7 +306,7 @@ async function main() {
 
   let portraitAssetReference: { _type: "reference"; _ref: string } | undefined;
 
-  if (existsSync(PORTRAIT_PATH)) {
+  if (existsSync(PORTRAIT_PATH) && !existingPortraitAssetId) {
     const portraitAsset = await client.assets.upload(
       "image",
       createReadStream(PORTRAIT_PATH),
@@ -186,6 +337,35 @@ async function main() {
     });
   }
 
+  const unapprovedProjectFields = [
+    "client",
+    "projectContext",
+    "brief",
+    "strategicApproach",
+    "coverImage",
+    "coverAlt",
+    "gallery",
+    "videoUrl",
+    "externalLinks",
+  ];
+
+  for (const document of projectDocuments) {
+    const { _id, _type: documentType, ...verifiedFields } = document;
+    void documentType;
+    transaction.createIfNotExists(document as IdentifiedSanityDocumentStub);
+    transaction.patch(_id, (patch) =>
+      patch.set(verifiedFields).unset([
+        ...unapprovedProjectFields,
+        ...(document._id === PROJECT_IDS[2] ? [] : ["execution"]),
+        ...(document._id === PROJECT_IDS[0] ||
+        document._id === PROJECT_IDS[1]
+          ? []
+          : ["verifiedResults"]),
+        ...(document._id === PROJECT_IDS[3] ? [] : ["collaborators"]),
+      ]),
+    );
+  }
+
   if (portraitAssetReference) {
     transaction.patch(PROFILE_ID, (patch) =>
       patch.set({
@@ -202,7 +382,7 @@ async function main() {
 
   const seededDocuments = await client.fetch<
     Array<{ _id: string; _type: string }>
-  >(`*[_id in $ids] | order(_id asc){_id, _type}`, { ids: foundationIds });
+  >(`*[_id in $ids] | order(_id asc){_id, _type}`, { ids: plannedIds });
 
   console.log(
     JSON.stringify(

@@ -1,38 +1,53 @@
+import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
+import { About } from "@/components/sections/About";
+import { Capabilities } from "@/components/sections/Capabilities";
+import { ExperienceTimeline } from "@/components/sections/ExperienceTimeline";
+import { FinalCta } from "@/components/sections/FinalCta";
 import { Hero } from "@/components/sections/Hero";
 import { ProofStrip } from "@/components/sections/ProofStrip";
 import { SelectedWork } from "@/components/sections/SelectedWork";
+import { TwoWorlds } from "@/components/sections/TwoWorlds";
 import { Container } from "@/components/ui/Container";
 import {
   getAllProjects,
+  getExperience,
   getFeaturedProjects,
   getProfile,
 } from "@/sanity/queries";
 
 export default async function Home() {
-  const [profile, featuredProjects, allProjects] = await Promise.all([
-    getProfile().catch((error: unknown) => {
-      console.error(
-        "The published Sanity Profile could not be loaded during this build.",
-        error,
-      );
-      return null;
-    }),
-    getFeaturedProjects().catch((error: unknown) => {
-      console.error(
-        "Featured projects could not be loaded during this build.",
-        error,
-      );
-      return [];
-    }),
-    getAllProjects().catch((error: unknown) => {
-      console.error(
-        "Published projects could not be loaded during this build.",
-        error,
-      );
-      return [];
-    }),
-  ]);
+  const [profile, featuredProjects, allProjects, experience] =
+    await Promise.all([
+      getProfile().catch((error: unknown) => {
+        console.error(
+          "The published Sanity Profile could not be loaded during this build.",
+          error,
+        );
+        return null;
+      }),
+      getFeaturedProjects().catch((error: unknown) => {
+        console.error(
+          "Featured projects could not be loaded during this build.",
+          error,
+        );
+        return [];
+      }),
+      getAllProjects().catch((error: unknown) => {
+        console.error(
+          "Published projects could not be loaded during this build.",
+          error,
+        );
+        return [];
+      }),
+      getExperience().catch((error: unknown) => {
+        console.error(
+          "Published experience could not be loaded during this build.",
+          error,
+        );
+        return [];
+      }),
+    ]);
 
   if (!profile?.portrait || !profile.portraitAlt) {
     return (
@@ -67,7 +82,20 @@ export default async function Home() {
           featuredProjects={featuredProjects}
           allProjects={allProjects}
         />
+        <TwoWorlds />
+        {profile.shortBio ? <About shortBio={profile.shortBio} /> : null}
+        <Capabilities />
+        <ExperienceTimeline experience={experience} />
+        <FinalCta
+          email={profile.email}
+          linkedInUrl={profile.linkedIn?.url ?? null}
+        />
       </main>
+      <SiteFooter
+        publicName={profile.publicName}
+        professionalTitle={profile.professionalTitle}
+        linkedInUrl={profile.linkedIn?.url ?? null}
+      />
     </>
   );
 }

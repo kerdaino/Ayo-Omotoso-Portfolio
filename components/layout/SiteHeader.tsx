@@ -58,7 +58,9 @@ export function SiteHeader({
               </Link>
             </li>
             <li>
-              <PendingNavigationItem>About</PendingNavigationItem>
+              <Link className="site-nav__link" href="/#about">
+                About
+              </Link>
             </li>
             <li>
               {resumeUrl ? (

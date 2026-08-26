@@ -2,7 +2,7 @@
 
 ## Current phase
 
-Phase 2E.1 — Selected Work Architecture (complete; awaiting review).
+Phase 2F — Remaining Homepage Story (complete; awaiting review).
 
 ## Completed work
 
@@ -48,11 +48,20 @@ Phase 2E.1 — Selected Work Architecture (complete; awaiting review).
 - Added an explicit project-image unavailable state rather than substituting fake media when a cover or meaningful alt text has not been published.
 - Added a quiet homepage CMS empty state because the current dataset still has no published Project documents.
 - Added the static-export-compatible `/work/[slug]` foundation with build-time params from published project slugs, item metadata and a deliberately minimal project summary/status page; full case-study content remains deferred.
-- Activated the existing Selected Work header, mobile-menu and hero controls so they now lead to the real homepage section; About and Resume remain honest pending states.
+- Activated the existing Selected Work header, mobile-menu and hero controls so they lead to the real homepage section; Resume remains an honest pending state.
+- Added the distinctive, responsive Two Worlds section with the approved Culture and Commerce themes and bridge statement; all content remains visible without hover or JavaScript.
+- Added the CMS-driven About section using the verified Profile short bio, with an editorial typographic composition instead of repeating the hero portrait.
+- Added the seven approved capabilities as a playful, readable list with CSS-only pointer enhancement.
+- Added a curated editorial timeline using exactly the six published Sanity Experience documents; descriptions and locations render only when the CMS supplies them.
+- Omitted the conditional education cue because the supplied institutions and programmes are not yet supported by verified repository content.
+- Added the final CTA using the approved statement and verified Profile email and LinkedIn destination.
+- Added the footer with Ayo's verified identity, real homepage anchors and verified LinkedIn destination, without an unapproved delivery credit.
+- Activated About links in the desktop and mobile navigation while retaining the honest pending Resume state.
+- Kept all Phase 2F content server-rendered and static-export compatible; no new hydrated component, CMS schema, full case-study content, deployment or client contact was introduced.
 
 ## Next action
 
-Stop for Phase 2E.1 review. Do not begin full case-study pages, About, the remaining homepage, deployment, webhook configuration or domain work without explicit approval.
+Stop for Phase 2F review. Do not begin full case-study pages, deployment, webhook configuration or domain work without explicit approval.
 
 ## Test/build status
 
@@ -84,6 +93,12 @@ Stop for Phase 2E.1 review. Do not begin full case-study pages, About, the remai
 - Phase 2E.1 `npm run build`: passed; `/`, `/_not-found` and the slug-ready work route remain statically generated (2026-08-24).
 - Because no Project documents are published, Next.js receives one reserved build-only slug that immediately renders `notFound()`; it is not linked or presented as portfolio content and will disappear from generated params when the first real project is published.
 - Phase 2E.1 exported-static HTTP smoke check: passed with `200 OK`; the homepage includes the Selected Work empty state and working section links, retains all four proof points, and contains no project cards, category groups or reserved-slug links while the CMS is empty (2026-08-24).
+- Phase 2F `npm run lint`: passed (2026-08-26).
+- Phase 2F `npm run typecheck`: passed (2026-08-26).
+- Phase 2F `npm run build`: passed; `/`, `/_not-found` and all four existing published project routes were statically generated (2026-08-26).
+- Phase 2F `git diff --check`: passed (2026-08-26).
+- Phase 2F exported HTML inspection: passed for the Two Worlds story, verified Profile bio, all seven capabilities, all six CMS Experience roles, exact final CTA, verified email/LinkedIn destinations and the absence of unsupported education copy (2026-08-26).
+- Phase 2F browser screenshot/responsive QA: unavailable because no in-app or extension browser surface was connected; manual viewport and interaction review remains required (2026-08-26).
 
 ## Unresolved technical decisions
 
@@ -94,11 +109,11 @@ Stop for Phase 2E.1 review. Do not begin full case-study pages, About, the remai
 - Complete Selected Work card/category and generated detail-route visual QA when the first approved Project fixtures are published; the current empty dataset can validate only the empty state and route architecture.
 - Confirm whether the Cloudflare Pages build should use the static `out/` directory directly or an organisation-specific deployment adapter/workflow.
 - Motion remains intentionally uninstalled; the approved first interaction layer uses native pointer events and CSS only.
-- Activate the pending Selected Work, About and Resume controls only when their real destinations or approved résumé resource exist.
+- Activate the pending Resume controls only when an approved résumé resource exists.
 
 ## Boundaries observed
 
-- No About, capability, experience, CTA/footer, full case-study content, Project document, Studio deployment, public-site deployment or webhook configuration was added.
+- No full case-study content, Project document, education schema, Studio deployment, public-site deployment or webhook configuration was added in Phase 2F.
 - No client facts, project metrics, case-study outcomes, collaborators, media or URLs were invented.
 - No server actions, runtime API routes, request middleware, dynamic server rendering or draft-preview dependencies were introduced.
 - No read token or authenticated query dependency was added to the public frontend.

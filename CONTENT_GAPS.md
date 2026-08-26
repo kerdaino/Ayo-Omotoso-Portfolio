@@ -40,6 +40,7 @@ This file records only information that still needs client confirmation or appro
 ## Experience
 
 - [ ] Supply approved short role descriptions for the curated experience entries.
+- [ ] Verify the supplied education institutions and programme/degree wording against approved repository source material before adding an education cue.
 
 ## CMS setup
 

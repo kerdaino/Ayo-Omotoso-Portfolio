@@ -21,10 +21,7 @@ function PendingNavigationItem({ children }: { children: React.ReactNode }) {
   );
 }
 
-export function MobileNavigation({
-  email,
-  resumeUrl,
-}: MobileNavigationProps) {
+export function MobileNavigation({ email, resumeUrl }: MobileNavigationProps) {
   const [isOpen, setIsOpen] = useState(false);
   const buttonRef = useRef<HTMLButtonElement>(null);
 
@@ -72,7 +69,13 @@ export function MobileNavigation({
               </Link>
             </li>
             <li>
-              <PendingNavigationItem>About</PendingNavigationItem>
+              <Link
+                className="site-nav__link"
+                href="/#about"
+                onClick={() => setIsOpen(false)}
+              >
+                About
+              </Link>
             </li>
             <li>
               {resumeUrl ? (

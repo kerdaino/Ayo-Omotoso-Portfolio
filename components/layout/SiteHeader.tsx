@@ -7,7 +7,6 @@ type SiteHeaderProps = {
   publicName?: string;
   professionalTitle?: string;
   email?: string | null;
-  resumeUrl?: string | null;
 };
 
 function PendingNavigationItem({ children }: { children: React.ReactNode }) {
@@ -27,7 +26,6 @@ export function SiteHeader({
   publicName,
   professionalTitle,
   email,
-  resumeUrl,
 }: SiteHeaderProps) {
   return (
     <header className="site-header">
@@ -63,13 +61,9 @@ export function SiteHeader({
               </Link>
             </li>
             <li>
-              {resumeUrl ? (
-                <a className="site-nav__link" href={resumeUrl}>
-                  Resume
-                </a>
-              ) : (
-                <PendingNavigationItem>Resume</PendingNavigationItem>
-              )}
+              <Link className="site-nav__link" href="/resume">
+                Resume
+              </Link>
             </li>
             <li>
               {email ? (
@@ -86,7 +80,7 @@ export function SiteHeader({
           </ul>
         </nav>
 
-        <MobileNavigation email={email} resumeUrl={resumeUrl} />
+        <MobileNavigation email={email} />
       </Container>
     </header>
   );

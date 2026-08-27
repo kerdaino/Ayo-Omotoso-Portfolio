@@ -5,7 +5,6 @@ import { useRef, useState, type KeyboardEvent } from "react";
 
 type MobileNavigationProps = {
   email?: string | null;
-  resumeUrl?: string | null;
 };
 
 function PendingNavigationItem({ children }: { children: React.ReactNode }) {
@@ -21,7 +20,7 @@ function PendingNavigationItem({ children }: { children: React.ReactNode }) {
   );
 }
 
-export function MobileNavigation({ email, resumeUrl }: MobileNavigationProps) {
+export function MobileNavigation({ email }: MobileNavigationProps) {
   const [isOpen, setIsOpen] = useState(false);
   const buttonRef = useRef<HTMLButtonElement>(null);
 
@@ -78,13 +77,13 @@ export function MobileNavigation({ email, resumeUrl }: MobileNavigationProps) {
               </Link>
             </li>
             <li>
-              {resumeUrl ? (
-                <a className="site-nav__link" href={resumeUrl}>
-                  Resume
-                </a>
-              ) : (
-                <PendingNavigationItem>Resume</PendingNavigationItem>
-              )}
+              <Link
+                className="site-nav__link"
+                href="/resume"
+                onClick={() => setIsOpen(false)}
+              >
+                Resume
+              </Link>
             </li>
             <li>
               {email ? (

@@ -64,7 +64,7 @@ Only after explicit authorisation, apply it with:
 npm run sanity:seed:commit
 ```
 
-The seed uses fixed document IDs and field-preserving patches, making it safe to review and rerun without duplicate foundation records. It contains only the approved Profile, LinkedIn and six Experience entries, uploads `public/images/ayo-portrait.jpeg`, and deliberately creates no Project documents. It uses the authenticated Sanity CLI session at execution time; no private token is stored in the script or repository.
+The seed uses fixed document IDs and field-preserving patches, making it safe to review and rerun without duplicate foundation records. It contains only the approved Profile with two education entries, LinkedIn, six Experience entries and four verified Culture Projects; it uploads `public/images/ayo-portrait.jpeg` only when the Profile has no portrait. It creates no B2B Projects or fabricated project media. It uses the authenticated Sanity CLI session at execution time; no private token is stored in the script or repository.
 
 ## Schema validation and TypeScript types
 

@@ -1,8 +1,12 @@
 import { Container } from "@/components/ui/Container";
-import type { ExperienceQueryResult } from "@/sanity/sanity.types";
+import type {
+  ExperienceQueryResult,
+  ProfileQueryResult,
+} from "@/sanity/sanity.types";
 
 type ExperienceTimelineProps = {
   experience: ExperienceQueryResult;
+  education: NonNullable<ProfileQueryResult>["education"];
 };
 
 function formatYears(entry: ExperienceQueryResult[number]) {
@@ -15,7 +19,10 @@ function formatYears(entry: ExperienceQueryResult[number]) {
     : String(entry.startYear);
 }
 
-export function ExperienceTimeline({ experience }: ExperienceTimelineProps) {
+export function ExperienceTimeline({
+  experience,
+  education,
+}: ExperienceTimelineProps) {
   return (
     <section
       id="experience"
@@ -59,6 +66,30 @@ export function ExperienceTimeline({ experience }: ExperienceTimelineProps) {
             Published experience is temporarily unavailable.
           </p>
         )}
+
+        {education && education.length > 0 ? (
+          <section
+            className="education-block"
+            aria-labelledby="education-title"
+          >
+            <header>
+              <p>Verified education</p>
+              <h3 id="education-title">Education</h3>
+            </header>
+            <ul>
+              {education.map((entry) => (
+                <li key={entry._key}>
+                  <p className="education-block__date">{entry.completion}</p>
+                  <div>
+                    <h4>{entry.institution}</h4>
+                    <p>{entry.qualification}</p>
+                    {entry.focus ? <p>{entry.focus}</p> : null}
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </section>
+        ) : null}
       </Container>
     </section>
   );

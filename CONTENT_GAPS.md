@@ -6,7 +6,6 @@ This file records only information that still needs client confirmation or appro
 
 - [ ] Confirm the canonical production domain.
 - [ ] Supply approved full biography copy if the later About experience needs more than the verified short biography.
-- [ ] Supply the approved public résumé file or public résumé URL.
 - [ ] Confirm any additional public social links beyond LinkedIn.
 - [ ] Confirm any public location wording and availability/contact call to action.
 - [ ] Confirm the final SEO title and description.
@@ -15,7 +14,6 @@ This file records only information that still needs client confirmation or appro
 
 ## Project media
 
-- [ ] Confirm the editorial status, work type and approved short summary for each launch project.
 - [ ] Supply approved cover and gallery media for each featured project.
 - [ ] Supply final public video URLs and public project links where available.
 - [ ] Confirm meaningful alt-text context for approved project media.
@@ -23,11 +21,9 @@ This file records only information that still needs client confirmation or appro
 
 ## Culture / entertainment projects
 
-- [ ] Confirm year, client/brand, Ayo's precise role, context, strategic approach and approved outcomes for One Take Studio Sessions.
-- [ ] Confirm year, client/brand, Ayo's precise role, context, strategic approach and approved outcomes for Becoming Garvicii Vlog.
-- [ ] Confirm year, client/brand, Ayo's precise role, context, strategic approach and approved public media for Masicka ft. Ruger & Oxlade location sourcing.
-- [ ] Confirm year, client/brand, Ayo's precise role and collaborator credits for Guchi Single Covers.
-- [ ] Identify any pitch/treatment material that must remain separate from completed Guchi cover work.
+- [ ] Supply any additional approved strategic-approach copy for the four published Culture case studies.
+- [ ] Supply approved public media or links for the four published Culture case studies if and when publication rights are confirmed.
+- [ ] Keep the Guchi GANJA rollout plan and other Guchi treatments/pitches separate from the completed Guchi Single Covers record.
 
 ## B2B / technology projects
 
@@ -40,7 +36,6 @@ This file records only information that still needs client confirmation or appro
 ## Experience
 
 - [ ] Supply approved short role descriptions for the curated experience entries.
-- [ ] Verify the supplied education institutions and programme/degree wording against approved repository source material before adding an education cue.
 
 ## CMS setup
 

@@ -10,6 +10,7 @@ const profileProjection = `{
   supportingLine,
   shortBio,
   fullBio,
+  education,
   portrait,
   portraitAlt,
   email,
@@ -126,4 +127,3 @@ export async function getSocialLinks() {
   const client = getSanityClient();
   return client ? client.fetch(socialLinksQuery) : [];
 }
-

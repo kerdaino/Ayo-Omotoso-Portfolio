@@ -65,7 +65,9 @@ export const project = defineType({
       type: "number",
       group: "identity",
       validation: (rule) =>
-        rule.required().integer().min(2000).max(currentYear + 2),
+        rule.integer().min(2000).max(currentYear + 2),
+      description:
+        "Use only a verified publication or completion year. Leave blank when the exact year is not confirmed.",
     }),
     defineField({
       name: "category",
@@ -234,4 +236,3 @@ export const project = defineType({
     },
   },
 });
-

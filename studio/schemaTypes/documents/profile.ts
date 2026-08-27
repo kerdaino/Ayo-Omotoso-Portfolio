@@ -1,4 +1,4 @@
-import { defineField, defineType } from "sanity";
+import { defineArrayMember, defineField, defineType } from "sanity";
 
 export const profile = defineType({
   name: "profile",
@@ -8,6 +8,7 @@ export const profile = defineType({
   groups: [
     { name: "identity", title: "Identity", default: true },
     { name: "biography", title: "Biography" },
+    { name: "education", title: "Education" },
     { name: "media", title: "Portrait & résumé" },
     { name: "contact", title: "Contact" },
     { name: "seo", title: "Search & sharing" },
@@ -64,6 +65,15 @@ export const profile = defineType({
       title: "Full biography",
       type: "portableText",
       group: "biography",
+    }),
+    defineField({
+      name: "education",
+      title: "Education",
+      type: "array",
+      group: "education",
+      description:
+        "Small verified public education list. Do not add grades, honours, locations or unsupported credentials.",
+      of: [defineArrayMember({ type: "educationEntry" })],
     }),
     defineField({
       name: "portrait",
@@ -139,4 +149,3 @@ export const profile = defineType({
     },
   },
 });
-

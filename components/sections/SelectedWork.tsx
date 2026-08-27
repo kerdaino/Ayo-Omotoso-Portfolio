@@ -14,7 +14,7 @@ type ProjectSummary = AllProjectsQueryResult[number];
 
 const categories = [
   { value: "culture", title: "Culture" },
-  { value: "b2b", title: "Commerce" },
+  { value: "b2b", title: "Commerce / B2B" },
 ] as const;
 
 function mergeProjects(

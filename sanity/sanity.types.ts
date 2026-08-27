@@ -83,6 +83,14 @@ export type ExternalLink = {
   url: string;
 };
 
+export type EducationEntry = {
+  _type: "educationEntry";
+  institution: string;
+  qualification: string;
+  focus?: string;
+  completion: string;
+};
+
 export type Collaborator = {
   _type: "collaborator";
   name: string;
@@ -115,7 +123,7 @@ export type Project = {
   title: string;
   slug: Slug;
   client?: string;
-  year: number;
+  year?: number;
   category: "culture" | "b2b";
   workType: string;
   status: "completed" | "in-progress" | "concept" | "pitch";
@@ -195,6 +203,11 @@ export type Profile = {
   supportingLine: string;
   shortBio?: string;
   fullBio?: PortableText;
+  education?: Array<
+    {
+      _key: string;
+    } & EducationEntry
+  >;
   portrait?: {
     asset?: SanityImageAssetReference;
     media?: unknown;
@@ -330,6 +343,7 @@ export type AllSanitySchemaTypes =
   | SanityImageAssetReference
   | GalleryImage
   | ExternalLink
+  | EducationEntry
   | Collaborator
   | Experience
   | Project
@@ -350,7 +364,7 @@ export type AllSanitySchemaTypes =
 
 // Source: ../sanity/queries.ts
 // Variable: profileQuery
-// Query: *[_type == "profile" && _id == "profile"][0]{  _id,  publicName,  professionalTitle,  heroStatement,  supportingLine,  shortBio,  fullBio,  portrait,  portraitAlt,  email,  resume {    "fileUrl": file.asset->url,    externalUrl  },  linkedIn->{_id, platform, label, url, enabled},  location,  availabilityCta,  seo}
+// Query: *[_type == "profile" && _id == "profile"][0]{  _id,  publicName,  professionalTitle,  heroStatement,  supportingLine,  shortBio,  fullBio,  education,  portrait,  portraitAlt,  email,  resume {    "fileUrl": file.asset->url,    externalUrl  },  linkedIn->{_id, platform, label, url, enabled},  location,  availabilityCta,  seo}
 export type ProfileQueryResult = {
   _id: "profile";
   publicName: string;
@@ -359,6 +373,11 @@ export type ProfileQueryResult = {
   supportingLine: string;
   shortBio: string | null;
   fullBio: PortableText | null;
+  education: Array<
+    {
+      _key: string;
+    } & EducationEntry
+  > | null;
   portrait: {
     asset?: SanityImageAssetReference;
     media?: unknown;
@@ -399,7 +418,7 @@ export type FeaturedProjectsQueryResult = Array<{
   title: string;
   slug: string;
   client: string | null;
-  year: number;
+  year: number | null;
   category: "b2b" | "culture";
   workType: string;
   status: "completed" | "concept" | "in-progress" | "pitch";
@@ -446,7 +465,7 @@ export type AllProjectsQueryResult = Array<{
   title: string;
   slug: string;
   client: string | null;
-  year: number;
+  year: number | null;
   category: "b2b" | "culture";
   workType: string;
   status: "completed" | "concept" | "in-progress" | "pitch";
@@ -493,7 +512,7 @@ export type ProjectBySlugQueryResult = {
   title: string;
   slug: string;
   client: string | null;
-  year: number;
+  year: number | null;
   category: "b2b" | "culture";
   workType: string;
   status: "completed" | "concept" | "in-progress" | "pitch";
@@ -563,7 +582,7 @@ export type SocialLinksQueryResult = Array<{
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    '*[_type == "profile" && _id == "profile"][0]{\n  _id,\n  publicName,\n  professionalTitle,\n  heroStatement,\n  supportingLine,\n  shortBio,\n  fullBio,\n  portrait,\n  portraitAlt,\n  email,\n  resume {\n    "fileUrl": file.asset->url,\n    externalUrl\n  },\n  linkedIn->{_id, platform, label, url, enabled},\n  location,\n  availabilityCta,\n  seo\n}': ProfileQueryResult;
+    '*[_type == "profile" && _id == "profile"][0]{\n  _id,\n  publicName,\n  professionalTitle,\n  heroStatement,\n  supportingLine,\n  shortBio,\n  fullBio,\n  education,\n  portrait,\n  portraitAlt,\n  email,\n  resume {\n    "fileUrl": file.asset->url,\n    externalUrl\n  },\n  linkedIn->{_id, platform, label, url, enabled},\n  location,\n  availabilityCta,\n  seo\n}': ProfileQueryResult;
     '*[_type == "project" && featured == true] | order(coalesce(displayOrder, 9999) asc, year desc) {\n  _id,\n  title,\n  "slug": slug.current,\n  client,\n  year,\n  category,\n  workType,\n  status,\n  shortSummary,\n  projectContext,\n  brief,\n  role,\n  strategicApproach,\n  execution,\n  verifiedResults,\n  collaborators,\n  coverImage,\n  coverAlt,\n  gallery,\n  videoUrl,\n  externalLinks,\n  featured,\n  displayOrder\n}': FeaturedProjectsQueryResult;
     '*[_type == "project"] | order(coalesce(displayOrder, 9999) asc, year desc) {\n  _id,\n  title,\n  "slug": slug.current,\n  client,\n  year,\n  category,\n  workType,\n  status,\n  shortSummary,\n  projectContext,\n  brief,\n  role,\n  strategicApproach,\n  execution,\n  verifiedResults,\n  collaborators,\n  coverImage,\n  coverAlt,\n  gallery,\n  videoUrl,\n  externalLinks,\n  featured,\n  displayOrder\n}': AllProjectsQueryResult;
     '*[_type == "project" && slug.current == $slug][0]{\n  _id,\n  title,\n  "slug": slug.current,\n  client,\n  year,\n  category,\n  workType,\n  status,\n  shortSummary,\n  projectContext,\n  brief,\n  role,\n  strategicApproach,\n  execution,\n  verifiedResults,\n  collaborators,\n  coverImage,\n  coverAlt,\n  gallery,\n  videoUrl,\n  externalLinks,\n  featured,\n  displayOrder\n}': ProjectBySlugQueryResult;

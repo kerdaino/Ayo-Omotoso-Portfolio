@@ -3,6 +3,7 @@ import { profile } from "./documents/profile";
 import { project } from "./documents/project";
 import { socialLink } from "./documents/socialLink";
 import { collaborator } from "./objects/collaborator";
+import { educationEntry } from "./objects/educationEntry";
 import { externalLink } from "./objects/externalLink";
 import { galleryImage } from "./objects/galleryImage";
 import { portableText } from "./objects/portableText";
@@ -15,10 +16,10 @@ export const schemaTypes = [
   experience,
   socialLink,
   collaborator,
+  educationEntry,
   externalLink,
   galleryImage,
   portableText,
   resumeResource,
   seoMetadata,
 ];
-

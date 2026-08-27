@@ -12,6 +12,10 @@ const PROJECT_IDS = [
   "project-becoming-garvicii",
   "project-masicka-ruger-oxlade-location",
   "project-guchi-single-covers",
+  "project-deepwatch-workspan",
+  "project-datastax-workspan",
+  "project-qualtrics-workspan",
+  "project-boomi-workspan",
 ] as const;
 const PORTRAIT_PATH = resolve(
   process.cwd(),
@@ -57,6 +61,23 @@ async function main() {
       "I shape ideas, campaigns and experiences across culture and commerce.",
     shortBio:
       "Ayo Omotoso is a Creative Brand Strategist with 8+ years of experience shaping brands, campaigns, content and cultural experiences across entertainment, fashion, technology and media. Her work moves from positioning and concept development through production, launch and audience engagement, combining creative instinct with commercial thinking to make ideas distinctive, relevant and executable.",
+    education: [
+      {
+        _key: "central-saint-martins-fashion-design",
+        _type: "educationEntry",
+        institution: "Central Saint Martins, University of the Arts London",
+        qualification: "Fashion Design Programme",
+        completion: "July 2025",
+      },
+      {
+        _key: "nevada-state-business-administration",
+        _type: "educationEntry",
+        institution: "Nevada State College",
+        qualification: "Bachelor of Arts in Business Administration",
+        focus: "Marketing and International Business",
+        completion: "December 2021",
+      },
+    ],
     email: "ayomiiomotoso@gmail.com",
     linkedIn: {
       _type: "reference",
@@ -177,10 +198,17 @@ async function main() {
       workType: "Vlog Series / Creative Content",
       role: [textBlock("role", "Creator / Director of Creative Strategy")],
       shortSummary:
-        "A vlog series created to close out Garvicii’s previous project, introduce the next phase of his career and give audiences a stronger view of his journey.",
-      verifiedResults: bulletList("result", [
+        "A self-assigned creative-content project for Garvicii.",
+      brief: [
+        textBlock(
+          "brief",
+          "Created to close out the prior project and introduce the next phase of Garvicii’s career.",
+        ),
+      ],
+      projectContext: [textBlock("context", "Self-assigned.")],
+      execution: bulletList("execution", [
         "2 vlog episodes",
-        "2 promotional videos",
+        "2 promo videos",
         "15 photoshoot images",
       ]),
       featured: true,
@@ -200,7 +228,14 @@ async function main() {
       workType: "Music Video Location Sourcing",
       role: [textBlock("role", "Location Sourcing")],
       shortSummary:
-        "A location-sourcing assignment after Def Jam requested assistance securing a location for a music video featuring Masicka, Ruger and Oxlade.",
+        "A completed music-video location-sourcing assignment.",
+      projectContext: [textBlock("context", "Assigned by Kamal.")],
+      brief: [
+        textBlock(
+          "brief",
+          "Def Jam requested assistance securing a music-video location.",
+        ),
+      ],
       execution: bulletList("execution", [
         "Location sourcing completed",
         "Finished output: music video",
@@ -227,7 +262,17 @@ async function main() {
         ),
       ],
       shortSummary:
-        "Creative planning for Guchi’s single-cover direction as part of her release work.",
+        "Creative planning for Guchi’s single-cover direction.",
+      projectContext: [
+        textBlock("context", "Submitted April 27, 2026."),
+      ],
+      brief: [textBlock("brief", "Assigned by JD.")],
+      execution: [
+        textBlock(
+          "execution",
+          "Creative planning for Guchi’s single-cover direction.",
+        ),
+      ],
       collaborators: [
         {
           _key: "jennifer",
@@ -237,6 +282,118 @@ async function main() {
       ],
       featured: true,
       displayOrder: 4,
+    },
+    {
+      _id: PROJECT_IDS[4],
+      _type: "project",
+      title: "Deepwatch / WorkSpan",
+      slug: { _type: "slug", current: "deepwatch-workspan" },
+      client: "WorkSpan / Deepwatch",
+      category: "b2b",
+      status: "completed",
+      workType: "Customer Case Study / Advocacy Content",
+      role: [
+        textBlock(
+          "role",
+          "Customer Marketing / Case Study & Advocacy Content",
+        ),
+      ],
+      shortSummary:
+        "A WorkSpan customer story documenting how Deepwatch used WorkSpan to scale its AWS co-sell operations, reduce manual effort and strengthen its cloud-partnership motion.",
+      externalLinks: [
+        {
+          _key: "workspan-case-study",
+          _type: "externalLink",
+          label: "Read the WorkSpan case study",
+          url: "https://www.workspan.com/customers/deepwatch",
+        },
+      ],
+      featured: true,
+      displayOrder: 5,
+    },
+    {
+      _id: PROJECT_IDS[5],
+      _type: "project",
+      title: "DataStax / WorkSpan",
+      slug: { _type: "slug", current: "datastax-workspan" },
+      client: "WorkSpan / DataStax",
+      category: "b2b",
+      status: "completed",
+      workType: "Customer Case Study / Advocacy Content",
+      role: [
+        textBlock(
+          "role",
+          "Customer Marketing / Case Study & Advocacy Content",
+        ),
+      ],
+      shortSummary:
+        "A customer-marketing story covering DataStax's migration to WorkSpan for AWS Marketplace operations, focusing on workflow confidence, unified marketplace visibility and operational efficiency.",
+      externalLinks: [
+        {
+          _key: "workspan-case-study",
+          _type: "externalLink",
+          label: "Read the WorkSpan case study",
+          url: "https://www.workspan.com/customers/datastax",
+        },
+      ],
+      featured: true,
+      displayOrder: 6,
+    },
+    {
+      _id: PROJECT_IDS[6],
+      _type: "project",
+      title: "Qualtrics / WorkSpan",
+      slug: { _type: "slug", current: "qualtrics-workspan" },
+      client: "WorkSpan / Qualtrics",
+      category: "b2b",
+      status: "completed",
+      workType: "Customer Case Study / Advocacy Content",
+      role: [
+        textBlock(
+          "role",
+          "Customer Marketing / Case Study & Advocacy Content",
+        ),
+      ],
+      shortSummary:
+        "A WorkSpan customer story documenting Qualtrics' AWS Marketplace growth and the development of a more scalable cloud-partnership motion.",
+      externalLinks: [
+        {
+          _key: "workspan-case-study",
+          _type: "externalLink",
+          label: "Read the WorkSpan case study",
+          url: "https://www.workspan.com/customers/qualtrics",
+        },
+      ],
+      featured: true,
+      displayOrder: 7,
+    },
+    {
+      _id: PROJECT_IDS[7],
+      _type: "project",
+      title: "Boomi / WorkSpan",
+      slug: { _type: "slug", current: "boomi-workspan" },
+      client: "WorkSpan / Boomi",
+      category: "b2b",
+      status: "completed",
+      workType: "Customer Case Study / Advocacy Content",
+      role: [
+        textBlock(
+          "role",
+          "Customer Marketing / Case Study & Advocacy Content",
+        ),
+      ],
+      shortSummary:
+        "A WorkSpan customer story covering Boomi's AWS partnership, cloud marketplace strategy and use of WorkSpan automation to support large-scale co-sell activity.",
+      externalLinks: [
+        {
+          _key: "workspan-case-study",
+          _type: "externalLink",
+          label: "Read the WorkSpan case study",
+          url: "https://www.workspan.com/customers/boomi-aws",
+        },
+      ],
+      featured: true,
+      displayOrder: 8,
     },
   ] as const;
 
@@ -337,17 +494,21 @@ async function main() {
     });
   }
 
-  const unapprovedProjectFields = [
+  const optionalProjectFields = [
     "client",
+    "year",
     "projectContext",
     "brief",
     "strategicApproach",
+    "execution",
+    "verifiedResults",
+    "collaborators",
     "coverImage",
     "coverAlt",
     "gallery",
     "videoUrl",
     "externalLinks",
-  ];
+  ] as const;
 
   for (const document of projectDocuments) {
     const { _id, _type: documentType, ...verifiedFields } = document;
@@ -355,13 +516,7 @@ async function main() {
     transaction.createIfNotExists(document as IdentifiedSanityDocumentStub);
     transaction.patch(_id, (patch) =>
       patch.set(verifiedFields).unset([
-        ...unapprovedProjectFields,
-        ...(document._id === PROJECT_IDS[2] ? [] : ["execution"]),
-        ...(document._id === PROJECT_IDS[0] ||
-        document._id === PROJECT_IDS[1]
-          ? []
-          : ["verifiedResults"]),
-        ...(document._id === PROJECT_IDS[3] ? [] : ["collaborators"]),
+        ...optionalProjectFields.filter((field) => !(field in document)),
       ]),
     );
   }

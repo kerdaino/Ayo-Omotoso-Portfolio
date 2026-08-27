@@ -73,7 +73,6 @@ export default async function Home() {
         publicName={profile.publicName}
         professionalTitle={profile.professionalTitle}
         email={profile.email}
-        resumeUrl={profile.resume?.fileUrl ?? profile.resume?.externalUrl}
       />
       <main id="main-content">
         <Hero profile={profile} />
@@ -85,7 +84,10 @@ export default async function Home() {
         <TwoWorlds />
         {profile.shortBio ? <About shortBio={profile.shortBio} /> : null}
         <Capabilities />
-        <ExperienceTimeline experience={experience} />
+        <ExperienceTimeline
+          experience={experience}
+          education={profile.education}
+        />
         <FinalCta
           email={profile.email}
           linkedInUrl={profile.linkedIn?.url ?? null}

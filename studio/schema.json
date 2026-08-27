@@ -410,6 +410,50 @@
     }
   },
   {
+    "name": "educationEntry",
+    "type": "type",
+    "value": {
+      "type": "object",
+      "attributes": {
+        "_type": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string",
+            "value": "educationEntry"
+          }
+        },
+        "institution": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          },
+          "optional": false
+        },
+        "qualification": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          },
+          "optional": false
+        },
+        "focus": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          },
+          "optional": true
+        },
+        "completion": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          },
+          "optional": false
+        }
+      }
+    }
+  },
+  {
     "name": "collaborator",
     "type": "type",
     "value": {
@@ -601,7 +645,7 @@
         "value": {
           "type": "number"
         },
-        "optional": false
+        "optional": true
       },
       "category": {
         "type": "objectAttribute",
@@ -1073,6 +1117,28 @@
         "value": {
           "type": "inline",
           "name": "portableText"
+        },
+        "optional": true
+      },
+      "education": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "array",
+          "of": {
+            "type": "object",
+            "attributes": {
+              "_key": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "string"
+                }
+              }
+            },
+            "rest": {
+              "type": "inline",
+              "name": "educationEntry"
+            }
+          }
         },
         "optional": true
       },

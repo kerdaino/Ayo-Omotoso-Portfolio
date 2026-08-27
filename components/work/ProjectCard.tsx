@@ -83,8 +83,12 @@ export function ProjectCard({ project }: ProjectCardProps) {
             <span>{categoryLabels[project.category]}</span>
             <span aria-hidden="true">/</span>
             <span>{project.workType}</span>
-            <span aria-hidden="true">/</span>
-            <time>{project.year}</time>
+            {project.year ? (
+              <>
+                <span aria-hidden="true">/</span>
+                <time>{project.year}</time>
+              </>
+            ) : null}
           </p>
 
           <div className="project-card__heading">

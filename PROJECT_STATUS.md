@@ -2,7 +2,7 @@
 
 ## Current phase
 
-Phase 2F — Remaining Homepage Story (complete; awaiting review).
+Phase 2G — Resume + Education + Culture Project Detail Pages (complete; awaiting review).
 
 ## Completed work
 
@@ -58,10 +58,19 @@ Phase 2F — Remaining Homepage Story (complete; awaiting review).
 - Added the footer with Ayo's verified identity, real homepage anchors and verified LinkedIn destination, without an unapproved delivery credit.
 - Activated About links in the desktop and mobile navigation while retaining the honest pending Resume state.
 - Kept all Phase 2F content server-rendered and static-export compatible; no new hydrated component, CMS schema, full case-study content, deployment or client contact was introduced.
+- Corrected the Phase 2F education assessment using the verified CV content supplied for Phase 2G.
+- Extended the Profile singleton with a lean editable education list and seeded the two verified Central Saint Martins and Nevada State College entries without grades, honours, locations or extra credentials.
+- Added a real static `/resume` page with the verified Professional Summary, four primary Experience roles, two Founder / Editorial Leadership roles, two education entries, four certifications and the approved public email only.
+- Replaced pending Resume navigation with an internal `/resume` link across desktop, mobile and footer navigation; no external résumé URL, Google Docs URL or phone number is exposed.
+- Upgraded `/work/[slug]` into a reusable Culture case-study template that conditionally renders only populated CMS fields for context, brief, role, approach, execution, verified results, credits and approved media.
+- Added a CSS-only typographic-poster treatment for projects without approved media, removing the development `Project image / Not published` placeholder from detail pages while leaving homepage card behavior unchanged.
+- Added deterministic, accessible next-project navigation using Culture display order, cycling from Guchi Single Covers back to One Take Studio Sessions.
+- Enriched only the four existing Culture Project records with the verified Phase 2G facts; no Project budget, B2B Project, fabricated media, extra Guchi treatment or unsupported collaborator was added.
+- Kept Phase 2G server-rendered and static-export compatible; no new client component, deployment, webhook, domain configuration or client contact was introduced.
 
 ## Next action
 
-Stop for Phase 2F review. Do not begin full case-study pages, deployment, webhook configuration or domain work without explicit approval.
+Stop for Phase 2G review. Do not begin B2B projects, deployment, webhook configuration or domain work without explicit approval.
 
 ## Test/build status
 
@@ -99,6 +108,15 @@ Stop for Phase 2F review. Do not begin full case-study pages, deployment, webhoo
 - Phase 2F `git diff --check`: passed (2026-08-26).
 - Phase 2F exported HTML inspection: passed for the Two Worlds story, verified Profile bio, all seven capabilities, all six CMS Experience roles, exact final CTA, verified email/LinkedIn destinations and the absence of unsupported education copy (2026-08-26).
 - Phase 2F browser screenshot/responsive QA: unavailable because no in-app or extension browser surface was connected; manual viewport and interaction review remains required (2026-08-26).
+- Phase 2G `npm run sanity:validate`: passed with 0 errors/warnings; extracted 25 schema types and generated types for 6 GROQ queries (2026-08-26).
+- Phase 2G deterministic Sanity dry run and authorised commit: passed; Profile now contains two verified education entries, four Culture Projects remain ordered 1–4, B2B Project count remains 0 and all four Project records have no media (2026-08-26).
+- Phase 2G `npm run lint`: passed with 0 errors/warnings (2026-08-26).
+- Phase 2G `npm run typecheck`: passed (2026-08-26).
+- Phase 2G `npm run build`: passed from a fresh generated cache; `/resume` and all four Culture project routes were statically generated (2026-08-26).
+- Phase 2G `git diff --check`: passed (2026-08-26).
+- Phase 2G exported HTML assertions: passed for résumé sections/content/privacy, both education entries on the homepage and résumé, all project-specific verified facts, conditional-heading omission, no-media treatment, prohibited-content absence and the complete next-project cycle (2026-08-26).
+- Phase 2G static HTTP smoke check: `/resume/` and all four Culture project routes returned `200 OK` (2026-08-26).
+- Phase 2G browser screenshot/responsive QA: unavailable because no in-app or extension browser surface was connected; CSS/source checks cover the 375px, 430px, 768px, 1024px and 1440px+ responsive strategy, but manual visual and interaction review remains required (2026-08-26).
 
 ## Unresolved technical decisions
 
@@ -106,10 +124,9 @@ Stop for Phase 2F review. Do not begin full case-study pages, deployment, webhoo
 - Confirm the Studio hosting preference, Studio URL and authorised editors.
 - Complete one signed-in human Studio walkthrough (Profile singleton, project groupings, Experience and Social Links) because an interactive browser surface was unavailable here.
 - Complete Phase 2D.1 visual QA at 350px, 375px, 430px, 768px, 1024px, 1280px and 1440px+; browser automation remained unavailable in this environment.
-- Complete Selected Work card/category and generated detail-route visual QA when the first approved Project fixtures are published; the current empty dataset can validate only the empty state and route architecture.
+- Complete Resume and Culture detail-page visual/interaction QA at 375px, 430px, 768px, 1024px and 1440px+ when a browser surface is available.
 - Confirm whether the Cloudflare Pages build should use the static `out/` directory directly or an organisation-specific deployment adapter/workflow.
 - Motion remains intentionally uninstalled; the approved first interaction layer uses native pointer events and CSS only.
-- Activate the pending Resume controls only when an approved résumé resource exists.
 
 ## Boundaries observed
 
@@ -117,3 +134,5 @@ Stop for Phase 2F review. Do not begin full case-study pages, deployment, webhoo
 - No client facts, project metrics, case-study outcomes, collaborators, media or URLs were invented.
 - No server actions, runtime API routes, request middleware, dynamic server rendering or draft-preview dependencies were introduced.
 - No read token or authenticated query dependency was added to the public frontend.
+- No B2B Project, project budget, fabricated media, private Google Docs URL, public phone number or KD Global credit was added in Phase 2G.
+- No Studio/public-site deployment, webhook, domain work or client contact occurred in Phase 2G.

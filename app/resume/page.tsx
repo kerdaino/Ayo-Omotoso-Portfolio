@@ -16,8 +16,19 @@ export const metadata: Metadata = {
   title: "Resume",
   description:
     "Verified professional experience, education and certifications for Ayo Omotoso.",
-  openGraph: { images: [] },
-  twitter: { images: [] },
+  openGraph: {
+    title: "Resume — Ayo Omotoso",
+    description:
+      "Verified professional experience, education and certifications for Ayo Omotoso.",
+    images: [],
+  },
+  twitter: {
+    card: "summary",
+    title: "Resume — Ayo Omotoso",
+    description:
+      "Verified professional experience, education and certifications for Ayo Omotoso.",
+    images: [],
+  },
 };
 
 function formatYears(entry: ExperienceQueryResult[number]) {

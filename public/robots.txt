@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /
+
+# Staging review only. Replace this file after the production domain and
+# indexing policy are explicitly approved.

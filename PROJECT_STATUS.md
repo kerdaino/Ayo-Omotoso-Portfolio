@@ -68,9 +68,20 @@ Phase 2G — Resume + Education + Culture Project Detail Pages (complete; awaiti
 - Enriched only the four existing Culture Project records with the verified Phase 2G facts; no Project budget, B2B Project, fabricated media, extra Guchi treatment or unsupported collaborator was added.
 - Kept Phase 2G server-rendered and static-export compatible; no new client component, deployment, webhook, domain configuration or client contact was introduced.
 
+## Phase 2I — final QA and staging preparation
+
+- Audited the complete public route set, homepage structure, internal navigation, project cycles, WorkSpan links, content integrity, accessibility source contracts, responsive CSS strategy, static asset output and metadata.
+- Added complete domain-independent Open Graph and Twitter metadata for the homepage and résumé. Project metadata remains generated from published Project content.
+- Kept canonical URLs and sitemap generation blocked until the production domain is approved; no staging or `pages.dev` URL is treated as canonical.
+- Added staging-only crawl protection through `public/robots.txt` and a global `X-Robots-Tag` rule in `public/_headers`, plus conservative security headers and immutable caching for fingerprinted Next.js assets.
+- Made `npm run build` use Next.js's supported webpack build flag after the default Turbopack path repeatedly failed while starting its CSS worker in the QA environment; output remains a standard static export in `out/`.
+- Documented exact Cloudflare Pages staging settings while keeping production-domain connection and deployment blocked.
+- Preserved the intentional no-media project-card treatment; no stock/generated imagery or new Project claims were added.
+- Activated the existing hero `About Ayo` control now that the verified homepage About section is published; the control no longer presents a false pending state.
+
 ## Next action
 
-Stop for Phase 2G review. Do not begin B2B projects, deployment, webhook configuration or domain work without explicit approval.
+Create a review-only Cloudflare Pages project from a dedicated staging branch after repository owner approval. Do not connect the production domain. Complete manual/browser visual QA before client review if no browser surface is available in the QA environment.
 
 ## Test/build status
 
@@ -117,6 +128,15 @@ Stop for Phase 2G review. Do not begin B2B projects, deployment, webhook configu
 - Phase 2G exported HTML assertions: passed for résumé sections/content/privacy, both education entries on the homepage and résumé, all project-specific verified facts, conditional-heading omission, no-media treatment, prohibited-content absence and the complete next-project cycle (2026-08-26).
 - Phase 2G static HTTP smoke check: `/resume/` and all four Culture project routes returned `200 OK` (2026-08-26).
 - Phase 2G browser screenshot/responsive QA: unavailable because no in-app or extension browser surface was connected; CSS/source checks cover the 375px, 430px, 768px, 1024px and 1440px+ responsive strategy, but manual visual and interaction review remains required (2026-08-26).
+- Phase 2I `npm run sanity:validate`: passed with 0 errors/warnings; extracted 25 schema types and generated types for 6 GROQ queries (2026-08-28).
+- Phase 2I `npm run lint`: passed with 0 errors/warnings (2026-08-28).
+- Phase 2I `npm run typecheck`: passed (2026-08-28).
+- Phase 2I `npm run build`: passed with Next.js 16.3.1's webpack build path; `/`, `/resume` and all eight Project routes were statically generated into `out/` (2026-08-28).
+- Phase 2I `git diff --check`: passed (2026-08-28).
+- Phase 2I local static HTTP smoke check: `/`, `/resume/` and all eight Project routes returned `200 OK` (2026-08-28).
+- Phase 2I rendered-output assertions: passed for one H1 per route, ordered homepage sections, eight Project cards, six Experience roles, two Education entries, complete next-project cycles, metadata, staging robots protection, and prohibited-content absence (2026-08-28).
+- Phase 2I external-link check: the verified LinkedIn profile and all four published WorkSpan customer-case-study URLs returned `200 OK` (2026-08-28).
+- Phase 2I browser viewport/keyboard QA: not run because no in-app or extension browser surface was connected. Source/CSS coverage is present for the requested breakpoints, wrapping, overflow containment, touch-target sizing, mobile-menu ARIA/Escape handling, focus states and reduced motion, but visual and interaction confirmation remains a staging review gate (2026-08-28).
 
 ## Unresolved technical decisions
 

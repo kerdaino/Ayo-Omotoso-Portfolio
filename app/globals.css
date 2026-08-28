@@ -2392,6 +2392,20 @@ a.action-link:focus-visible {
     display: block;
     height: 0.12rem;
     background: currentColor;
+    transform-origin: center;
+    transition: transform var(--duration-fast) var(--ease-standard);
+  }
+
+  .mobile-nav__button[aria-expanded="true"]
+    .mobile-nav__icon
+    > span:first-child {
+    transform: translateY(0.2rem) rotate(45deg);
+  }
+
+  .mobile-nav__button[aria-expanded="true"]
+    .mobile-nav__icon
+    > span:last-child {
+    transform: translateY(-0.2rem) rotate(-45deg);
   }
 
   .mobile-nav__panel {

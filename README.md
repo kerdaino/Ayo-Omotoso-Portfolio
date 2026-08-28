@@ -64,7 +64,7 @@ Only after explicit authorisation, apply it with:
 npm run sanity:seed:commit
 ```
 
-The seed uses fixed document IDs and field-preserving patches, making it safe to review and rerun without duplicate foundation records. It contains only the approved Profile with two education entries, LinkedIn, six Experience entries and four verified Culture Projects; it uploads `public/images/ayo-portrait.jpeg` only when the Profile has no portrait. It creates no B2B Projects or fabricated project media. It uses the authenticated Sanity CLI session at execution time; no private token is stored in the script or repository.
+The seed uses fixed document IDs and field-preserving patches, making it safe to review and rerun without duplicate foundation records. It contains only the approved Profile with two education entries, LinkedIn, six Experience entries, four verified Culture Projects and four verified WorkSpan B2B Projects. B2B publication years remain absent because they are not verified, and no Project receives fabricated media or customer-company metrics framed as Ayo's results. The script uploads `public/images/ayo-portrait.jpeg` only when the Profile has no portrait. It uses the authenticated Sanity CLI session at execution time; no private token is stored in the script or repository.
 
 ## Schema validation and TypeScript types
 
@@ -101,4 +101,21 @@ npm run sanity:validate
 git diff --check
 ```
 
-The production build is a static export written to `out/` for Cloudflare Pages. Deployment and publish-triggered rebuild webhooks are intentionally not configured or run during Phase 2C.
+The production build is a static export written to `out/` for Cloudflare Pages.
+
+## Cloudflare Pages staging
+
+Phase 2I prepares the repository for a review-only Pages project; it does not create or deploy that project. Use these exact build settings:
+
+- Framework preset: `Next.js (Static HTML Export)`
+- Production branch: a dedicated staging branch, not `main`
+- Build command: `npm run build`
+- Build output directory: `out`
+- Root directory: repository root
+- Node.js: `22.16.0` through `NODE_VERSION=22.16.0`
+- Public build variables: `NEXT_PUBLIC_SANITY_PROJECT_ID`, `NEXT_PUBLIC_SANITY_DATASET=production`, and `NEXT_PUBLIC_SANITY_API_VERSION=2026-08-20`
+- Do not configure a custom domain, production deployment hook, or automatic production-branch deployment during review.
+
+The build script explicitly uses Next.js's supported `--webpack` production-build path. This avoids the current Turbopack CSS-worker port-binding failure observed in the QA environment while preserving the same App Router static export and `out/` output contract.
+
+The committed `public/_headers` and `public/robots.txt` deliberately apply `noindex` protection to the staging artifact. `_headers` also adds conservative browser security headers and immutable caching for fingerprinted Next.js assets. Before any production launch, remove the global `X-Robots-Tag` rule, replace the blocking `robots.txt`, confirm the production domain, and then add verified canonical URLs and a sitemap. Do not reuse a `pages.dev` preview URL as the canonical origin.

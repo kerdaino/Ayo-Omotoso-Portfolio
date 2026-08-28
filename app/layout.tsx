@@ -31,6 +31,19 @@ export const metadata: Metadata = {
     template: `%s — ${siteProfile.publicName}`,
   },
   description: siteDescription,
+  openGraph: {
+    type: "website",
+    siteName: siteProfile.publicName,
+    title: `${siteProfile.publicName} — ${siteProfile.professionalTitle}`,
+    description: siteDescription,
+    images: [],
+  },
+  twitter: {
+    card: "summary",
+    title: `${siteProfile.publicName} — ${siteProfile.professionalTitle}`,
+    description: siteDescription,
+    images: [],
+  },
 };
 
 export const viewport: Viewport = {

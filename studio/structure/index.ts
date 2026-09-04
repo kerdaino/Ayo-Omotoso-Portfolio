@@ -6,7 +6,7 @@ export const portfolioStructure: StructureResolver = (S) =>
     .items([
       S.listItem()
         .id("profile")
-        .title("Ayo's profile")
+        .title("Ayomi's profile")
         .child(S.document().schemaType("profile").documentId("profile")),
       S.divider(),
       S.listItem()
@@ -79,4 +79,3 @@ export const portfolioStructure: StructureResolver = (S) =>
       S.documentTypeListItem("experience").title("Experience timeline"),
       S.documentTypeListItem("socialLink").title("Social links"),
     ]);
-

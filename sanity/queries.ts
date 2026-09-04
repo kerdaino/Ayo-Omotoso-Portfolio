@@ -1,5 +1,7 @@
 import { defineQuery } from "groq";
 
+import { siteProfile } from "@/lib/site";
+
 import { getSanityClient } from "./client";
 
 const profileProjection = `{
@@ -92,7 +94,22 @@ export const socialLinksQuery = defineQuery(`
 
 export async function getProfile() {
   const client = getSanityClient();
-  return client ? client.fetch(profileQuery) : null;
+  const profile = client ? await client.fetch(profileQuery) : null;
+
+  if (!profile) {
+    return null;
+  }
+
+  return {
+    ...profile,
+    publicName: siteProfile.publicName,
+    shortBio: profile.shortBio
+      ? profile.shortBio.replaceAll("Ayo Omotoso", siteProfile.publicName)
+      : null,
+    portraitAlt: profile.portraitAlt
+      ? profile.portraitAlt.replaceAll("Ayo Omotoso", siteProfile.publicName)
+      : null,
+  };
 }
 
 export async function getFeaturedProjects() {

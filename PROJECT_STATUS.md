@@ -36,10 +36,10 @@ Phase 2G — Resume + Education + Culture Project Detail Pages (complete; awaiti
 - Added a small client-only pointer response for decorative hero layers while keeping all content, CMS reads and composition server-rendered.
 - Added structural reduced-motion handling that removes entrance and parallax transforms, plus coarse-pointer/mobile layouts that reduce overlap and disable pointer movement.
 - Added honest pending states for Selected Work, About and Resume instead of broken links; Contact uses the verified Profile email.
-- Added contextual proof labels that distinguish Ayo's career experience from verified WorkSpan contributions.
+- Added contextual proof labels that distinguish Ayomi's career experience from verified WorkSpan contributions.
 - Tightened the desktop hero into one centred composition by reducing excess padding and grid stretch, increasing the headline/header hierarchy and scaling the portrait responsively against the viewport height.
 - Reconnected the desktop actions to the supporting copy while retaining their honest pending state until Selected Work and About are approved.
-- Replaced the tall mobile identity/navigation stack with a compact Ayo Omotoso and Menu row; the professional title remains in the hero as the primary identity moment.
+- Replaced the tall mobile identity/navigation stack with a compact Ayomi Omotoso and Menu row; the professional title remains in the hero as the primary identity moment.
 - Added a small accessible mobile navigation disclosure with a labelled button, `aria-expanded`, `aria-controls`, Escape-to-close handling, normal destination links and an obvious Contact action.
 - Refined the mobile hero rhythm and CTA proportions without shrinking or replacing the Sanity portrait collage, changing the headline treatment or altering the proof-strip structure.
 - Added a server-rendered Selected Work section below the proof strip using the existing published-only `getFeaturedProjects()` and `getAllProjects()` queries.
@@ -55,7 +55,7 @@ Phase 2G — Resume + Education + Culture Project Detail Pages (complete; awaiti
 - Added a curated editorial timeline using exactly the six published Sanity Experience documents; descriptions and locations render only when the CMS supplies them.
 - Omitted the conditional education cue because the supplied institutions and programmes are not yet supported by verified repository content.
 - Added the final CTA using the approved statement and verified Profile email and LinkedIn destination.
-- Added the footer with Ayo's verified identity, real homepage anchors and verified LinkedIn destination, without an unapproved delivery credit.
+- Added the footer with Ayomi's verified identity, real homepage anchors and verified LinkedIn destination, without an unapproved delivery credit.
 - Activated About links in the desktop and mobile navigation while retaining the honest pending Resume state.
 - Kept all Phase 2F content server-rendered and static-export compatible; no new hydrated component, CMS schema, full case-study content, deployment or client contact was introduced.
 - Corrected the Phase 2F education assessment using the verified CV content supplied for Phase 2G.
@@ -71,17 +71,17 @@ Phase 2G — Resume + Education + Culture Project Detail Pages (complete; awaiti
 ## Phase 2I — final QA and staging preparation
 
 - Audited the complete public route set, homepage structure, internal navigation, project cycles, WorkSpan links, content integrity, accessibility source contracts, responsive CSS strategy, static asset output and metadata.
-- Added complete domain-independent Open Graph and Twitter metadata for the homepage and résumé. Project metadata remains generated from published Project content.
-- Kept canonical URLs and sitemap generation blocked until the production domain is approved; no staging or `pages.dev` URL is treated as canonical.
-- Added staging-only crawl protection through `public/robots.txt` and a global `X-Robots-Tag` rule in `public/_headers`, plus conservative security headers and immutable caching for fingerprinted Next.js assets.
+- Added production canonical, Open Graph and Twitter metadata for the homepage, résumé and generated Project pages using `https://ayomiomotoso.com`.
+- Added a production sitemap for the homepage, résumé and all published Project routes, plus an indexing-ready `robots.txt` that references it.
+- Removed the global `X-Robots-Tag` from `public/_headers` so it cannot block the custom domain; before production deployment, the existing production `pages.dev` hostname must be redirected to the canonical domain with an account-level Cloudflare Bulk Redirect. Any independently accessible staging environment needs a separate blocking build/project or Access policy.
 - Made `npm run build` use Next.js's supported webpack build flag after the default Turbopack path repeatedly failed while starting its CSS worker in the QA environment; output remains a standard static export in `out/`.
 - Documented exact Cloudflare Pages staging settings while keeping production-domain connection and deployment blocked.
 - Preserved the intentional no-media project-card treatment; no stock/generated imagery or new Project claims were added.
-- Activated the existing hero `About Ayo` control now that the verified homepage About section is published; the control no longer presents a false pending state.
+- Activated the existing hero `About Ayomi` control now that the verified homepage About section is published; the control no longer presents a false pending state.
 
 ## Next action
 
-Create a review-only Cloudflare Pages project from a dedicated staging branch after repository owner approval. Do not connect the production domain. Complete manual/browser visual QA before client review if no browser surface is available in the QA environment.
+Review and deploy the validated static export only after explicit approval, connect `ayomiomotoso.com`, and configure permanent Cloudflare redirects from both `www.ayomiomotoso.com` and the production `pages.dev` hostname to the apex.
 
 ## Test/build status
 
@@ -140,7 +140,7 @@ Create a review-only Cloudflare Pages project from a dedicated staging branch af
 
 ## Unresolved technical decisions
 
-- Confirm the canonical production domain before canonical and social metadata are completed.
+- Add and verify the final custom domain, `www` redirect and production `pages.dev` redirect in Cloudflare after deployment approval.
 - Confirm the Studio hosting preference, Studio URL and authorised editors.
 - Complete one signed-in human Studio walkthrough (Profile singleton, project groupings, Experience and Social Links) because an interactive browser surface was unavailable here.
 - Complete Phase 2D.1 visual QA at 350px, 375px, 430px, 768px, 1024px, 1280px and 1440px+; browser automation remained unavailable in this environment.

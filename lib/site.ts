@@ -1,5 +1,5 @@
 export const siteProfile = {
-  publicName: "Ayo Omotoso",
+  publicName: "Ayomi Omotoso",
   professionalTitle: "Creative Brand Strategist",
   heroStatement: "One Strategic Mind, Many Worlds.",
   supportingLine:
@@ -9,4 +9,12 @@ export const siteProfile = {
 } as const;
 
 export const siteDescription =
-  "The portfolio of Ayo Omotoso, a Creative Brand Strategist working across culture and commerce.";
+  "The portfolio of Ayomi Omotoso, a Creative Brand Strategist working across culture and commerce.";
+
+export const siteUrl = new URL(
+  process.env.NEXT_PUBLIC_SITE_URL || "https://ayomiomotoso.com",
+);
+
+export function canonicalUrl(pathname = "/") {
+  return new URL(pathname, siteUrl).toString();
+}

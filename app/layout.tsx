@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Bebas_Neue, Inter, Playfair_Display } from "next/font/google";
 
-import { siteDescription, siteProfile } from "@/lib/site";
+import { siteDescription, siteProfile, siteUrl } from "@/lib/site";
 
 import "./globals.css";
 
@@ -26,16 +26,21 @@ const playfairDisplay = Playfair_Display({
 });
 
 export const metadata: Metadata = {
+  metadataBase: siteUrl,
   title: {
     default: `${siteProfile.publicName} — ${siteProfile.professionalTitle}`,
     template: `%s — ${siteProfile.publicName}`,
   },
   description: siteDescription,
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
     type: "website",
     siteName: siteProfile.publicName,
     title: `${siteProfile.publicName} — ${siteProfile.professionalTitle}`,
     description: siteDescription,
+    url: "/",
     images: [],
   },
   twitter: {

@@ -4,7 +4,7 @@ export const profile = defineType({
   name: "profile",
   title: "Profile",
   type: "document",
-  description: "Ayo's public identity and portfolio-wide information.",
+  description: "Ayomi's public identity and portfolio-wide information.",
   groups: [
     { name: "identity", title: "Identity", default: true },
     { name: "biography", title: "Biography" },
@@ -14,7 +14,7 @@ export const profile = defineType({
     { name: "seo", title: "Search & sharing" },
   ],
   initialValue: {
-    publicName: "Ayo Omotoso",
+    publicName: "Ayomi Omotoso",
     professionalTitle: "Creative Brand Strategist",
     heroStatement: "One Strategic Mind, Many Worlds.",
     supportingLine:
@@ -145,7 +145,7 @@ export const profile = defineType({
   preview: {
     select: { title: "publicName", subtitle: "professionalTitle", media: "portrait" },
     prepare({ title, subtitle, media }) {
-      return { title: title || "Ayo's profile", subtitle, media };
+      return { title: title || "Ayomi's profile", subtitle, media };
     },
   },
 });

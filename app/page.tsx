@@ -56,7 +56,7 @@ export default async function Home() {
         <main id="main-content" className="cms-state">
           <Container size="content">
             <p className="cms-state__eyebrow">Portfolio content unavailable</p>
-            <h1>Ayo&apos;s published profile is awaiting CMS configuration.</h1>
+            <h1>Ayomi&apos;s published profile is awaiting CMS configuration.</h1>
             <p>
               No placeholder biography or portrait has been substituted. Please
               reconnect the published Sanity Profile and rebuild the site.

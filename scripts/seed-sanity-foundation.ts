@@ -54,13 +54,13 @@ async function main() {
   const profileDocument = {
     _id: PROFILE_ID,
     _type: "profile",
-    publicName: "Ayo Omotoso",
+    publicName: "Ayomi Omotoso",
     professionalTitle: "Creative Brand Strategist",
     heroStatement: "One Strategic Mind, Many Worlds.",
     supportingLine:
       "I shape ideas, campaigns and experiences across culture and commerce.",
     shortBio:
-      "Ayo Omotoso is a Creative Brand Strategist with 8+ years of experience shaping brands, campaigns, content and cultural experiences across entertainment, fashion, technology and media. Her work moves from positioning and concept development through production, launch and audience engagement, combining creative instinct with commercial thinking to make ideas distinctive, relevant and executable.",
+      "Ayomi Omotoso is a Creative Brand Strategist with 8+ years of experience shaping brands, campaigns, content and cultural experiences across entertainment, fashion, technology and media. Her work moves from positioning and concept development through production, launch and audience engagement, combining creative instinct with commercial thinking to make ideas distinctive, relevant and executable.",
     education: [
       {
         _key: "central-saint-martins-fashion-design",
@@ -528,7 +528,7 @@ async function main() {
           _type: "image",
           asset: portraitAssetReference,
         },
-        portraitAlt: "Portrait of Ayo Omotoso.",
+        portraitAlt: "Portrait of Ayomi Omotoso.",
       }),
     );
   }

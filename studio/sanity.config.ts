@@ -11,8 +11,8 @@ const singletonActions = new Set(["publish", "discardChanges", "restore"]);
 export default defineConfig({
   name: "default",
   title: studioEnv.isConfigured
-    ? "Ayo Omotoso Portfolio"
-    : "Ayo Omotoso Portfolio — not connected",
+    ? "Ayomi Omotoso Portfolio"
+    : "Ayomi Omotoso Portfolio — not connected",
   projectId: studioEnv.projectId,
   dataset: studioEnv.dataset,
   plugins: [structureTool({ structure: portfolioStructure })],
@@ -30,4 +30,3 @@ export default defineConfig({
         : actions,
   },
 });
-

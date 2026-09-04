@@ -118,10 +118,10 @@ export const project = defineType({
     }),
     defineField({
       name: "role",
-      title: "Ayo's role",
+      title: "Ayomi's role",
       type: "portableText",
       group: "story",
-      description: "State Ayo's own contribution precisely.",
+      description: "State Ayomi's own contribution precisely.",
     }),
     defineField({
       name: "strategicApproach",
@@ -141,7 +141,7 @@ export const project = defineType({
       type: "portableText",
       group: "story",
       description:
-        "Enter only outcomes that can be verified and fairly attributed. Do not present a customer's company-wide figures as Ayo's personal achievement.",
+        "Enter only outcomes that can be verified and fairly attributed. Do not present a customer's company-wide figures as Ayomi's personal achievement.",
     }),
     defineField({
       name: "collaborators",

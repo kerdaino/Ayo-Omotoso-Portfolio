@@ -136,7 +136,7 @@ export function Hero({ profile }: HeroProps) {
         <div className="hero__actions" aria-label="Portfolio actions">
           <ActionLink href="#selected-work">View Selected Work</ActionLink>
           <ActionLink href="#about" variant="secondary">
-            About Ayo
+            About Ayomi
           </ActionLink>
         </div>
       </Container>

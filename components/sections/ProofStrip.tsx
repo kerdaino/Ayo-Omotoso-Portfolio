@@ -4,7 +4,7 @@ const proofPoints = [
   {
     value: "8+",
     label: "Years Experience",
-    context: "Across Ayo’s career",
+    context: "Across Ayomi’s career",
   },
   {
     value: "$5M+",

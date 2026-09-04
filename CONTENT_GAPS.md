@@ -4,13 +4,13 @@ This file records only information that still needs client confirmation or appro
 
 ## Global profile and publishing
 
-- [ ] Confirm the canonical production domain.
+- [x] Canonical production domain confirmed as `https://ayomiomotoso.com`.
 - [ ] Supply approved full biography copy if the later About experience needs more than the verified short biography.
 - [ ] Confirm any additional public social links beyond LinkedIn.
 - [ ] Confirm any public location wording and availability/contact call to action.
 - [ ] Confirm the final SEO title and description.
 - [ ] Confirm final social-share image/art direction.
-- [ ] Confirm whether any additional portrait crops are required beyond the uploaded original; current alt text is `Portrait of Ayo Omotoso.`
+- [ ] Confirm whether any additional portrait crops are required beyond the uploaded original; current alt text is `Portrait of Ayomi Omotoso.`
 
 ## Project media
 
@@ -27,11 +27,11 @@ This file records only information that still needs client confirmation or appro
 
 ## B2B / technology projects
 
-- [ ] Confirm year, approved customer-marketing scope, Ayo's role, deliverables and attributable outcomes for Deepwatch / WorkSpan.
-- [ ] Confirm year, approved customer-marketing scope, Ayo's role, deliverables and attributable outcomes for DataStax / WorkSpan.
-- [ ] Confirm year, approved customer-marketing scope, Ayo's role, deliverables and attributable outcomes for Qualtrics / WorkSpan.
-- [ ] Confirm year, approved customer-marketing scope, Ayo's role, deliverables and attributable outcomes for Boomi / WorkSpan.
-- [ ] Identify customer-company performance figures that must not be framed as Ayo's personal results.
+- [ ] Confirm year, approved customer-marketing scope, Ayomi's role, deliverables and attributable outcomes for Deepwatch / WorkSpan.
+- [ ] Confirm year, approved customer-marketing scope, Ayomi's role, deliverables and attributable outcomes for DataStax / WorkSpan.
+- [ ] Confirm year, approved customer-marketing scope, Ayomi's role, deliverables and attributable outcomes for Qualtrics / WorkSpan.
+- [ ] Confirm year, approved customer-marketing scope, Ayomi's role, deliverables and attributable outcomes for Boomi / WorkSpan.
+- [ ] Identify customer-company performance figures that must not be framed as Ayomi's personal results.
 
 ## Experience
 

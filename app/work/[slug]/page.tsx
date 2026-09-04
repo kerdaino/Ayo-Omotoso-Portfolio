@@ -63,9 +63,13 @@ export async function generateMetadata({
   return {
     title: project.title,
     description: project.shortSummary,
+    alternates: {
+      canonical: `/work/${project.slug}/`,
+    },
     openGraph: {
       title: project.title,
       description: project.shortSummary,
+      url: `/work/${project.slug}/`,
       images: [],
     },
     twitter: {
@@ -268,7 +272,7 @@ export default async function WorkPage({ params }: WorkPageProps) {
             </header>
 
             <div className="case-study__details">
-              <ProjectSection title="Ayo’s role" value={project.role} />
+              <ProjectSection title="Ayomi’s role" value={project.role} />
               <ProjectSection
                 title="Short context"
                 value={project.projectContext}

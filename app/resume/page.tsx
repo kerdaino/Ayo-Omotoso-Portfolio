@@ -15,18 +15,22 @@ import type { ExperienceQueryResult } from "@/sanity/sanity.types";
 export const metadata: Metadata = {
   title: "Resume",
   description:
-    "Verified professional experience, education and certifications for Ayo Omotoso.",
+    "Verified professional experience, education and certifications for Ayomi Omotoso.",
+  alternates: {
+    canonical: "/resume/",
+  },
   openGraph: {
-    title: "Resume — Ayo Omotoso",
+    title: "Resume — Ayomi Omotoso",
     description:
-      "Verified professional experience, education and certifications for Ayo Omotoso.",
+      "Verified professional experience, education and certifications for Ayomi Omotoso.",
+    url: "/resume/",
     images: [],
   },
   twitter: {
     card: "summary",
-    title: "Resume — Ayo Omotoso",
+    title: "Resume — Ayomi Omotoso",
     description:
-      "Verified professional experience, education and certifications for Ayo Omotoso.",
+      "Verified professional experience, education and certifications for Ayomi Omotoso.",
     images: [],
   },
 };
@@ -97,7 +101,7 @@ export default async function ResumePage() {
         <Container>
           <header className="resume-page__hero">
             <p>Verified CV / Resume</p>
-            <h1>Ayo Omotoso</h1>
+            <h1>{publicName}</h1>
             <div>
               <p>{professionalTitle}</p>
               <a href={`mailto:${email}`}>{email}</a>

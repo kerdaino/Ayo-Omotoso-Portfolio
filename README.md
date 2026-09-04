@@ -1,6 +1,6 @@
-# Ayo Omotoso Portfolio
+# Ayomi Omotoso Portfolio
 
-Production portfolio for Ayo Omotoso, built with Next.js App Router, TypeScript, Tailwind CSS and Sanity.
+Production portfolio for Ayomi Omotoso, built with Next.js App Router, TypeScript, Tailwind CSS and Sanity.
 
 The public application remains a static export for Cloudflare Pages. Sanity content will be read during `next build`; this repository does not use Server Actions, runtime API routes, middleware, draft mode or a persistent Next.js server.
 
@@ -20,6 +20,7 @@ The authorised Sanity project is connected locally through `.env.local`, and its
 Set these public, non-secret values in `.env.local` and in the eventual static-site build environment:
 
 ```bash
+NEXT_PUBLIC_SITE_URL=https://ayomiomotoso.com
 NEXT_PUBLIC_SANITY_PROJECT_ID=your-project-id
 NEXT_PUBLIC_SANITY_DATASET=production
 NEXT_PUBLIC_SANITY_API_VERSION=2026-08-20
@@ -64,7 +65,7 @@ Only after explicit authorisation, apply it with:
 npm run sanity:seed:commit
 ```
 
-The seed uses fixed document IDs and field-preserving patches, making it safe to review and rerun without duplicate foundation records. It contains only the approved Profile with two education entries, LinkedIn, six Experience entries, four verified Culture Projects and four verified WorkSpan B2B Projects. B2B publication years remain absent because they are not verified, and no Project receives fabricated media or customer-company metrics framed as Ayo's results. The script uploads `public/images/ayo-portrait.jpeg` only when the Profile has no portrait. It uses the authenticated Sanity CLI session at execution time; no private token is stored in the script or repository.
+The seed uses fixed document IDs and field-preserving patches, making it safe to review and rerun without duplicate foundation records. It contains only the approved Profile with two education entries, LinkedIn, six Experience entries, four verified Culture Projects and four verified WorkSpan B2B Projects. B2B publication years remain absent because they are not verified, and no Project receives fabricated media or customer-company metrics framed as Ayomi's results. The script uploads the internally named `public/images/ayo-portrait.jpeg` only when the Profile has no portrait. It uses the authenticated Sanity CLI session at execution time; no private token is stored in the script or repository.
 
 ## Schema validation and TypeScript types
 
@@ -87,7 +88,7 @@ Sanity image references are converted to CDN URLs through `sanity/image.ts`. The
 
 ## Later Studio hosting direction
 
-Studio deployment is intentionally out of scope for Phase 2C. The recommended first option is a separately deployed Sanity-hosted Studio because it gives Ayo the simplest editor login and keeps the public Cloudflare Pages site independent. A separately built Studio on another static host is also viable if the team wants hosting consolidated; access would still be controlled through Sanity project membership.
+Studio deployment is intentionally separate from the public site. The recommended first option is a separately deployed Sanity-hosted Studio because it gives Ayomi the simplest editor login and keeps the public Cloudflare Pages site independent. A separately built Studio on another static host is also viable if the team wants hosting consolidated; access would still be controlled through Sanity project membership.
 
 Before choosing either route, confirm the current Sanity plan, hosting terms, authorised editors and desired Studio URL. No hosting option should be assumed to remain permanently free.
 
@@ -103,19 +104,18 @@ git diff --check
 
 The production build is a static export written to `out/` for Cloudflare Pages.
 
-## Cloudflare Pages staging
+## Cloudflare Pages production and staging
 
-Phase 2I prepares the repository for a review-only Pages project; it does not create or deploy that project. Use these exact build settings:
+Use these build settings for the existing Pages project:
 
 - Framework preset: `Next.js (Static HTML Export)`
-- Production branch: a dedicated staging branch, not `main`
+- Production branch: the branch approved for the final site
 - Build command: `npm run build`
 - Build output directory: `out`
 - Root directory: repository root
 - Node.js: `22.16.0` through `NODE_VERSION=22.16.0`
-- Public build variables: `NEXT_PUBLIC_SANITY_PROJECT_ID`, `NEXT_PUBLIC_SANITY_DATASET=production`, and `NEXT_PUBLIC_SANITY_API_VERSION=2026-08-20`
-- Do not configure a custom domain, production deployment hook, or automatic production-branch deployment during review.
+- Public build variables: `NEXT_PUBLIC_SITE_URL=https://ayomiomotoso.com`, `NEXT_PUBLIC_SANITY_PROJECT_ID`, `NEXT_PUBLIC_SANITY_DATASET=production`, and `NEXT_PUBLIC_SANITY_API_VERSION=2026-08-20`
 
 The build script explicitly uses Next.js's supported `--webpack` production-build path. This avoids the current Turbopack CSS-worker port-binding failure observed in the QA environment while preserving the same App Router static export and `out/` output contract.
 
-The committed `public/_headers` and `public/robots.txt` deliberately apply `noindex` protection to the staging artifact. `_headers` also adds conservative browser security headers and immutable caching for fingerprinted Next.js assets. Before any production launch, remove the global `X-Robots-Tag` rule, replace the blocking `robots.txt`, confirm the production domain, and then add verified canonical URLs and a sitemap. Do not reuse a `pages.dev` preview URL as the canonical origin.
+The exported `robots.txt` allows production crawling and links to the production sitemap. `public/_headers` retains conservative browser security headers and immutable caching without globally blocking the custom domain. Before deploying this production artifact, configure Cloudflare's account-level Bulk Redirect so `https://ayo-omotoso-portfolio.pages.dev/*` permanently redirects to `https://ayomiomotoso.com/${1}` with path and query preservation. This prevents the production `pages.dev` alias from becoming a duplicate indexable site. If an independently accessible staging site is still required, use a separate Pages project or branch alias with its own blocking build and Cloudflare Access; one static artifact cannot return different `robots.txt` or `_headers` by hostname. Canonical and Open Graph URLs always use `https://ayomiomotoso.com`.

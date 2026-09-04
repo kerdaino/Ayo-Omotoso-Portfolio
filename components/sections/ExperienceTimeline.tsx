@@ -34,7 +34,7 @@ export function ExperienceTimeline({
           <p>Experience / 05</p>
           <div>
             <h2 id="experience-title">A career built across worlds.</h2>
-            <p>Selected roles from Ayo&apos;s published experience.</p>
+            <p>Selected roles from Ayomi&apos;s published experience.</p>
           </div>
         </header>
 

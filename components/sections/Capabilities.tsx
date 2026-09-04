@@ -16,7 +16,7 @@ export function Capabilities() {
       <Container>
         <header className="capabilities__header">
           <p>Capabilities / 04</p>
-          <h2 id="capabilities-title">What Ayo brings to the room.</h2>
+          <h2 id="capabilities-title">What Ayomi brings to the room.</h2>
         </header>
 
         <ol className="capabilities__list">

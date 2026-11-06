@@ -12,26 +12,17 @@ import { Container } from "@/components/ui/Container";
 import {
   getAllProjects,
   getExperience,
-  getFeaturedProjects,
   getProfile,
 } from "@/sanity/queries";
 
 export default async function Home() {
-  const [profile, featuredProjects, allProjects, experience] =
-    await Promise.all([
+  const [profile, allProjects, experience] = await Promise.all([
       getProfile().catch((error: unknown) => {
         console.error(
           "The published Sanity Profile could not be loaded during this build.",
           error,
         );
         return null;
-      }),
-      getFeaturedProjects().catch((error: unknown) => {
-        console.error(
-          "Featured projects could not be loaded during this build.",
-          error,
-        );
-        return [];
       }),
       getAllProjects().catch((error: unknown) => {
         console.error(
@@ -77,10 +68,7 @@ export default async function Home() {
       <main id="main-content">
         <Hero profile={profile} />
         <ProofStrip />
-        <SelectedWork
-          featuredProjects={featuredProjects}
-          allProjects={allProjects}
-        />
+        <SelectedWork allProjects={allProjects} />
         <TwoWorlds />
         {profile.shortBio ? <About shortBio={profile.shortBio} /> : null}
         <Capabilities />

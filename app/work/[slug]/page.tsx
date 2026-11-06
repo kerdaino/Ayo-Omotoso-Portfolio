@@ -267,6 +267,16 @@ export default async function WorkPage({ params }: WorkPageProps) {
                     </div>
                   ) : null}
                 </dl>
+                {project.skills && project.skills.length > 0 ? (
+                  <div
+                    className="case-study__skills"
+                    aria-label="Professional skills"
+                  >
+                    {project.skills.map((skill) => (
+                      <span key={skill}>{skill}</span>
+                    ))}
+                  </div>
+                ) : null}
                 <p className="case-study__summary">{project.shortSummary}</p>
               </div>
             </header>

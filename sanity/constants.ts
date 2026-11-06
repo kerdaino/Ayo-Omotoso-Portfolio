@@ -10,6 +10,16 @@ export const PROJECT_STATUSES = [
   { title: "Pitch", value: "pitch" },
 ] as const;
 
+export const PROJECT_SKILLS = [
+  "Creative Direction & Brand Strategy",
+  "Campaign & Rollout Strategy",
+  "Copywriting & Customer Storytelling",
+  "Set Design & Experiential",
+  "Content Production & Visual Storytelling",
+  "Partnerships & Sponsorships",
+  "Event & Customer Marketing",
+] as const;
+
 export const SOCIAL_PLATFORMS = [
   { title: "LinkedIn", value: "linkedin" },
   { title: "Instagram", value: "instagram" },
@@ -22,4 +32,5 @@ export const SOCIAL_PLATFORMS = [
 
 export type ProjectCategory = (typeof PROJECT_CATEGORIES)[number]["value"];
 export type ProjectStatus = (typeof PROJECT_STATUSES)[number]["value"];
+export type ProjectSkill = (typeof PROJECT_SKILLS)[number];
 

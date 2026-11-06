@@ -16,6 +16,12 @@ const PROJECT_IDS = [
   "project-datastax-workspan",
   "project-qualtrics-workspan",
   "project-boomi-workspan",
+  "project-plug-and-play-set-design-options",
+  "project-lobby-redesign",
+  "project-one-take-sponsorship-deck",
+  "project-frankly-speaking-brand-partnership-deck",
+  "project-guchi-ganja-single-rollout-plan",
+  "project-garvicii-ep-content-plan",
 ] as const;
 const PORTRAIT_PATH = resolve(
   process.cwd(),
@@ -165,6 +171,10 @@ async function main() {
       },
       year: 2026,
       category: "culture",
+      skills: [
+        "Creative Direction & Brand Strategy",
+        "Content Production & Visual Storytelling",
+      ],
       status: "completed",
       workType: "Studio Sessions / Content Production",
       role: [
@@ -194,6 +204,10 @@ async function main() {
       },
       year: 2026,
       category: "culture",
+      skills: [
+        "Creative Direction & Brand Strategy",
+        "Content Production & Visual Storytelling",
+      ],
       status: "completed",
       workType: "Vlog Series / Creative Content",
       role: [textBlock("role", "Creator / Director of Creative Strategy")],
@@ -224,6 +238,7 @@ async function main() {
       },
       year: 2026,
       category: "culture",
+      skills: ["Content Production & Visual Storytelling"],
       status: "completed",
       workType: "Music Video Location Sourcing",
       role: [textBlock("role", "Location Sourcing")],
@@ -253,6 +268,10 @@ async function main() {
       },
       year: 2026,
       category: "culture",
+      skills: [
+        "Creative Direction & Brand Strategy",
+        "Campaign & Rollout Strategy",
+      ],
       status: "completed",
       workType: "Single Cover Creative Planning",
       role: [
@@ -290,6 +309,10 @@ async function main() {
       slug: { _type: "slug", current: "deepwatch-workspan" },
       client: "WorkSpan / Deepwatch",
       category: "b2b",
+      skills: [
+        "Copywriting & Customer Storytelling",
+        "Event & Customer Marketing",
+      ],
       status: "completed",
       workType: "Customer Case Study / Advocacy Content",
       role: [
@@ -318,6 +341,10 @@ async function main() {
       slug: { _type: "slug", current: "datastax-workspan" },
       client: "WorkSpan / DataStax",
       category: "b2b",
+      skills: [
+        "Copywriting & Customer Storytelling",
+        "Event & Customer Marketing",
+      ],
       status: "completed",
       workType: "Customer Case Study / Advocacy Content",
       role: [
@@ -346,6 +373,10 @@ async function main() {
       slug: { _type: "slug", current: "qualtrics-workspan" },
       client: "WorkSpan / Qualtrics",
       category: "b2b",
+      skills: [
+        "Copywriting & Customer Storytelling",
+        "Event & Customer Marketing",
+      ],
       status: "completed",
       workType: "Customer Case Study / Advocacy Content",
       role: [
@@ -374,6 +405,10 @@ async function main() {
       slug: { _type: "slug", current: "boomi-workspan" },
       client: "WorkSpan / Boomi",
       category: "b2b",
+      skills: [
+        "Copywriting & Customer Storytelling",
+        "Event & Customer Marketing",
+      ],
       status: "completed",
       workType: "Customer Case Study / Advocacy Content",
       role: [
@@ -394,6 +429,122 @@ async function main() {
       ],
       featured: true,
       displayOrder: 8,
+    },
+    {
+      _id: PROJECT_IDS[8],
+      _type: "project",
+      title: "Plug & Play Set Design Options",
+      slug: { _type: "slug", current: "plug-and-play-set-design-options" },
+      year: 2026,
+      category: "culture",
+      skills: ["Set Design & Experiential"],
+      status: "concept",
+      workType: "Set Design / Creative Development",
+      role: [textBlock("role", "Set Design / Creative Development")],
+      shortSummary:
+        "Created three different set design options for the Plug & Play hosts to choose from.",
+      projectContext: [textBlock("context", "Submitted June 30, 2026.")],
+      brief: [textBlock("brief", "Assigned by Kamal.")],
+      featured: false,
+      displayOrder: 9,
+    },
+    {
+      _id: PROJECT_IDS[9],
+      _type: "project",
+      title: "Lobby Redesign",
+      slug: { _type: "slug", current: "lobby-redesign" },
+      year: 2026,
+      category: "culture",
+      skills: [
+        "Set Design & Experiential",
+        "Creative Direction & Brand Strategy",
+      ],
+      status: "concept",
+      workType: "Spatial Redesign Direction",
+      shortSummary:
+        "Developed a redesign direction for the studio lobby so the physical environment better reflected the state-of-the-art positioning of the studio.",
+      projectContext: [textBlock("context", "Submitted February 7, 2026.")],
+      brief: [textBlock("brief", "Assigned by Kamal and Bugo.")],
+      featured: false,
+      displayOrder: 10,
+    },
+    {
+      _id: PROJECT_IDS[10],
+      _type: "project",
+      title: "1Take Sponsorship Deck",
+      slug: { _type: "slug", current: "one-take-sponsorship-deck" },
+      year: 2026,
+      category: "culture",
+      skills: ["Partnerships & Sponsorships"],
+      status: "concept",
+      workType: "Sponsorship / Partnership Strategy",
+      shortSummary:
+        "Developed a sponsorship deck to attract brand partners for Season 2 of One Take.",
+      projectContext: [
+        textBlock("context", "Submitted July 2, 2026. Self-initiated."),
+      ],
+      featured: false,
+      displayOrder: 11,
+    },
+    {
+      _id: PROJECT_IDS[11],
+      _type: "project",
+      title: "Frankly Speaking Brand Partnership Deck",
+      slug: {
+        _type: "slug",
+        current: "frankly-speaking-brand-partnership-deck",
+      },
+      year: 2026,
+      category: "culture",
+      skills: ["Partnerships & Sponsorships"],
+      status: "concept",
+      workType: "Brand Partnership / Sponsorship Direction",
+      shortSummary:
+        "Developed a brand partnership and sponsorship direction for the Frankly Speaking podcast.",
+      projectContext: [
+        textBlock("context", "Submitted July 9, 2026. Self-assigned."),
+      ],
+      featured: false,
+      displayOrder: 12,
+    },
+    {
+      _id: PROJECT_IDS[12],
+      _type: "project",
+      title: "Guchi — GANJA Single Rollout Plan",
+      slug: { _type: "slug", current: "guchi-ganja-single-rollout-plan" },
+      year: 2026,
+      category: "culture",
+      skills: [
+        "Campaign & Rollout Strategy",
+        "Creative Direction & Brand Strategy",
+      ],
+      status: "concept",
+      workType: "Single Rollout Planning / Strategy",
+      shortSummary:
+        "Developed a rollout strategy designed to strengthen Guchi’s presence with Nigerian audiences around the “GANJA” single.",
+      projectContext: [textBlock("context", "Submitted April 27, 2026.")],
+      brief: [textBlock("brief", "Assigned by JD.")],
+      featured: false,
+      displayOrder: 13,
+    },
+    {
+      _id: PROJECT_IDS[13],
+      _type: "project",
+      title: "Garvicii EP Content Plan",
+      slug: { _type: "slug", current: "garvicii-ep-content-plan" },
+      year: 2026,
+      category: "culture",
+      skills: [
+        "Campaign & Rollout Strategy",
+        "Content Production & Visual Storytelling",
+      ],
+      status: "concept",
+      workType: "EP Content Planning / Strategy",
+      shortSummary: "Planned the content direction for Garvicii’s EP release.",
+      projectContext: [textBlock("context", "Submitted July 8, 2026.")],
+      brief: [textBlock("brief", "Assigned by JD.")],
+      featured: false,
+      displayOrder: 14,
     },
   ] as const;
 
@@ -538,6 +689,20 @@ async function main() {
   const seededDocuments = await client.fetch<
     Array<{ _id: string; _type: string }>
   >(`*[_id in $ids] | order(_id asc){_id, _type}`, { ids: plannedIds });
+  const projectVerification = await client.fetch<
+    Array<{ _id: string; title: string; skills: string[] | null }>
+  >(
+    `*[_type == "project"] | order(coalesce(displayOrder, 9999) asc, title asc){_id, title, skills}`,
+  );
+  const skillCoverage = projectVerification.reduce<Record<string, number>>(
+    (coverage, project) => {
+      for (const skill of project.skills ?? []) {
+        coverage[skill] = (coverage[skill] ?? 0) + 1;
+      }
+      return coverage;
+    },
+    {},
+  );
 
   console.log(
     JSON.stringify(
@@ -545,6 +710,12 @@ async function main() {
         committed: true,
         portraitUploaded: Boolean(portraitAssetReference),
         seededDocuments,
+        projectVerification,
+        projectCount: projectVerification.length,
+        expectedProjectCount: projectDocuments.length,
+        projectCountMatchesExpected:
+          projectVerification.length === projectDocuments.length,
+        skillCoverage,
       },
       null,
       2,

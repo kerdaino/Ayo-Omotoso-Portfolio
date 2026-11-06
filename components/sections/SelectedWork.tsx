@@ -1,30 +1,23 @@
+"use client";
+
+import { useId, useState } from "react";
+
 import { ProjectCard } from "@/components/work/ProjectCard";
 import { Container } from "@/components/ui/Container";
-import type {
-  AllProjectsQueryResult,
-  FeaturedProjectsQueryResult,
-} from "@/sanity/sanity.types";
+import { PROJECT_SKILLS, type ProjectSkill } from "@/sanity/constants";
+import type { AllProjectsQueryResult } from "@/sanity/sanity.types";
 
 type SelectedWorkProps = {
-  featuredProjects: FeaturedProjectsQueryResult;
   allProjects: AllProjectsQueryResult;
 };
 
 type ProjectSummary = AllProjectsQueryResult[number];
 
-const categories = [
-  { value: "culture", title: "Culture" },
-  { value: "b2b", title: "Commerce / B2B" },
-] as const;
-
-function mergeProjects(
-  featuredProjects: FeaturedProjectsQueryResult,
-  allProjects: AllProjectsQueryResult,
-) {
+function deduplicateProjects(allProjects: AllProjectsQueryResult) {
   const seenProjectIds = new Set<string>();
   const projects: ProjectSummary[] = [];
 
-  for (const project of [...featuredProjects, ...allProjects]) {
+  for (const project of allProjects) {
     if (seenProjectIds.has(project._id)) {
       continue;
     }
@@ -37,10 +30,15 @@ function mergeProjects(
 }
 
 export function SelectedWork({
-  featuredProjects,
   allProjects,
 }: SelectedWorkProps) {
-  const projects = mergeProjects(featuredProjects, allProjects);
+  const projects = deduplicateProjects(allProjects);
+  const [activeSkill, setActiveSkill] = useState<ProjectSkill | null>(null);
+  const filterHeadingId = useId();
+  const visibleProjects = activeSkill
+    ? projects.filter((project) => project.skills?.includes(activeSkill))
+    : projects;
+  const activeLabel = activeSkill ?? "All Work";
 
   return (
     <section
@@ -63,43 +61,55 @@ export function SelectedWork({
             <span>No project entries are published in the CMS yet.</span>
           </div>
         ) : (
-          <div className="selected-work__categories">
-            {categories.map((category, categoryIndex) => {
-              const categoryProjects = projects.filter(
-                (project) => project.category === category.value,
-              );
-
-              if (categoryProjects.length === 0) {
-                return null;
-              }
-
-              const categoryId = `selected-work-${category.value}`;
-
-              return (
-                <section
-                  className="work-category"
-                  key={category.value}
-                  aria-labelledby={categoryId}
+          <div className="selected-work__browser">
+            <div className="work-filters" aria-labelledby={filterHeadingId}>
+              <p id={filterHeadingId}>Browse by skill</p>
+              <div className="work-filters__controls">
+                <button
+                  type="button"
+                  aria-pressed={activeSkill === null}
+                  onClick={() => setActiveSkill(null)}
                 >
-                  <header className="work-category__header">
-                    <span aria-hidden="true">
-                      {String(categoryIndex + 1).padStart(2, "0")}
-                    </span>
-                    <h3 id={categoryId}>{category.title}</h3>
-                    <p>
-                      {categoryProjects.length}{" "}
-                      {categoryProjects.length === 1 ? "project" : "projects"}
-                    </p>
-                  </header>
+                  All Work
+                </button>
+                {PROJECT_SKILLS.map((skill) => (
+                  <button
+                    type="button"
+                    aria-pressed={activeSkill === skill}
+                    key={skill}
+                    onClick={() => setActiveSkill(skill)}
+                  >
+                    {skill}
+                  </button>
+                ))}
+              </div>
+            </div>
 
-                  <div className="work-category__grid">
-                    {categoryProjects.map((project) => (
-                      <ProjectCard project={project} key={project._id} />
-                    ))}
-                  </div>
-                </section>
-              );
-            })}
+            <section
+              className="work-category"
+              aria-labelledby="visible-work-title"
+            >
+              <header className="work-category__header">
+                <span aria-hidden="true">01</span>
+                <h3 id="visible-work-title">{activeLabel}</h3>
+                <p aria-live="polite">
+                  {visibleProjects.length}{" "}
+                  {visibleProjects.length === 1 ? "project" : "projects"}
+                </p>
+              </header>
+
+              {visibleProjects.length > 0 ? (
+                <div className="work-category__grid">
+                  {visibleProjects.map((project) => (
+                    <ProjectCard project={project} key={project._id} />
+                  ))}
+                </div>
+              ) : (
+                <p className="work-category__empty">
+                  No published projects are assigned to this skill yet.
+                </p>
+              )}
+            </section>
           </div>
         )}
       </Container>

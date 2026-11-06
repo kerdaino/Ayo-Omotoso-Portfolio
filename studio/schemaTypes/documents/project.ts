@@ -1,6 +1,10 @@
 import { defineArrayMember, defineField, defineType } from "sanity";
 
-import { PROJECT_CATEGORIES, PROJECT_STATUSES } from "../../../sanity/constants";
+import {
+  PROJECT_CATEGORIES,
+  PROJECT_SKILLS,
+  PROJECT_STATUSES,
+} from "../../../sanity/constants";
 
 const currentYear = new Date().getFullYear();
 
@@ -76,6 +80,22 @@ export const project = defineType({
       group: "identity",
       options: { list: [...PROJECT_CATEGORIES], layout: "radio" },
       validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: "skills",
+      title: "Professional skills",
+      type: "array",
+      group: "identity",
+      description:
+        "Select every approved skill that is clearly supported by this project's existing content. This is separate from the main category.",
+      of: [
+        defineArrayMember({
+          type: "string",
+          options: { list: [...PROJECT_SKILLS] },
+        }),
+      ],
+      options: { layout: "grid" },
+      validation: (rule) => rule.unique(),
     }),
     defineField({
       name: "workType",

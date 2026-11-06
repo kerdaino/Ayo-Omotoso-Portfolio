@@ -33,6 +33,7 @@ const projectProjection = `{
   client,
   year,
   category,
+  skills,
   workType,
   status,
   shortSummary,

@@ -125,6 +125,15 @@ export type Project = {
   client?: string;
   year?: number;
   category: "culture" | "b2b";
+  skills?: Array<
+    | "Creative Direction & Brand Strategy"
+    | "Campaign & Rollout Strategy"
+    | "Copywriting & Customer Storytelling"
+    | "Set Design & Experiential"
+    | "Content Production & Visual Storytelling"
+    | "Partnerships & Sponsorships"
+    | "Event & Customer Marketing"
+  >;
   workType: string;
   status: "completed" | "in-progress" | "concept" | "pitch";
   shortSummary: string;
@@ -412,7 +421,7 @@ export type ProfileQueryResult = {
 
 // Source: ../sanity/queries.ts
 // Variable: featuredProjectsQuery
-// Query: *[_type == "project" && featured == true] | order(coalesce(displayOrder, 9999) asc, year desc) {  _id,  title,  "slug": slug.current,  client,  year,  category,  workType,  status,  shortSummary,  projectContext,  brief,  role,  strategicApproach,  execution,  verifiedResults,  collaborators,  coverImage,  coverAlt,  gallery,  videoUrl,  externalLinks,  featured,  displayOrder}
+// Query: *[_type == "project" && featured == true] | order(coalesce(displayOrder, 9999) asc, year desc) {  _id,  title,  "slug": slug.current,  client,  year,  category,  skills,  workType,  status,  shortSummary,  projectContext,  brief,  role,  strategicApproach,  execution,  verifiedResults,  collaborators,  coverImage,  coverAlt,  gallery,  videoUrl,  externalLinks,  featured,  displayOrder}
 export type FeaturedProjectsQueryResult = Array<{
   _id: string;
   title: string;
@@ -420,6 +429,15 @@ export type FeaturedProjectsQueryResult = Array<{
   client: string | null;
   year: number | null;
   category: "b2b" | "culture";
+  skills: Array<
+    | "Campaign & Rollout Strategy"
+    | "Content Production & Visual Storytelling"
+    | "Copywriting & Customer Storytelling"
+    | "Creative Direction & Brand Strategy"
+    | "Event & Customer Marketing"
+    | "Partnerships & Sponsorships"
+    | "Set Design & Experiential"
+  > | null;
   workType: string;
   status: "completed" | "concept" | "in-progress" | "pitch";
   shortSummary: string;
@@ -459,7 +477,7 @@ export type FeaturedProjectsQueryResult = Array<{
 
 // Source: ../sanity/queries.ts
 // Variable: allProjectsQuery
-// Query: *[_type == "project"] | order(coalesce(displayOrder, 9999) asc, year desc) {  _id,  title,  "slug": slug.current,  client,  year,  category,  workType,  status,  shortSummary,  projectContext,  brief,  role,  strategicApproach,  execution,  verifiedResults,  collaborators,  coverImage,  coverAlt,  gallery,  videoUrl,  externalLinks,  featured,  displayOrder}
+// Query: *[_type == "project"] | order(coalesce(displayOrder, 9999) asc, year desc) {  _id,  title,  "slug": slug.current,  client,  year,  category,  skills,  workType,  status,  shortSummary,  projectContext,  brief,  role,  strategicApproach,  execution,  verifiedResults,  collaborators,  coverImage,  coverAlt,  gallery,  videoUrl,  externalLinks,  featured,  displayOrder}
 export type AllProjectsQueryResult = Array<{
   _id: string;
   title: string;
@@ -467,6 +485,15 @@ export type AllProjectsQueryResult = Array<{
   client: string | null;
   year: number | null;
   category: "b2b" | "culture";
+  skills: Array<
+    | "Campaign & Rollout Strategy"
+    | "Content Production & Visual Storytelling"
+    | "Copywriting & Customer Storytelling"
+    | "Creative Direction & Brand Strategy"
+    | "Event & Customer Marketing"
+    | "Partnerships & Sponsorships"
+    | "Set Design & Experiential"
+  > | null;
   workType: string;
   status: "completed" | "concept" | "in-progress" | "pitch";
   shortSummary: string;
@@ -506,7 +533,7 @@ export type AllProjectsQueryResult = Array<{
 
 // Source: ../sanity/queries.ts
 // Variable: projectBySlugQuery
-// Query: *[_type == "project" && slug.current == $slug][0]{  _id,  title,  "slug": slug.current,  client,  year,  category,  workType,  status,  shortSummary,  projectContext,  brief,  role,  strategicApproach,  execution,  verifiedResults,  collaborators,  coverImage,  coverAlt,  gallery,  videoUrl,  externalLinks,  featured,  displayOrder}
+// Query: *[_type == "project" && slug.current == $slug][0]{  _id,  title,  "slug": slug.current,  client,  year,  category,  skills,  workType,  status,  shortSummary,  projectContext,  brief,  role,  strategicApproach,  execution,  verifiedResults,  collaborators,  coverImage,  coverAlt,  gallery,  videoUrl,  externalLinks,  featured,  displayOrder}
 export type ProjectBySlugQueryResult = {
   _id: string;
   title: string;
@@ -514,6 +541,15 @@ export type ProjectBySlugQueryResult = {
   client: string | null;
   year: number | null;
   category: "b2b" | "culture";
+  skills: Array<
+    | "Campaign & Rollout Strategy"
+    | "Content Production & Visual Storytelling"
+    | "Copywriting & Customer Storytelling"
+    | "Creative Direction & Brand Strategy"
+    | "Event & Customer Marketing"
+    | "Partnerships & Sponsorships"
+    | "Set Design & Experiential"
+  > | null;
   workType: string;
   status: "completed" | "concept" | "in-progress" | "pitch";
   shortSummary: string;
@@ -583,9 +619,9 @@ import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
     '*[_type == "profile" && _id == "profile"][0]{\n  _id,\n  publicName,\n  professionalTitle,\n  heroStatement,\n  supportingLine,\n  shortBio,\n  fullBio,\n  education,\n  portrait,\n  portraitAlt,\n  email,\n  resume {\n    "fileUrl": file.asset->url,\n    externalUrl\n  },\n  linkedIn->{_id, platform, label, url, enabled},\n  location,\n  availabilityCta,\n  seo\n}': ProfileQueryResult;
-    '*[_type == "project" && featured == true] | order(coalesce(displayOrder, 9999) asc, year desc) {\n  _id,\n  title,\n  "slug": slug.current,\n  client,\n  year,\n  category,\n  workType,\n  status,\n  shortSummary,\n  projectContext,\n  brief,\n  role,\n  strategicApproach,\n  execution,\n  verifiedResults,\n  collaborators,\n  coverImage,\n  coverAlt,\n  gallery,\n  videoUrl,\n  externalLinks,\n  featured,\n  displayOrder\n}': FeaturedProjectsQueryResult;
-    '*[_type == "project"] | order(coalesce(displayOrder, 9999) asc, year desc) {\n  _id,\n  title,\n  "slug": slug.current,\n  client,\n  year,\n  category,\n  workType,\n  status,\n  shortSummary,\n  projectContext,\n  brief,\n  role,\n  strategicApproach,\n  execution,\n  verifiedResults,\n  collaborators,\n  coverImage,\n  coverAlt,\n  gallery,\n  videoUrl,\n  externalLinks,\n  featured,\n  displayOrder\n}': AllProjectsQueryResult;
-    '*[_type == "project" && slug.current == $slug][0]{\n  _id,\n  title,\n  "slug": slug.current,\n  client,\n  year,\n  category,\n  workType,\n  status,\n  shortSummary,\n  projectContext,\n  brief,\n  role,\n  strategicApproach,\n  execution,\n  verifiedResults,\n  collaborators,\n  coverImage,\n  coverAlt,\n  gallery,\n  videoUrl,\n  externalLinks,\n  featured,\n  displayOrder\n}': ProjectBySlugQueryResult;
+    '*[_type == "project" && featured == true] | order(coalesce(displayOrder, 9999) asc, year desc) {\n  _id,\n  title,\n  "slug": slug.current,\n  client,\n  year,\n  category,\n  skills,\n  workType,\n  status,\n  shortSummary,\n  projectContext,\n  brief,\n  role,\n  strategicApproach,\n  execution,\n  verifiedResults,\n  collaborators,\n  coverImage,\n  coverAlt,\n  gallery,\n  videoUrl,\n  externalLinks,\n  featured,\n  displayOrder\n}': FeaturedProjectsQueryResult;
+    '*[_type == "project"] | order(coalesce(displayOrder, 9999) asc, year desc) {\n  _id,\n  title,\n  "slug": slug.current,\n  client,\n  year,\n  category,\n  skills,\n  workType,\n  status,\n  shortSummary,\n  projectContext,\n  brief,\n  role,\n  strategicApproach,\n  execution,\n  verifiedResults,\n  collaborators,\n  coverImage,\n  coverAlt,\n  gallery,\n  videoUrl,\n  externalLinks,\n  featured,\n  displayOrder\n}': AllProjectsQueryResult;
+    '*[_type == "project" && slug.current == $slug][0]{\n  _id,\n  title,\n  "slug": slug.current,\n  client,\n  year,\n  category,\n  skills,\n  workType,\n  status,\n  shortSummary,\n  projectContext,\n  brief,\n  role,\n  strategicApproach,\n  execution,\n  verifiedResults,\n  collaborators,\n  coverImage,\n  coverAlt,\n  gallery,\n  videoUrl,\n  externalLinks,\n  featured,\n  displayOrder\n}': ProjectBySlugQueryResult;
     '\n  *[_type == "experience"] | order(coalesce(displayOrder, 9999) asc, startYear desc) {\n    _id,\n    organisation,\n    role,\n    startYear,\n    endYear,\n    current,\n    shortDescription,\n    location,\n    displayOrder\n  }\n': ExperienceQueryResult;
     '\n  *[_type == "socialLink" && enabled == true] | order(coalesce(displayOrder, 9999) asc, label asc) {\n    _id,\n    platform,\n    label,\n    url,\n    displayOrder\n  }\n': SocialLinksQueryResult;
   }

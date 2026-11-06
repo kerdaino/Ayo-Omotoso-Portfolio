@@ -664,6 +664,46 @@
         },
         "optional": false
       },
+      "skills": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "array",
+          "of": {
+            "type": "union",
+            "of": [
+              {
+                "type": "string",
+                "value": "Creative Direction & Brand Strategy"
+              },
+              {
+                "type": "string",
+                "value": "Campaign & Rollout Strategy"
+              },
+              {
+                "type": "string",
+                "value": "Copywriting & Customer Storytelling"
+              },
+              {
+                "type": "string",
+                "value": "Set Design & Experiential"
+              },
+              {
+                "type": "string",
+                "value": "Content Production & Visual Storytelling"
+              },
+              {
+                "type": "string",
+                "value": "Partnerships & Sponsorships"
+              },
+              {
+                "type": "string",
+                "value": "Event & Customer Marketing"
+              }
+            ]
+          }
+        },
+        "optional": true
+      },
       "workType": {
         "type": "objectAttribute",
         "value": {

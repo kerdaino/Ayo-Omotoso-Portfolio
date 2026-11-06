@@ -12,12 +12,10 @@ export const PROJECT_STATUSES = [
 
 export const PROJECT_SKILLS = [
   "Creative Direction & Brand Strategy",
-  "Campaign & Rollout Strategy",
   "Copywriting & Customer Storytelling",
   "Set Design & Experiential",
-  "Content Production & Visual Storytelling",
   "Partnerships & Sponsorships",
-  "Event & Customer Marketing",
+  "Events",
 ] as const;
 
 export const SOCIAL_PLATFORMS = [

@@ -677,10 +677,6 @@
               },
               {
                 "type": "string",
-                "value": "Campaign & Rollout Strategy"
-              },
-              {
-                "type": "string",
                 "value": "Copywriting & Customer Storytelling"
               },
               {
@@ -689,15 +685,11 @@
               },
               {
                 "type": "string",
-                "value": "Content Production & Visual Storytelling"
-              },
-              {
-                "type": "string",
                 "value": "Partnerships & Sponsorships"
               },
               {
                 "type": "string",
-                "value": "Event & Customer Marketing"
+                "value": "Events"
               }
             ]
           }

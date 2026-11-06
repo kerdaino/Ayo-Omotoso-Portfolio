@@ -127,12 +127,10 @@ export type Project = {
   category: "culture" | "b2b";
   skills?: Array<
     | "Creative Direction & Brand Strategy"
-    | "Campaign & Rollout Strategy"
     | "Copywriting & Customer Storytelling"
     | "Set Design & Experiential"
-    | "Content Production & Visual Storytelling"
     | "Partnerships & Sponsorships"
-    | "Event & Customer Marketing"
+    | "Events"
   >;
   workType: string;
   status: "completed" | "in-progress" | "concept" | "pitch";
@@ -430,11 +428,9 @@ export type FeaturedProjectsQueryResult = Array<{
   year: number | null;
   category: "b2b" | "culture";
   skills: Array<
-    | "Campaign & Rollout Strategy"
-    | "Content Production & Visual Storytelling"
     | "Copywriting & Customer Storytelling"
     | "Creative Direction & Brand Strategy"
-    | "Event & Customer Marketing"
+    | "Events"
     | "Partnerships & Sponsorships"
     | "Set Design & Experiential"
   > | null;
@@ -486,11 +482,9 @@ export type AllProjectsQueryResult = Array<{
   year: number | null;
   category: "b2b" | "culture";
   skills: Array<
-    | "Campaign & Rollout Strategy"
-    | "Content Production & Visual Storytelling"
     | "Copywriting & Customer Storytelling"
     | "Creative Direction & Brand Strategy"
-    | "Event & Customer Marketing"
+    | "Events"
     | "Partnerships & Sponsorships"
     | "Set Design & Experiential"
   > | null;
@@ -542,11 +536,9 @@ export type ProjectBySlugQueryResult = {
   year: number | null;
   category: "b2b" | "culture";
   skills: Array<
-    | "Campaign & Rollout Strategy"
-    | "Content Production & Visual Storytelling"
     | "Copywriting & Customer Storytelling"
     | "Creative Direction & Brand Strategy"
-    | "Event & Customer Marketing"
+    | "Events"
     | "Partnerships & Sponsorships"
     | "Set Design & Experiential"
   > | null;

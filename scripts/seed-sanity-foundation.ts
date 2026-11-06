@@ -173,7 +173,7 @@ async function main() {
       category: "culture",
       skills: [
         "Creative Direction & Brand Strategy",
-        "Content Production & Visual Storytelling",
+        "Events",
       ],
       status: "completed",
       workType: "Studio Sessions / Content Production",
@@ -204,10 +204,7 @@ async function main() {
       },
       year: 2026,
       category: "culture",
-      skills: [
-        "Creative Direction & Brand Strategy",
-        "Content Production & Visual Storytelling",
-      ],
+      skills: ["Creative Direction & Brand Strategy"],
       status: "completed",
       workType: "Vlog Series / Creative Content",
       role: [textBlock("role", "Creator / Director of Creative Strategy")],
@@ -238,7 +235,7 @@ async function main() {
       },
       year: 2026,
       category: "culture",
-      skills: ["Content Production & Visual Storytelling"],
+      skills: ["Creative Direction & Brand Strategy"],
       status: "completed",
       workType: "Music Video Location Sourcing",
       role: [textBlock("role", "Location Sourcing")],
@@ -268,10 +265,7 @@ async function main() {
       },
       year: 2026,
       category: "culture",
-      skills: [
-        "Creative Direction & Brand Strategy",
-        "Campaign & Rollout Strategy",
-      ],
+      skills: ["Creative Direction & Brand Strategy"],
       status: "completed",
       workType: "Single Cover Creative Planning",
       role: [
@@ -309,10 +303,7 @@ async function main() {
       slug: { _type: "slug", current: "deepwatch-workspan" },
       client: "WorkSpan / Deepwatch",
       category: "b2b",
-      skills: [
-        "Copywriting & Customer Storytelling",
-        "Event & Customer Marketing",
-      ],
+      skills: ["Copywriting & Customer Storytelling"],
       status: "completed",
       workType: "Customer Case Study / Advocacy Content",
       role: [
@@ -341,10 +332,7 @@ async function main() {
       slug: { _type: "slug", current: "datastax-workspan" },
       client: "WorkSpan / DataStax",
       category: "b2b",
-      skills: [
-        "Copywriting & Customer Storytelling",
-        "Event & Customer Marketing",
-      ],
+      skills: ["Copywriting & Customer Storytelling"],
       status: "completed",
       workType: "Customer Case Study / Advocacy Content",
       role: [
@@ -373,10 +361,7 @@ async function main() {
       slug: { _type: "slug", current: "qualtrics-workspan" },
       client: "WorkSpan / Qualtrics",
       category: "b2b",
-      skills: [
-        "Copywriting & Customer Storytelling",
-        "Event & Customer Marketing",
-      ],
+      skills: ["Copywriting & Customer Storytelling"],
       status: "completed",
       workType: "Customer Case Study / Advocacy Content",
       role: [
@@ -405,10 +390,7 @@ async function main() {
       slug: { _type: "slug", current: "boomi-workspan" },
       client: "WorkSpan / Boomi",
       category: "b2b",
-      skills: [
-        "Copywriting & Customer Storytelling",
-        "Event & Customer Marketing",
-      ],
+      skills: ["Copywriting & Customer Storytelling"],
       status: "completed",
       workType: "Customer Case Study / Advocacy Content",
       role: [
@@ -514,10 +496,7 @@ async function main() {
       slug: { _type: "slug", current: "guchi-ganja-single-rollout-plan" },
       year: 2026,
       category: "culture",
-      skills: [
-        "Campaign & Rollout Strategy",
-        "Creative Direction & Brand Strategy",
-      ],
+      skills: ["Creative Direction & Brand Strategy"],
       status: "concept",
       workType: "Single Rollout Planning / Strategy",
       shortSummary:
@@ -534,10 +513,7 @@ async function main() {
       slug: { _type: "slug", current: "garvicii-ep-content-plan" },
       year: 2026,
       category: "culture",
-      skills: [
-        "Campaign & Rollout Strategy",
-        "Content Production & Visual Storytelling",
-      ],
+      skills: ["Creative Direction & Brand Strategy"],
       status: "concept",
       workType: "EP Content Planning / Strategy",
       shortSummary: "Planned the content direction for Garvicii’s EP release.",

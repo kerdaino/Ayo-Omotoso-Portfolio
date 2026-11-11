@@ -22,7 +22,6 @@ const worlds = [
       "Campaign systems",
       "Customer stories",
       "Webinars",
-      "Events",
       "Advocacy content",
       "Revenue-aligned marketing",
     ],

@@ -22,6 +22,7 @@ const PROJECT_IDS = [
   "project-frankly-speaking-brand-partnership-deck",
   "project-guchi-ganja-single-rollout-plan",
   "project-garvicii-ep-content-plan",
+  "project-garvicii-jo",
 ] as const;
 const PORTRAIT_PATH = resolve(
   process.cwd(),
@@ -173,14 +174,13 @@ async function main() {
       category: "culture",
       skills: [
         "Creative Direction & Brand Strategy",
-        "Events",
       ],
       status: "completed",
       workType: "Studio Sessions / Content Production",
       role: [
         textBlock(
           "role",
-          "Director of Creative Strategy — Engage/MAD",
+          "Created, Designed & Produced",
         ),
       ],
       shortSummary:
@@ -453,11 +453,11 @@ async function main() {
     {
       _id: PROJECT_IDS[10],
       _type: "project",
-      title: "1Take Sponsorship Deck",
+      title: "One Take Season 2 — Brand Partnership Proposal",
       slug: { _type: "slug", current: "one-take-sponsorship-deck" },
       year: 2026,
       category: "culture",
-      skills: ["Partnerships & Sponsorships"],
+      skills: ["Brand Partnerships"],
       status: "concept",
       workType: "Sponsorship / Partnership Strategy",
       shortSummary:
@@ -478,7 +478,7 @@ async function main() {
       },
       year: 2026,
       category: "culture",
-      skills: ["Partnerships & Sponsorships"],
+      skills: ["Brand Partnerships"],
       status: "concept",
       workType: "Brand Partnership / Sponsorship Direction",
       shortSummary:
@@ -521,6 +521,26 @@ async function main() {
       brief: [textBlock("brief", "Assigned by JD.")],
       featured: false,
       displayOrder: 14,
+    },
+    {
+      _id: PROJECT_IDS[14],
+      _type: "project",
+      title: 'Garvicii — "JO" Creative Direction',
+      slug: { _type: "slug", current: "garvicii-jo-creative-direction" },
+      category: "culture",
+      skills: [
+        "Creative Direction & Brand Strategy",
+        "Set Design & Experiential",
+      ],
+      status: "completed",
+      workType: "Creative Direction / Set Design / Art Direction",
+      shortSummary:
+        'Creative direction, set design and art direction for Garvicii’s "JO".',
+      role: [
+        textBlock("role", "Creative direction, set design and art direction"),
+      ],
+      featured: false,
+      displayOrder: 15,
     },
   ] as const;
 
@@ -630,11 +650,6 @@ async function main() {
     "execution",
     "verifiedResults",
     "collaborators",
-    "coverImage",
-    "coverAlt",
-    "gallery",
-    "videoUrl",
-    "externalLinks",
   ] as const;
 
   for (const document of projectDocuments) {

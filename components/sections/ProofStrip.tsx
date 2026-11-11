@@ -29,7 +29,7 @@ export function ProofStrip() {
       <Container>
         <div className="proof-strip__heading">
           <p>Selected proof</p>
-          <h2 id="proof-title">Verified career and WorkSpan contribution.</h2>
+          <h2 id="proof-title">Verified Career</h2>
         </div>
 
         <dl className="proof-strip__grid">

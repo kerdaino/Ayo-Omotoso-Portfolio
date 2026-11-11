@@ -156,3 +156,13 @@ Review and deploy the validated static export only after explicit approval, conn
 - No read token or authenticated query dependency was added to the public frontend.
 - No B2B Project, project budget, fabricated media, private Google Docs URL, public phone number or KD Global credit was added in Phase 2G.
 - No Studio/public-site deployment, webhook, domain work or client contact occurred in Phase 2G.
+
+## 11 November 2026 — client typography and production corrections
+
+- Reduced display headings, card titles, experience roles and résumé titles with responsive sizes; retained Bebas Neue, Inter, Playfair Display, approved colours, layouts and imagery. Reading copy stays at least 16px; filter buttons retain 44px targets.
+- Changed only the proof heading to “Verified Career”; all achievement metrics, evidence labels and WorkSpan attribution remain intact.
+- Released the four approved skill options through shared frontend/Studio constants; no project reseed or content mutation is required.
+- Added an ink/cream AO monogram favicon at `app/favicon.ico` using the existing condensed display identity; static export includes `/favicon.ico`.
+- Redeployed the existing hosted Studio via `node scripts/run-sanity.mjs deploy`; verified its exact deployed bundle matches the corrected local build.
+- Local responsive checks: homepage, résumé, longest project title and JO detail at 375, 430, 768 and 1440px. No text overflow, broken images, distorted detail images or sub-16px reading copy. Category interactions return 8 / 4 / 3 / 2 projects and All Work returns 15. Mobile menu opens and dismisses.
+- Lint, typecheck, production build and diff checks passed. All 15 project routes and the 11 approved media references remain present. Private media, snapshots and QA screenshots remain ignored by Git.

@@ -14,3 +14,7 @@ coverage/
 .wrangler/
 studio/dist/
 studio/.sanity/
+
+# Private client source media and review-only derivatives
+media-inbox/
+media-review/

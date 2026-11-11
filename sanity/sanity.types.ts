@@ -129,8 +129,7 @@ export type Project = {
     | "Creative Direction & Brand Strategy"
     | "Copywriting & Customer Storytelling"
     | "Set Design & Experiential"
-    | "Partnerships & Sponsorships"
-    | "Events"
+    | "Brand Partnerships"
   >;
   workType: string;
   status: "completed" | "in-progress" | "concept" | "pitch";
@@ -428,10 +427,9 @@ export type FeaturedProjectsQueryResult = Array<{
   year: number | null;
   category: "b2b" | "culture";
   skills: Array<
+    | "Brand Partnerships"
     | "Copywriting & Customer Storytelling"
     | "Creative Direction & Brand Strategy"
-    | "Events"
-    | "Partnerships & Sponsorships"
     | "Set Design & Experiential"
   > | null;
   workType: string;
@@ -482,10 +480,9 @@ export type AllProjectsQueryResult = Array<{
   year: number | null;
   category: "b2b" | "culture";
   skills: Array<
+    | "Brand Partnerships"
     | "Copywriting & Customer Storytelling"
     | "Creative Direction & Brand Strategy"
-    | "Events"
-    | "Partnerships & Sponsorships"
     | "Set Design & Experiential"
   > | null;
   workType: string;
@@ -536,10 +533,9 @@ export type ProjectBySlugQueryResult = {
   year: number | null;
   category: "b2b" | "culture";
   skills: Array<
+    | "Brand Partnerships"
     | "Copywriting & Customer Storytelling"
     | "Creative Direction & Brand Strategy"
-    | "Events"
-    | "Partnerships & Sponsorships"
     | "Set Design & Experiential"
   > | null;
   workType: string;

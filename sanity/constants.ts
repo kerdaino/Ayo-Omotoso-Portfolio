@@ -14,8 +14,7 @@ export const PROJECT_SKILLS = [
   "Creative Direction & Brand Strategy",
   "Copywriting & Customer Storytelling",
   "Set Design & Experiential",
-  "Partnerships & Sponsorships",
-  "Events",
+  "Brand Partnerships",
 ] as const;
 
 export const SOCIAL_PLATFORMS = [

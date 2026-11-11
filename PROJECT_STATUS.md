@@ -166,3 +166,4 @@ Review and deploy the validated static export only after explicit approval, conn
 - Redeployed the existing hosted Studio via `node scripts/run-sanity.mjs deploy`; verified its exact deployed bundle matches the corrected local build.
 - Local responsive checks: homepage, résumé, longest project title and JO detail at 375, 430, 768 and 1440px. No text overflow, broken images, distorted detail images or sub-16px reading copy. Category interactions return 8 / 4 / 3 / 2 projects and All Work returns 15. Mobile menu opens and dismisses.
 - Lint, typecheck, production build and diff checks passed. All 15 project routes and the 11 approved media references remain present. Private media, snapshots and QA screenshots remain ignored by Git.
+- Cloudflare's default `npx next build` (Turbopack) rejected the initial RGB favicon payload despite the successful webpack build. Re-encoded the same AO artwork as RGBA for both build engines; no visual or content change.

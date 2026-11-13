@@ -10,6 +10,8 @@ export default defineConfig([
     "out/**",
     "studio/dist/**",
     "node_modules/**",
+    "media-inbox/**",
+    "media-review/**",
     "next-env.d.ts",
   ]),
 ]);

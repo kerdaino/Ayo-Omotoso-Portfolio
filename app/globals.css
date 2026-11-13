@@ -1108,7 +1108,6 @@ a.action-link:focus-visible {
   font-style: italic;
 }
 
-.project-card__status,
 .project-card__featured {
   position: absolute;
   z-index: 2;
@@ -1123,7 +1122,7 @@ a.action-link:focus-visible {
 }
 
 .project-card__status {
-  left: var(--space-4);
+  padding-inline: 0.4rem;
   background: var(--ink);
   color: var(--paper-light);
 }
@@ -2670,14 +2669,9 @@ a.action-link:focus-visible {
     padding-inline: var(--space-5);
   }
 
-  .project-card__status,
   .project-card__featured {
     top: var(--space-3);
     padding-inline: 0.5rem;
-  }
-
-  .project-card__status {
-    left: var(--space-3);
   }
 
   .project-card__featured {

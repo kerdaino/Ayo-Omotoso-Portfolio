@@ -72,7 +72,6 @@ export function ProjectCard({ project }: ProjectCardProps) {
             </div>
           )}
 
-          <span className="project-card__status">{statusLabel}</span>
           {project.featured ? (
             <span className="project-card__featured">Featured</span>
           ) : null}
@@ -80,6 +79,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
 
         <div className="project-card__body">
           <p className="project-card__meta">
+            <span className="project-card__status">{statusLabel}</span>
             <span>{categoryLabels[project.category]}</span>
             <span aria-hidden="true">/</span>
             <span>{project.workType}</span>

@@ -4,6 +4,8 @@ import { resolve } from "node:path";
 import type { IdentifiedSanityDocumentStub } from "@sanity/client";
 import { getCliClient } from "sanity/cli";
 
+import { HIDDEN_PROJECT_IDS, EP_PUBLIC_FIELDS } from "../sanity/portfolio-policy";
+
 const API_VERSION = "2026-08-20";
 const PROFILE_ID = "profile";
 const LINKEDIN_ID = "social-link-linkedin";
@@ -509,14 +511,13 @@ async function main() {
     {
       _id: PROJECT_IDS[13],
       _type: "project",
-      title: "Garvicii EP Content Plan",
+      ...EP_PUBLIC_FIELDS,
       slug: { _type: "slug", current: "garvicii-ep-content-plan" },
       year: 2026,
       category: "culture",
       skills: ["Creative Direction & Brand Strategy"],
       status: "concept",
       workType: "EP Content Planning / Strategy",
-      shortSummary: "Planned the content direction for Garvicii’s EP release.",
       projectContext: [textBlock("context", "Submitted July 8, 2026.")],
       brief: [textBlock("brief", "Assigned by JD.")],
       featured: false,
@@ -657,7 +658,7 @@ async function main() {
     void documentType;
     transaction.createIfNotExists(document as IdentifiedSanityDocumentStub);
     transaction.patch(_id, (patch) =>
-      patch.set(verifiedFields).unset([
+      patch.set({ ...verifiedFields, ...(HIDDEN_PROJECT_IDS.includes(_id) ? { showInPortfolio: false } : {}) }).unset([
         ...optionalProjectFields.filter((field) => !(field in document)),
       ]),
     );

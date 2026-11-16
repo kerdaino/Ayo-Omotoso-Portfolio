@@ -22,6 +22,7 @@ export const project = defineType({
   initialValue: {
     displayOrder: 100,
     featured: false,
+    showInPortfolio: true,
   },
   orderings: [
     {
@@ -39,6 +40,13 @@ export const project = defineType({
     },
   ],
   fields: [
+    defineField({
+      name: "showInPortfolio",
+      title: "Show in public portfolio",
+      type: "boolean",
+      group: "display",
+      description: "Turn off to hide the card and public detail page. Existing projects without this field remain visible.",
+    }),
     defineField({
       name: "title",
       title: "Project title",

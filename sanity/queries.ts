@@ -3,6 +3,8 @@ import { defineQuery } from "groq";
 import { siteProfile } from "@/lib/site";
 
 import { getSanityClient } from "./client";
+import { publicProject } from "./public-project";
+import type { AllProjectsQueryResult, FeaturedProjectsQueryResult, ProjectBySlugQueryResult } from "./sanity.types";
 
 const profileProjection = `{
   _id,
@@ -58,15 +60,15 @@ export const profileQuery = defineQuery(
 );
 
 export const featuredProjectsQuery = defineQuery(
-  `*[_type == "project" && featured == true] | order(coalesce(displayOrder, 9999) asc, year desc) ${projectProjection}`,
+  `*[_type == "project" && showInPortfolio != false && featured == true] | order(coalesce(displayOrder, 9999) asc, year desc) ${projectProjection}`,
 );
 
 export const allProjectsQuery = defineQuery(
-  `*[_type == "project"] | order(coalesce(displayOrder, 9999) asc, year desc) ${projectProjection}`,
+  `*[_type == "project" && showInPortfolio != false] | order(coalesce(displayOrder, 9999) asc, year desc) ${projectProjection}`,
 );
 
 export const projectBySlugQuery = defineQuery(
-  `*[_type == "project" && slug.current == $slug][0]${projectProjection}`,
+  `*[_type == "project" && showInPortfolio != false && slug.current == $slug][0]${projectProjection}`,
 );
 
 export const experienceQuery = defineQuery(`
@@ -115,12 +117,12 @@ export async function getProfile() {
 
 export async function getFeaturedProjects() {
   const client = getSanityClient();
-  return client ? client.fetch(featuredProjectsQuery) : [];
+  return client ? (await client.fetch<FeaturedProjectsQueryResult>(featuredProjectsQuery)).map(publicProject) : [];
 }
 
 export async function getAllProjects() {
   const client = getSanityClient();
-  return client ? client.fetch(allProjectsQuery) : [];
+  return client ? (await client.fetch<AllProjectsQueryResult>(allProjectsQuery)).map(publicProject) : [];
 }
 
 export async function getProjectBySlug(slug: string) {
@@ -131,9 +133,10 @@ export async function getProjectBySlug(slug: string) {
   }
 
   const client = getSanityClient();
-  return client
-    ? client.fetch(projectBySlugQuery, { slug: normalizedSlug })
+  const project = client
+    ? await client.fetch<ProjectBySlugQueryResult>(projectBySlugQuery, { slug: normalizedSlug })
     : null;
+  return project ? publicProject(project) : null;
 }
 
 export async function getExperience() {

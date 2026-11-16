@@ -104,6 +104,20 @@ git diff --check
 
 The production build is a static export written to `out/` for Cloudflare Pages.
 
+Project visibility is controlled by Sanity's `showInPortfolio`; an absent value
+means visible. Public queries exclude hidden projects before listings, route
+generation and sitemap generation. Internal assignment/submission notes and
+private Drive links are removed at the public data boundary while source records
+remain intact. The foundation seed preserves the five client-requested removals.
+
+The five retired November 2026 project URLs additionally have a narrowly scoped
+Pages Function (`functions/work/[[path]].ts` and `public/_routes.json`) returning
+an uncached 404, including old HTML/data variants. This prevents previously cached
+Pages assets from resurfacing after removal. All other pages remain static and
+do not invoke the Function. Restoring one of these five requires explicit client
+approval, updating its edge retirement routes and changing its Sanity visibility,
+then rebuilding and deploying the site.
+
 ## Cloudflare Pages production and staging
 
 Use these build settings for the existing Pages project:

@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "include": [
+    "/work/becoming-garvicii",
+    "/work/becoming-garvicii/*",
+    "/work/masicka-ruger-oxlade-location-sourcing",
+    "/work/masicka-ruger-oxlade-location-sourcing/*",
+    "/work/guchi-single-covers",
+    "/work/guchi-single-covers/*",
+    "/work/lobby-redesign",
+    "/work/lobby-redesign/*",
+    "/work/frankly-speaking-brand-partnership-deck",
+    "/work/frankly-speaking-brand-partnership-deck/*"
+  ],
+  "exclude": []
+}

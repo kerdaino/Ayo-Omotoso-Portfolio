@@ -516,7 +516,6 @@ async function main() {
       year: 2026,
       category: "culture",
       skills: ["Creative Direction & Brand Strategy"],
-      status: "concept",
       workType: "EP Content Planning / Strategy",
       projectContext: [textBlock("context", "Submitted July 8, 2026.")],
       brief: [textBlock("brief", "Assigned by JD.")],

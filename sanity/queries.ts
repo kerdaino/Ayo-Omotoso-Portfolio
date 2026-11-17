@@ -50,6 +50,8 @@ const projectProjection = `{
   coverAlt,
   gallery,
   videoUrl,
+  "evidenceSections": evidenceSections[publicApproved == true],
+  "videos": videos[publicApproved == true] | order(displayOrder asc),
   externalLinks,
   featured,
   displayOrder

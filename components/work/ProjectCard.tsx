@@ -97,6 +97,9 @@ export function ProjectCard({ project }: ProjectCardProps) {
           </div>
 
           <p className="project-card__summary">{project.shortSummary}</p>
+          <span className="project-card__action">
+            View case study <span aria-hidden="true">↗</span>
+          </span>
         </div>
       </article>
     </Link>

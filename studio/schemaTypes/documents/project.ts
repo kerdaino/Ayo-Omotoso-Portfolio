@@ -45,7 +45,8 @@ export const project = defineType({
       title: "Show in public portfolio",
       type: "boolean",
       group: "display",
-      description: "Turn off to hide the card and public detail page. Existing projects without this field remain visible.",
+      description:
+        "Turn off to hide the card and public detail page. Existing projects without this field remain visible.",
     }),
     defineField({
       name: "title",
@@ -77,7 +78,10 @@ export const project = defineType({
       type: "number",
       group: "identity",
       validation: (rule) =>
-        rule.integer().min(2000).max(currentYear + 2),
+        rule
+          .integer()
+          .min(2000)
+          .max(currentYear + 2),
       description:
         "Use only a verified publication or completion year. Leave blank when the exact year is not confirmed.",
     }),
@@ -110,7 +114,8 @@ export const project = defineType({
       title: "Work type",
       type: "string",
       group: "identity",
-      description: "For example: brand strategy, campaign, cover art, or location sourcing.",
+      description:
+        "For example: brand strategy, campaign, cover art, or location sourcing.",
       validation: (rule) => rule.required().min(2).max(100),
     }),
     defineField({
@@ -208,6 +213,22 @@ export const project = defineType({
       of: [defineArrayMember({ type: "galleryImage" })],
     }),
     defineField({
+      name: "evidenceSections",
+      title: "Grouped project evidence",
+      type: "array",
+      group: "media",
+      of: [defineArrayMember({ type: "evidenceSection" })],
+      description:
+        "Group design options, creative development, production and approved deck excerpts in a meaningful sequence.",
+    }),
+    defineField({
+      name: "videos",
+      title: "Ordered video gallery",
+      type: "array",
+      group: "media",
+      of: [defineArrayMember({ type: "projectVideo" })],
+    }),
+    defineField({
       name: "videoUrl",
       title: "Public video URL",
       type: "url",
@@ -227,14 +248,16 @@ export const project = defineType({
       title: "Feature on the portfolio",
       type: "boolean",
       group: "display",
-      description: "Featured projects can appear in the primary work selection.",
+      description:
+        "Featured projects can appear in the primary work selection.",
     }),
     defineField({
       name: "displayOrder",
       title: "Display order",
       type: "number",
       group: "display",
-      description: "Lower numbers appear first. Projects with the same number fall back to title order.",
+      description:
+        "Lower numbers appear first. Projects with the same number fall back to title order.",
       validation: (rule) => rule.required().integer().min(0),
     }),
   ],
@@ -249,7 +272,8 @@ export const project = defineType({
     },
     prepare({ title, client, category, status, year, media }) {
       const categoryTitle =
-        PROJECT_CATEGORIES.find((item) => item.value === category)?.title || category;
+        PROJECT_CATEGORIES.find((item) => item.value === category)?.title ||
+        category;
       const statusTitle =
         PROJECT_STATUSES.find((item) => item.value === status)?.title || status;
       const details = [client, categoryTitle, statusTitle, year]

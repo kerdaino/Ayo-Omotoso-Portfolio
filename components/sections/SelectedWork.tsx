@@ -1,6 +1,6 @@
 "use client";
 
-import { useId, useState } from "react";
+import { useId, useRef, useState } from "react";
 
 import { ProjectCard } from "@/components/work/ProjectCard";
 import { Container } from "@/components/ui/Container";
@@ -29,16 +29,42 @@ function deduplicateProjects(allProjects: AllProjectsQueryResult) {
   return projects;
 }
 
-export function SelectedWork({
-  allProjects,
-}: SelectedWorkProps) {
+export function SelectedWork({ allProjects }: SelectedWorkProps) {
   const projects = deduplicateProjects(allProjects);
-  const [activeSkill, setActiveSkill] = useState<ProjectSkill | null>(null);
+  const [activeSkill, setActiveSkill] = useState<ProjectSkill | "all" | null>(
+    null,
+  );
+  const resultsHeading = useRef<HTMLHeadingElement>(null);
+  const featuredIds = [
+    "project-garvicii-jo",
+    "project-deepwatch-workspan",
+    "project-plug-and-play-set-design-options",
+    "project-one-take-sponsorship-deck",
+  ];
+  const featured = featuredIds.flatMap((id, index) => {
+    const project = projects.find(
+      (item) => item._id === id && item.skills?.includes(PROJECT_SKILLS[index]),
+    );
+    return project ? [{ project, skill: PROJECT_SKILLS[index] }] : [];
+  });
+  function selectSkill(skill: ProjectSkill | "all" | null, focus = false) {
+    setActiveSkill(skill);
+    if (focus)
+      requestAnimationFrame(() => {
+        resultsHeading.current?.focus({ preventScroll: true });
+        resultsHeading.current?.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      });
+  }
   const filterHeadingId = useId();
-  const visibleProjects = activeSkill
-    ? projects.filter((project) => project.skills?.includes(activeSkill))
-    : projects;
-  const activeLabel = activeSkill ?? "All Work";
+  const visibleProjects =
+    activeSkill && activeSkill !== "all"
+      ? projects.filter((project) => project.skills?.includes(activeSkill))
+      : projects;
+  const activeLabel =
+    activeSkill === "all" ? "All Work" : (activeSkill ?? "Featured Work");
 
   return (
     <section
@@ -50,7 +76,7 @@ export function SelectedWork({
         <header className="selected-work__header">
           <p>Portfolio / 01</p>
           <div>
-            <h2 id="selected-work-title">Selected Work</h2>
+            <h2 id="selected-work-title">Featured Work</h2>
             <p>Published projects, organised by practice.</p>
           </div>
         </header>
@@ -68,20 +94,27 @@ export function SelectedWork({
                 <button
                   type="button"
                   aria-pressed={activeSkill === null}
-                  onClick={() => setActiveSkill(null)}
+                  onClick={() => selectSkill(null)}
                 >
-                  All Work
+                  Featured Work
                 </button>
                 {PROJECT_SKILLS.map((skill) => (
                   <button
                     type="button"
                     aria-pressed={activeSkill === skill}
                     key={skill}
-                    onClick={() => setActiveSkill(skill)}
+                    onClick={() => selectSkill(skill)}
                   >
                     {skill}
                   </button>
                 ))}
+                <button
+                  type="button"
+                  aria-pressed={activeSkill === "all"}
+                  onClick={() => selectSkill("all")}
+                >
+                  All Work
+                </button>
               </div>
             </div>
 
@@ -91,14 +124,34 @@ export function SelectedWork({
             >
               <header className="work-category__header">
                 <span aria-hidden="true">01</span>
-                <h3 id="visible-work-title">{activeLabel}</h3>
+                <h3 id="visible-work-title" ref={resultsHeading} tabIndex={-1}>
+                  {activeLabel}
+                </h3>
                 <p aria-live="polite">
-                  {visibleProjects.length}{" "}
-                  {visibleProjects.length === 1 ? "project" : "projects"}
+                  {activeSkill === null
+                    ? featured.length
+                    : visibleProjects.length}
+                  {" projects"}
                 </p>
               </header>
 
-              {visibleProjects.length > 0 ? (
+              {activeSkill === null ? (
+                <div className="work-category__grid">
+                  {featured.map(({ project, skill }) => (
+                    <div className="featured-work" key={skill}>
+                      <p className="featured-work__discipline">{skill}</p>
+                      <ProjectCard project={project} />
+                      <button
+                        className="work-explore"
+                        type="button"
+                        onClick={() => selectSkill(skill, true)}
+                      >
+                        Explore {skill} <span aria-hidden="true">→</span>
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              ) : visibleProjects.length > 0 ? (
                 <div className="work-category__grid">
                   {visibleProjects.map((project) => (
                     <ProjectCard project={project} key={project._id} />

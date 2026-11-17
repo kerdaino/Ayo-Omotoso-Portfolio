@@ -5,10 +5,12 @@ export const HIDDEN_PROJECT_IDS: readonly string[] = [
   "project-lobby-redesign",
   "project-frankly-speaking-brand-partnership-deck",
   "project-becoming-garvicii",
+  "project-guchi-ganja-single-rollout-plan",
 ];
 
 export const EP_PUBLIC_FIELDS = {
+  status: "completed",
   title: "Garvicii — Missbehave EP Content Plan",
   shortSummary:
-    "Content planning for Garvicii’s 2026 Missbehave EP release, covering a proposed visualizer, short-form video content, social distribution and launch activity.",
+    "Completed creative strategy and content planning for Garvicii’s Missbehave EP, outlining a proposed visualizer, short-form content, social distribution and launch activity.",
 };

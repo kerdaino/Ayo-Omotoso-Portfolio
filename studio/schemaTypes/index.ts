@@ -1,3 +1,5 @@
+import { evidenceSection } from "./objects/evidenceSection";
+import { projectVideo } from "./objects/projectVideo";
 import { experience } from "./documents/experience";
 import { profile } from "./documents/profile";
 import { project } from "./documents/project";
@@ -19,6 +21,8 @@ export const schemaTypes = [
   educationEntry,
   externalLink,
   galleryImage,
+  evidenceSection,
+  projectVideo,
   portableText,
   resumeResource,
   seoMetadata,

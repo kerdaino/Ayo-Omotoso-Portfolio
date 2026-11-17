@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
@@ -10,13 +9,14 @@ import {
   hasPortableText,
   PortableTextContent,
 } from "@/components/work/PortableTextContent";
+import {
+  EvidenceGallery,
+  type EvidenceImage,
+} from "@/components/work/EvidenceGallery";
+import { VideoGallery } from "@/components/work/VideoGallery";
 import { PROJECT_STATUSES } from "@/sanity/constants";
 import { urlForImage } from "@/sanity/image";
-import {
-  getAllProjects,
-  getProfile,
-  getProjectBySlug,
-} from "@/sanity/queries";
+import { getAllProjects, getProfile, getProjectBySlug } from "@/sanity/queries";
 import type { AllProjectsQueryResult } from "@/sanity/sanity.types";
 
 type WorkPageProps = {
@@ -108,7 +108,10 @@ function ProjectSection({
   );
 }
 
-function buildImageUrl(image: NonNullable<Project["coverImage"]>, width: number) {
+function buildImageUrl(
+  image: NonNullable<Project["coverImage"]>,
+  width: number,
+) {
   return (
     urlForImage(image)
       ?.width(width)
@@ -119,59 +122,103 @@ function buildImageUrl(image: NonNullable<Project["coverImage"]>, width: number)
   );
 }
 
+function evidenceImage(
+  image: NonNullable<Project["coverImage"]>,
+  key: string,
+  alt: string,
+  caption?: string | null,
+): EvidenceImage | null {
+  if (!alt.trim()) return null;
+  const src = buildImageUrl(image, 1400);
+  const enlargedSrc = buildImageUrl(image, 2400);
+  if (!src || !enlargedSrc) return null;
+  const dimensions = image.asset?._ref.match(/-(\d+)x(\d+)-/);
+  return {
+    key,
+    src,
+    enlargedSrc,
+    alt,
+    caption,
+    width: Number(dimensions?.[1]) || 1400,
+    height: Number(dimensions?.[2]) || 1050,
+  };
+}
 function ProjectMedia({ project }: { project: Project }) {
-  const coverUrl =
-    project.coverImage && project.coverAlt?.trim()
-      ? buildImageUrl(project.coverImage, 1600)
-      : null;
-  const gallery = (project.gallery ?? []).flatMap((item) => {
-    const url = item.alt.trim() ? buildImageUrl(item.image, 1400) : null;
-    return url ? [{ ...item, url }] : [];
-  });
-  const hasMedia = Boolean(coverUrl || gallery.length || project.videoUrl);
-
-  if (!hasMedia) {
-    return null;
-  }
-
+  const groups = (project.evidenceSections ?? []).filter(
+    (section) => section.publicApproved === true && section.images?.length,
+  );
+  const groupedRefs = new Set(
+    groups.flatMap((section) =>
+      (section.images ?? []).map((item) => item.image.asset?._ref),
+    ),
+  );
+  const images = [
+    ...(project.coverImage &&
+    project.coverAlt &&
+    !groupedRefs.has(project.coverImage.asset?._ref)
+      ? [evidenceImage(project.coverImage, "cover", project.coverAlt)]
+      : []),
+    ...(groups.length ? [] : (project.gallery ?? []))
+      .filter((item) => !groupedRefs.has(item.image.asset?._ref))
+      .map((item) =>
+        evidenceImage(item.image, item._key, item.alt, item.caption),
+      ),
+  ].filter((item): item is EvidenceImage => item !== null);
+  const videos = (project.videos ?? [])
+    .filter((video) => video.publicApproved === true)
+    .map((video) => ({
+      key: video._key,
+      title: video.title,
+      playbackUrl: video.playbackUrl,
+      poster: video.poster ? buildImageUrl(video.poster, 1200) : null,
+      posterAlt: video.posterAlt,
+      caption: video.caption,
+    }));
+  if (
+    project.videoUrl &&
+    !videos.some((video) => video.playbackUrl === project.videoUrl)
+  )
+    videos.push({
+      key: "approved-video",
+      title:
+        project._id === "project-garvicii-jo"
+          ? "Garvicii — JO (Official Video)"
+          : `${project.title} — Video`,
+      playbackUrl: project.videoUrl,
+      poster: project.coverImage
+        ? buildImageUrl(project.coverImage, 1200)
+        : null,
+      posterAlt: project.coverAlt ?? undefined,
+      caption: undefined,
+    });
   return (
-    <section className="case-study__media" aria-labelledby="project-media-title">
-      <h2 id="project-media-title">Project media</h2>
-      {coverUrl ? (
-        <figure>
-          <Image
-            src={coverUrl}
-            alt={project.coverAlt ?? ""}
-            width={1600}
-            height={1200}
-            loading="lazy"
-            decoding="async"
-          />
-        </figure>
+    <>
+      {images.length ? (
+        <EvidenceGallery
+          title={
+            groups.length
+              ? "Project overview"
+              : project._id === "project-garvicii-shalewa"
+                ? "Shalewa production photographs"
+                : "Project imagery"
+          }
+          images={images}
+        />
       ) : null}
-      {gallery.length > 0 ? (
-        <div className="case-study__gallery">
-          {gallery.map((item) => (
-            <figure key={item._key}>
-              <Image
-                src={item.url}
-                alt={item.alt}
-                width={1400}
-                height={1050}
-                loading="lazy"
-                decoding="async"
-              />
-              {item.caption ? <figcaption>{item.caption}</figcaption> : null}
-            </figure>
-          ))}
-        </div>
-      ) : null}
-      {project.videoUrl ? (
-        <a className="case-study__media-link" href={project.videoUrl}>
-          View approved project video <span aria-hidden="true">↗</span>
-        </a>
-      ) : null}
-    </section>
+      {groups.map((section) => (
+        <EvidenceGallery
+          key={section._key}
+          title={section.title || "Project evidence"}
+          description={section.description}
+          images={(section.images ?? [])
+            .map((item) =>
+              evidenceImage(item.image, item._key, item.alt, item.caption),
+            )
+            .filter((item): item is EvidenceImage => item !== null)}
+        />
+      ))}
+      <VideoGallery videos={videos} />
+    </>
   );
 }
 
@@ -278,6 +325,19 @@ export default async function WorkPage({ params }: WorkPageProps) {
                   </div>
                 ) : null}
                 <p className="case-study__summary">{project.shortSummary}</p>
+                {project.category === "b2b"
+                  ? project.externalLinks?.map((link) => (
+                      <a
+                        className="case-study__customer-story"
+                        key={link._key}
+                        href={link.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        View customer story <span aria-hidden="true">↗</span>
+                      </a>
+                    ))
+                  : null}
               </div>
             </header>
 
@@ -328,10 +388,17 @@ export default async function WorkPage({ params }: WorkPageProps) {
                 className="case-study__external-links"
                 aria-labelledby="project-links-title"
               >
-                <h2 id="project-links-title">Public case study</h2>
+                <h2 id="project-links-title">
+                  {project.category === "b2b"
+                    ? "Customer story"
+                    : "Public case study"}
+                </h2>
                 {project.externalLinks.map((link) => (
                   <a key={link._key} href={link.url}>
-                    {link.label} <span aria-hidden="true">↗</span>
+                    {project.category === "b2b"
+                      ? "View customer story"
+                      : link.label}{" "}
+                    <span aria-hidden="true">↗</span>
                   </a>
                 ))}
               </section>

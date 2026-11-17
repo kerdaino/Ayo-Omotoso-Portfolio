@@ -64,6 +64,35 @@ export type SanityImageAssetReference = {
   [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
 };
 
+export type ProjectVideo = {
+  _type: "projectVideo";
+  title: string;
+  poster?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  posterAlt?: string;
+  playbackUrl: string;
+  caption?: string;
+  displayOrder: number;
+  publicApproved?: boolean;
+};
+
+export type EvidenceSection = {
+  _type: "evidenceSection";
+  title: string;
+  description?: string;
+  images?: Array<
+    {
+      _key: string;
+    } & GalleryImage
+  >;
+  publicApproved?: boolean;
+};
+
 export type GalleryImage = {
   _type: "galleryImage";
   image: {
@@ -120,6 +149,7 @@ export type Project = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
+  showInPortfolio?: boolean;
   title: string;
   slug: Slug;
   client?: string;
@@ -157,6 +187,16 @@ export type Project = {
     {
       _key: string;
     } & GalleryImage
+  >;
+  evidenceSections?: Array<
+    {
+      _key: string;
+    } & EvidenceSection
+  >;
+  videos?: Array<
+    {
+      _key: string;
+    } & ProjectVideo
   >;
   videoUrl?: string;
   externalLinks?: Array<
@@ -347,6 +387,8 @@ export type AllSanitySchemaTypes =
   | ResumeResource
   | PortableText
   | SanityImageAssetReference
+  | ProjectVideo
+  | EvidenceSection
   | GalleryImage
   | ExternalLink
   | EducationEntry
@@ -418,7 +460,7 @@ export type ProfileQueryResult = {
 
 // Source: ../sanity/queries.ts
 // Variable: featuredProjectsQuery
-// Query: *[_type == "project" && featured == true] | order(coalesce(displayOrder, 9999) asc, year desc) {  _id,  title,  "slug": slug.current,  client,  year,  category,  skills,  workType,  status,  shortSummary,  projectContext,  brief,  role,  strategicApproach,  execution,  verifiedResults,  collaborators,  coverImage,  coverAlt,  gallery,  videoUrl,  externalLinks,  featured,  displayOrder}
+// Query: *[_type == "project" && showInPortfolio != false && featured == true] | order(coalesce(displayOrder, 9999) asc, year desc) {  _id,  title,  "slug": slug.current,  client,  year,  category,  skills,  workType,  status,  shortSummary,  projectContext,  brief,  role,  strategicApproach,  execution,  verifiedResults,  collaborators,  coverImage,  coverAlt,  gallery,  videoUrl,  "evidenceSections": evidenceSections[publicApproved == true],  "videos": videos[publicApproved == true] | order(displayOrder asc),  externalLinks,  featured,  displayOrder}
 export type FeaturedProjectsQueryResult = Array<{
   _id: string;
   title: string;
@@ -460,18 +502,28 @@ export type FeaturedProjectsQueryResult = Array<{
     } & GalleryImage
   > | null;
   videoUrl: string | null;
+  evidenceSections: Array<
+    {
+      _key: string;
+    } & EvidenceSection
+  > | null;
+  videos: Array<
+    {
+      _key: string;
+    } & ProjectVideo
+  > | null;
   externalLinks: Array<
     {
       _key: string;
     } & ExternalLink
   > | null;
-  featured: true;
+  featured: boolean | null;
   displayOrder: number;
 }>;
 
 // Source: ../sanity/queries.ts
 // Variable: allProjectsQuery
-// Query: *[_type == "project"] | order(coalesce(displayOrder, 9999) asc, year desc) {  _id,  title,  "slug": slug.current,  client,  year,  category,  skills,  workType,  status,  shortSummary,  projectContext,  brief,  role,  strategicApproach,  execution,  verifiedResults,  collaborators,  coverImage,  coverAlt,  gallery,  videoUrl,  externalLinks,  featured,  displayOrder}
+// Query: *[_type == "project" && showInPortfolio != false] | order(coalesce(displayOrder, 9999) asc, year desc) {  _id,  title,  "slug": slug.current,  client,  year,  category,  skills,  workType,  status,  shortSummary,  projectContext,  brief,  role,  strategicApproach,  execution,  verifiedResults,  collaborators,  coverImage,  coverAlt,  gallery,  videoUrl,  "evidenceSections": evidenceSections[publicApproved == true],  "videos": videos[publicApproved == true] | order(displayOrder asc),  externalLinks,  featured,  displayOrder}
 export type AllProjectsQueryResult = Array<{
   _id: string;
   title: string;
@@ -513,6 +565,16 @@ export type AllProjectsQueryResult = Array<{
     } & GalleryImage
   > | null;
   videoUrl: string | null;
+  evidenceSections: Array<
+    {
+      _key: string;
+    } & EvidenceSection
+  > | null;
+  videos: Array<
+    {
+      _key: string;
+    } & ProjectVideo
+  > | null;
   externalLinks: Array<
     {
       _key: string;
@@ -524,7 +586,7 @@ export type AllProjectsQueryResult = Array<{
 
 // Source: ../sanity/queries.ts
 // Variable: projectBySlugQuery
-// Query: *[_type == "project" && slug.current == $slug][0]{  _id,  title,  "slug": slug.current,  client,  year,  category,  skills,  workType,  status,  shortSummary,  projectContext,  brief,  role,  strategicApproach,  execution,  verifiedResults,  collaborators,  coverImage,  coverAlt,  gallery,  videoUrl,  externalLinks,  featured,  displayOrder}
+// Query: *[_type == "project" && showInPortfolio != false && slug.current == $slug][0]{  _id,  title,  "slug": slug.current,  client,  year,  category,  skills,  workType,  status,  shortSummary,  projectContext,  brief,  role,  strategicApproach,  execution,  verifiedResults,  collaborators,  coverImage,  coverAlt,  gallery,  videoUrl,  "evidenceSections": evidenceSections[publicApproved == true],  "videos": videos[publicApproved == true] | order(displayOrder asc),  externalLinks,  featured,  displayOrder}
 export type ProjectBySlugQueryResult = {
   _id: string;
   title: string;
@@ -566,6 +628,16 @@ export type ProjectBySlugQueryResult = {
     } & GalleryImage
   > | null;
   videoUrl: string | null;
+  evidenceSections: Array<
+    {
+      _key: string;
+    } & EvidenceSection
+  > | null;
+  videos: Array<
+    {
+      _key: string;
+    } & ProjectVideo
+  > | null;
   externalLinks: Array<
     {
       _key: string;
@@ -607,9 +679,9 @@ import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
     '*[_type == "profile" && _id == "profile"][0]{\n  _id,\n  publicName,\n  professionalTitle,\n  heroStatement,\n  supportingLine,\n  shortBio,\n  fullBio,\n  education,\n  portrait,\n  portraitAlt,\n  email,\n  resume {\n    "fileUrl": file.asset->url,\n    externalUrl\n  },\n  linkedIn->{_id, platform, label, url, enabled},\n  location,\n  availabilityCta,\n  seo\n}': ProfileQueryResult;
-    '*[_type == "project" && featured == true] | order(coalesce(displayOrder, 9999) asc, year desc) {\n  _id,\n  title,\n  "slug": slug.current,\n  client,\n  year,\n  category,\n  skills,\n  workType,\n  status,\n  shortSummary,\n  projectContext,\n  brief,\n  role,\n  strategicApproach,\n  execution,\n  verifiedResults,\n  collaborators,\n  coverImage,\n  coverAlt,\n  gallery,\n  videoUrl,\n  externalLinks,\n  featured,\n  displayOrder\n}': FeaturedProjectsQueryResult;
-    '*[_type == "project"] | order(coalesce(displayOrder, 9999) asc, year desc) {\n  _id,\n  title,\n  "slug": slug.current,\n  client,\n  year,\n  category,\n  skills,\n  workType,\n  status,\n  shortSummary,\n  projectContext,\n  brief,\n  role,\n  strategicApproach,\n  execution,\n  verifiedResults,\n  collaborators,\n  coverImage,\n  coverAlt,\n  gallery,\n  videoUrl,\n  externalLinks,\n  featured,\n  displayOrder\n}': AllProjectsQueryResult;
-    '*[_type == "project" && slug.current == $slug][0]{\n  _id,\n  title,\n  "slug": slug.current,\n  client,\n  year,\n  category,\n  skills,\n  workType,\n  status,\n  shortSummary,\n  projectContext,\n  brief,\n  role,\n  strategicApproach,\n  execution,\n  verifiedResults,\n  collaborators,\n  coverImage,\n  coverAlt,\n  gallery,\n  videoUrl,\n  externalLinks,\n  featured,\n  displayOrder\n}': ProjectBySlugQueryResult;
+    '*[_type == "project" && showInPortfolio != false && featured == true] | order(coalesce(displayOrder, 9999) asc, year desc) {\n  _id,\n  title,\n  "slug": slug.current,\n  client,\n  year,\n  category,\n  skills,\n  workType,\n  status,\n  shortSummary,\n  projectContext,\n  brief,\n  role,\n  strategicApproach,\n  execution,\n  verifiedResults,\n  collaborators,\n  coverImage,\n  coverAlt,\n  gallery,\n  videoUrl,\n  "evidenceSections": evidenceSections[publicApproved == true],\n  "videos": videos[publicApproved == true] | order(displayOrder asc),\n  externalLinks,\n  featured,\n  displayOrder\n}': FeaturedProjectsQueryResult;
+    '*[_type == "project" && showInPortfolio != false] | order(coalesce(displayOrder, 9999) asc, year desc) {\n  _id,\n  title,\n  "slug": slug.current,\n  client,\n  year,\n  category,\n  skills,\n  workType,\n  status,\n  shortSummary,\n  projectContext,\n  brief,\n  role,\n  strategicApproach,\n  execution,\n  verifiedResults,\n  collaborators,\n  coverImage,\n  coverAlt,\n  gallery,\n  videoUrl,\n  "evidenceSections": evidenceSections[publicApproved == true],\n  "videos": videos[publicApproved == true] | order(displayOrder asc),\n  externalLinks,\n  featured,\n  displayOrder\n}': AllProjectsQueryResult;
+    '*[_type == "project" && showInPortfolio != false && slug.current == $slug][0]{\n  _id,\n  title,\n  "slug": slug.current,\n  client,\n  year,\n  category,\n  skills,\n  workType,\n  status,\n  shortSummary,\n  projectContext,\n  brief,\n  role,\n  strategicApproach,\n  execution,\n  verifiedResults,\n  collaborators,\n  coverImage,\n  coverAlt,\n  gallery,\n  videoUrl,\n  "evidenceSections": evidenceSections[publicApproved == true],\n  "videos": videos[publicApproved == true] | order(displayOrder asc),\n  externalLinks,\n  featured,\n  displayOrder\n}': ProjectBySlugQueryResult;
     '\n  *[_type == "experience"] | order(coalesce(displayOrder, 9999) asc, startYear desc) {\n    _id,\n    organisation,\n    role,\n    startYear,\n    endYear,\n    current,\n    shortDescription,\n    location,\n    displayOrder\n  }\n': ExperienceQueryResult;
     '\n  *[_type == "socialLink" && enabled == true] | order(coalesce(displayOrder, 9999) asc, label asc) {\n    _id,\n    platform,\n    label,\n    url,\n    displayOrder\n  }\n': SocialLinksQueryResult;
   }

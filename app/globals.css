@@ -3629,18 +3629,6 @@ a.action-link:focus-visible {
 .video-gallery__recovery { font-size: .875rem; }
 .video-gallery__recovery button { min-height: 44px; padding: .5rem .75rem; border: 1px solid currentColor; background: transparent; color: inherit; font: inherit; cursor: pointer; text-decoration: underline; }
 
-/* This production-led case study opens with its work rather than a duplicate title poster. */
-.case-study__hero--video-first { grid-template-columns: minmax(0, 1fr); }
-.case-study__hero--video-first .case-study__poster { display: none; }
-.case-study__hero--video-first .case-study__intro { padding-block: 0 1.5rem; }
-#video-work { scroll-margin-top: 7rem; }
-
-/* Shalewa leads with its actual productions rather than a repeated title poster. */
-.case-study__hero--video-first { grid-template-columns: minmax(0, 1fr); }
-.case-study__hero--video-first .case-study__poster { display: none; }
-.case-study__hero--video-first .case-study__intro { padding-block: 0 1.5rem; }
-#video-work { scroll-margin-top: 7rem; }
-
 /* Shalewa leads with the productions instead of a repeated decorative title. */
 .case-study__hero--video-first { grid-template-columns: minmax(0, 1fr); }
 .case-study__hero--video-first .case-study__poster { display: none; }

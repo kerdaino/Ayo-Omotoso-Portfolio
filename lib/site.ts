@@ -5,7 +5,7 @@ export const siteProfile = {
   supportingLine:
     "I shape ideas, campaigns and experiences across culture and commerce.",
   email: "ayomiiomotoso@gmail.com",
-  linkedIn: "https://linkedin.com/ayomiomotoso",
+  linkedIn: "https://www.linkedin.com/in/ayomiomotoso",
 } as const;
 
 export const siteDescription =

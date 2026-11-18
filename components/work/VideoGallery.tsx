@@ -13,6 +13,7 @@ export type VideoEntry = {
 };
 function VideoItem({ video }: { video: VideoEntry }) {
   const [playing, setPlaying] = useState(false);
+  const [attempt, setAttempt] = useState(0);
   const playback = publicPlayback(video.playbackUrl);
   if (!playback) return null;
   const poster = video.poster ?? (
@@ -38,6 +39,7 @@ function VideoItem({ video }: { video: VideoEntry }) {
           />
         ) : (
           <iframe
+            key={attempt}
             ref={(element) => element?.focus()}
             tabIndex={0}
             src={playback.src}
@@ -66,6 +68,15 @@ function VideoItem({ video }: { video: VideoEntry }) {
         </button>
       )}
       {video.caption ? <p>{video.caption}</p> : null}
+      {playing && playback.kind === "embed" ? (
+        <p className="video-gallery__recovery">
+          Player not responding?{" "}
+          <button type="button" onClick={() => setAttempt((value) => value + 1)} aria-label={`Reload ${video.title} player`}>
+            Reload player
+          </button>{" "}
+          or watch at source below.
+        </p>
+      ) : null}
       <a href={video.playbackUrl} target="_blank" rel="noopener noreferrer">
         Watch {video.title} at source <span aria-hidden="true">↗</span>
       </a>
@@ -76,7 +87,7 @@ export function VideoGallery({ videos }: { videos: VideoEntry[] }) {
   const supported = videos.filter((video) => publicPlayback(video.playbackUrl));
   if (!supported.length) return null;
   return (
-    <section className="video-gallery" aria-label="Video deliverables">
+    <section id="video-work" className="video-gallery" aria-label="Video deliverables" tabIndex={-1}>
       <h2>Video work</h2>
       <div className="video-gallery__grid">
         {supported.map((video) => (

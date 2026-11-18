@@ -99,7 +99,7 @@ async function main() {
     _type: "socialLink",
     platform: "linkedin",
     label: "LinkedIn",
-    url: "https://linkedin.com/ayomiomotoso",
+    url: "https://www.linkedin.com/in/ayomiomotoso",
     displayOrder: 10,
     enabled: true,
   } as const;

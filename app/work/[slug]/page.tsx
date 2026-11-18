@@ -193,33 +193,32 @@ function ProjectMedia({ project }: { project: Project }) {
       posterAlt: project.coverAlt ?? undefined,
       caption: undefined,
     });
+  const videosFirst = project._id === "project-garvicii-shalewa";
+  const technicalFirst = project.slug === "plug-and-play-set-design-options";
+  const overview = images.length ? (
+    <EvidenceGallery
+      title={groups.length ? "Project overview" : videosFirst ? "Behind the scenes" : "Project imagery"}
+      images={images}
+    />
+  ) : null;
   return (
     <>
-      {images.length ? (
-        <EvidenceGallery
-          title={
-            groups.length
-              ? "Project overview"
-              : project._id === "project-garvicii-shalewa"
-                ? "Shalewa production photographs"
-                : "Project imagery"
-          }
-          images={images}
-        />
-      ) : null}
+      {videosFirst ? <VideoGallery videos={videos} /> : null}
+      {!technicalFirst ? overview : null}
       {groups.map((section) => (
         <EvidenceGallery
           key={section._key}
           title={section.title || "Project evidence"}
           description={section.description}
-          images={(section.images ?? [])
-            .map((item) =>
-              evidenceImage(item.image, item._key, item.alt, item.caption),
-            )
+          images={(technicalFirst
+            ? (section.images ?? []).toSorted((a, b) => Number(/technical/i.test(b.alt)) - Number(/technical/i.test(a.alt)))
+            : (section.images ?? []))
+            .map((item) => evidenceImage(item.image, item._key, item.alt, item.caption))
             .filter((item): item is EvidenceImage => item !== null)}
         />
       ))}
-      <VideoGallery videos={videos} />
+      {technicalFirst ? overview : null}
+      {!videosFirst ? <VideoGallery videos={videos} /> : null}
     </>
   );
 }
@@ -284,7 +283,7 @@ export default async function WorkPage({ params }: WorkPageProps) {
           </Link>
 
           <article>
-            <header className="case-study__hero" data-status={project.status}>
+            <header className={`case-study__hero${project._id === "project-garvicii-shalewa" ? " case-study__hero--video-first" : ""}`} data-status={project.status}>
               <div className="case-study__poster" aria-hidden="true">
                 <span>{categoryLabel}</span>
                 <strong>{project.title}</strong>
@@ -327,6 +326,9 @@ export default async function WorkPage({ params }: WorkPageProps) {
                   </div>
                 ) : null}
                 <p className="case-study__summary">{project.shortSummary}</p>
+                {project._id === "project-garvicii-shalewa" ? (
+                  <a className="case-study__customer-story" href="#video-work">View all eight video productions ↓</a>
+                ) : null}
                 {project.category === "b2b"
                   ? project.externalLinks?.map((link) => (
                       <a
@@ -343,8 +345,14 @@ export default async function WorkPage({ params }: WorkPageProps) {
               </div>
             </header>
 
+            {project._id === "project-garvicii-shalewa" ? (
+              <>
+                <ProjectSection title="Ayomi’s role" value={project.role} />
+                <ProjectMedia project={project} />
+              </>
+            ) : null}
             <div className="case-study__details">
-              <ProjectSection title="Ayomi’s role" value={project.role} />
+              {project._id !== "project-garvicii-shalewa" ? <ProjectSection title="Ayomi’s role" value={project.role} /> : null}
               <ProjectSection
                 title="Short context"
                 value={project.projectContext}
@@ -383,7 +391,7 @@ export default async function WorkPage({ params }: WorkPageProps) {
               ) : null}
             </div>
 
-            <ProjectMedia project={project} />
+            {project._id !== "project-garvicii-shalewa" ? <ProjectMedia project={project} /> : null}
 
             {project.externalLinks && project.externalLinks.length > 0 ? (
               <section

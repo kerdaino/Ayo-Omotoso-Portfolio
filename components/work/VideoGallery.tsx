@@ -9,17 +9,25 @@ export type VideoEntry = {
   poster?: string | null;
   posterAlt?: string | null;
   caption?: string | null;
+  portrait?: boolean;
 };
 function VideoItem({ video }: { video: VideoEntry }) {
   const [playing, setPlaying] = useState(false);
   const playback = publicPlayback(video.playbackUrl);
   if (!playback) return null;
+  const poster = video.poster ?? (
+    playback.kind === "embed" && new URL(playback.src).hostname === "www.youtube-nocookie.com"
+      ? `https://i.ytimg.com/vi/${new URL(playback.src).pathname.split("/").pop()}/hqdefault.jpg`
+      : null
+  );
   return (
-    <article>
+    <article className={video.portrait ? "video-gallery__portrait" : undefined}>
       <h3>{video.title}</h3>
       {playing ? (
         playback.kind === "file" ? (
           <video
+            ref={(element) => element?.focus()}
+            tabIndex={0}
             src={playback.src}
             poster={video.poster ?? undefined}
             controls
@@ -30,6 +38,8 @@ function VideoItem({ video }: { video: VideoEntry }) {
           />
         ) : (
           <iframe
+            ref={(element) => element?.focus()}
+            tabIndex={0}
             src={playback.src}
             title={video.title}
             allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
@@ -44,11 +54,11 @@ function VideoItem({ video }: { video: VideoEntry }) {
           onClick={() => setPlaying(true)}
           aria-label={`Play ${video.title}`}
         >
-          {video.poster ? (
+          {poster ? (
             // eslint-disable-next-line @next/next/no-img-element
             <img
-              src={video.poster}
-              alt={video.posterAlt || ""}
+              src={poster}
+              alt={video.posterAlt || `${video.title} video thumbnail`}
               loading="lazy"
             />
           ) : null}

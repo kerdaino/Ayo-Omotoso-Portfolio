@@ -173,6 +173,7 @@ function ProjectMedia({ project }: { project: Project }) {
       poster: video.poster ? buildImageUrl(video.poster, 1200) : null,
       posterAlt: video.posterAlt,
       caption: video.caption,
+      portrait: project._id === "project-garvicii-shalewa",
     }));
   if (
     project.videoUrl &&
@@ -180,6 +181,7 @@ function ProjectMedia({ project }: { project: Project }) {
   )
     videos.push({
       key: "approved-video",
+      portrait: false,
       title:
         project._id === "project-garvicii-jo"
           ? "Garvicii — JO (Official Video)"

@@ -3618,6 +3618,7 @@ a.action-link:focus-visible {
 .video-gallery__grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2rem; }
 .video-gallery article { min-width: 0; }
 .video-gallery iframe, .video-gallery video { display: block; width: 100%; aspect-ratio: 16 / 9; border: 0; background: #111; }
+.video-gallery .video-gallery__portrait iframe, .video-gallery .video-gallery__portrait video { aspect-ratio: 9 / 16; }
 .video-gallery__play { display: flex; flex-direction: column; gap: .75rem; width: 100%; text-align: left; background: transparent; }
 .video-gallery__play img { width: 100%; max-height: 24rem; object-fit: contain; }
 .case-study__customer-story { display: inline-flex; padding: .9rem 1.1rem; margin-top: 1rem; background: var(--lime, #dcff27); border: 1px solid var(--ink); color: var(--ink); font-weight: 800; }

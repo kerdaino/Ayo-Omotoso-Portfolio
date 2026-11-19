@@ -1575,7 +1575,7 @@ a.action-link:focus-visible {
     transform var(--duration-base) var(--ease-standard);
 }
 
-.capabilities__list summary {
+.capabilities__toggle {
   display: grid;
   min-height: clamp(5rem, 8vw, 7rem);
   padding: clamp(1rem, 2.5vw, 1.75rem) clamp(1rem, 3vw, 2.25rem);
@@ -1585,14 +1585,19 @@ a.action-link:focus-visible {
   cursor: pointer;
   list-style: none;
 }
-.capabilities__list summary::-webkit-details-marker { display: none; }
-.capabilities__list summary:focus-visible {
-  outline: 0.2rem solid var(--cobalt);
-  outline-offset: 0.2rem;
+.capabilities__heading { margin: 0; }
+.capabilities__toggle {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
 }
-.capabilities__list summary:focus-visible { outline: .2rem solid var(--cobalt); outline-offset: .25rem; }
-.capabilities__indicator::before { content: "+"; }
-.capabilities__list details[open] .capabilities__indicator::before { content: "−"; }
+.capabilities__toggle:focus-visible {
+  outline: .2rem solid var(--cobalt);
+  outline-offset: .25rem;
+}
 .capabilities__content {
   padding: 0 clamp(1rem, 3vw, 2.25rem) 1.75rem;
   max-width: 75ch;
@@ -1600,14 +1605,19 @@ a.action-link:focus-visible {
 }
 .capabilities__content p { margin: 0 0 1rem; }
 .capabilities__content a { display: inline-block; padding-block: .5rem; font-weight: 750; text-decoration: underline; text-underline-offset: .2em; }
-.capabilities__list details { interpolate-size: allow-keywords; }
-.capabilities__list details::details-content {
-  block-size: 0;
+.capabilities__panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  visibility: hidden;
   opacity: 0;
-  overflow: clip;
-  transition: block-size 180ms ease, opacity 180ms ease, content-visibility 180ms allow-discrete;
+  transition: grid-template-rows 180ms ease, opacity 180ms ease, visibility 180ms;
 }
-.capabilities__list details[open]::details-content { block-size: auto; opacity: 1; }
+.capabilities__panel[data-expanded="true"] {
+  grid-template-rows: 1fr;
+  visibility: visible;
+  opacity: 1;
+}
+.capabilities__clip { min-height: 0; overflow: hidden; }
 #capabilities, #capabilities-title, .capabilities__header { scroll-margin-top: 7rem; }
 
 .capabilities__list li:nth-child(3n + 1) {
@@ -1618,7 +1628,7 @@ a.action-link:focus-visible {
   transform: rotate(0.3deg);
 }
 
-.capabilities__list summary > span:first-child {
+.capabilities__toggle > span:first-child {
   color: var(--pink);
   font-family: var(--font-editorial);
   font-size: var(--text-sm);
@@ -1635,7 +1645,7 @@ a.action-link:focus-visible {
   text-transform: uppercase;
 }
 
-.capabilities__list summary > span:last-child {
+.capabilities__toggle > span:last-child {
   display: grid;
   width: 2.8rem;
   aspect-ratio: 1;
@@ -1990,7 +2000,7 @@ a.action-link:focus-visible {
     background: var(--orange);
   }
 
-  .capabilities__list li:hover summary > span:last-child {
+  .capabilities__list li:hover .capabilities__toggle > span:last-child {
     transform: rotate(12deg);
   }
 }
@@ -2082,7 +2092,7 @@ a.action-link:focus-visible {
     opacity: 0.35;
   }
 
-  .capabilities__list summary {
+  .capabilities__toggle {
     min-height: 6rem;
     grid-template-columns: 2rem minmax(0, 1fr) auto;
   }
@@ -2091,7 +2101,7 @@ a.action-link:focus-visible {
     font-size: clamp(1.6rem, 6.5vw, 2.5rem);
   }
 
-  .capabilities__list summary > span:last-child {
+  .capabilities__toggle > span:last-child {
     width: 2.35rem;
   }
 
@@ -2149,13 +2159,13 @@ a.action-link:focus-visible {
     font-size: clamp(2rem, 9vw, 3rem);
   }
 
-  .capabilities__list summary {
+  .capabilities__toggle {
     padding-inline: var(--space-4);
     gap: var(--space-3);
     grid-template-columns: minmax(0, 1fr) auto;
   }
 
-  .capabilities__list summary > span:first-child {
+  .capabilities__toggle > span:first-child {
     grid-column: 1 / -1;
   }
 
@@ -3666,5 +3676,5 @@ a.action-link:focus-visible {
 #video-work { scroll-margin-top: 8rem; }
 
 @media (prefers-reduced-motion: reduce) {
-  .capabilities__list details::details-content { transition: none; }
+  .capabilities__panel { transition: none; }
 }

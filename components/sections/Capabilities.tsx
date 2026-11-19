@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 
@@ -48,6 +51,49 @@ const capabilities = [
   },
 ] as const;
 
+function CapabilityCard({ capability, index }: {
+  capability: (typeof capabilities)[number];
+  index: number;
+}) {
+  const [expanded, setExpanded] = useState(false);
+  const id = `capability-${index + 1}`;
+
+  return (
+    <li>
+      <h3 className="capabilities__heading">
+        <button
+          type="button"
+          className="capabilities__toggle"
+          id={`${id}-button`}
+          aria-expanded={expanded}
+          aria-controls={`${id}-panel`}
+          onClick={() => setExpanded(!expanded)}
+        >
+          <span>{String(index + 1).padStart(2, "0")}</span>
+          <strong>{capability.title}</strong>
+          <span className="capabilities__indicator" aria-hidden="true">{expanded ? "−" : "+"}</span>
+        </button>
+      </h3>
+      <div
+        id={`${id}-panel`}
+        className="capabilities__panel"
+        data-expanded={expanded}
+        role="region"
+        aria-labelledby={`${id}-button`}
+        aria-hidden={!expanded}
+        inert={!expanded}
+      >
+        <div className="capabilities__clip">
+          <div className="capabilities__content">
+            <p>{capability.description}</p>
+            <Link href={capability.href}>{capability.project}</Link>
+          </div>
+        </div>
+      </div>
+    </li>
+  );
+}
+
 export function Capabilities() {
   return (
     <section id="capabilities" className="capabilities" aria-labelledby="capabilities-title">
@@ -58,19 +104,7 @@ export function Capabilities() {
         </header>
         <ol className="capabilities__list">
           {capabilities.map((capability, index) => (
-            <li key={capability.title}>
-              <details>
-                <summary>
-                  <span>{String(index + 1).padStart(2, "0")}</span>
-                  <strong>{capability.title}</strong>
-                  <span className="capabilities__indicator" aria-hidden="true" />
-                </summary>
-                <div className="capabilities__content">
-                  <p>{capability.description}</p>
-                  <Link href={capability.href}>{capability.project} <span aria-hidden="true">↗</span></Link>
-                </div>
-              </details>
-            </li>
+            <CapabilityCard key={capability.title} capability={capability} index={index} />
           ))}
         </ol>
       </Container>

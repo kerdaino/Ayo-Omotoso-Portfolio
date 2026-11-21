@@ -77,14 +77,13 @@ export function SelectedWork({ allProjects }: SelectedWorkProps) {
           <p>Portfolio / 01</p>
           <div>
             <h2 id="selected-work-title">Featured Work</h2>
-            <p>Published projects, organised by practice.</p>
+            <p>Explore my work by discipline.</p>
           </div>
         </header>
 
         {projects.length === 0 ? (
           <div className="selected-work__empty">
             <p>Selected work is being prepared for publication.</p>
-            <span>No project entries are published in the CMS yet.</span>
           </div>
         ) : (
           <div className="selected-work__browser">
@@ -159,7 +158,7 @@ export function SelectedWork({ allProjects }: SelectedWorkProps) {
                 </div>
               ) : (
                 <p className="work-category__empty">
-                  No published projects are assigned to this skill yet.
+                  No projects to show for this skill yet.
                 </p>
               )}
             </section>

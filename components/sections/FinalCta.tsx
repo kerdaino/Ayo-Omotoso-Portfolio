@@ -17,7 +17,7 @@ export function FinalCta({ email, linkedInUrl }: FinalCtaProps) {
               className="action-link action-link--primary"
               href={`mailto:${email}`}
             >
-              Email Ayomi
+              Email me
               <span aria-hidden="true">↗</span>
             </a>
           ) : null}

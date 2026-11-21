@@ -67,8 +67,8 @@ export function ProjectCard({ project }: ProjectCardProps) {
             </picture>
           ) : (
             <div className="project-card__media-state">
-              <span>Project image</span>
-              <strong>Not published</strong>
+              <span>{categoryLabels[project.category]}</span>
+              <strong>{project.title}</strong>
             </div>
           )}
 

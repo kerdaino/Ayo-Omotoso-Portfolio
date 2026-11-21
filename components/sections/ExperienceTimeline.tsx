@@ -34,7 +34,7 @@ export function ExperienceTimeline({
           <p>Experience / 05</p>
           <div>
             <h2 id="experience-title">A career built across worlds.</h2>
-            <p>Selected roles from Ayomi&apos;s published experience.</p>
+            <p>Selected roles from my career.</p>
           </div>
         </header>
 
@@ -63,7 +63,7 @@ export function ExperienceTimeline({
           </ol>
         ) : (
           <p className="experience__empty">
-            Published experience is temporarily unavailable.
+            Experience is temporarily unavailable.
           </p>
         )}
 
@@ -73,7 +73,7 @@ export function ExperienceTimeline({
             aria-labelledby="education-title"
           >
             <header>
-              <p>Verified education</p>
+              <p>Academic background</p>
               <h3 id="education-title">Education</h3>
             </header>
             <ul>

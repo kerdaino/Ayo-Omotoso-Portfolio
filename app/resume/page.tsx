@@ -12,25 +12,24 @@ import { siteProfile } from "@/lib/site";
 import { getExperience, getProfile } from "@/sanity/queries";
 import type { ExperienceQueryResult } from "@/sanity/sanity.types";
 
+const resumeDescription = "My experience, education and certifications in creative strategy, production and marketing.";
+
 export const metadata: Metadata = {
   title: "Resume",
-  description:
-    "Verified professional experience, education and certifications for Ayomi Omotoso.",
+  description: resumeDescription,
   alternates: {
     canonical: "/resume/",
   },
   openGraph: {
     title: "Resume — Ayomi Omotoso",
-    description:
-      "Verified professional experience, education and certifications for Ayomi Omotoso.",
+    description: resumeDescription,
     url: "/resume/",
     images: [],
   },
   twitter: {
     card: "summary",
     title: "Resume — Ayomi Omotoso",
-    description:
-      "Verified professional experience, education and certifications for Ayomi Omotoso.",
+    description: resumeDescription,
     images: [],
   },
 };
@@ -100,7 +99,7 @@ export default async function ResumePage() {
       <main id="main-content" className="resume-page">
         <Container>
           <header className="resume-page__hero">
-            <p>Verified CV / Resume</p>
+            <p>CV / Resume</p>
             <h1>{publicName}</h1>
             <div>
               <p>{professionalTitle}</p>

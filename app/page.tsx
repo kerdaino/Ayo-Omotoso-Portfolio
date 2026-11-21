@@ -1,3 +1,6 @@
+import type { Metadata } from "next";
+
+import { siteDescription, siteProfile } from "@/lib/site";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { About } from "@/components/sections/About";
@@ -14,6 +17,21 @@ import {
   getExperience,
   getProfile,
 } from "@/sanity/queries";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const profile = await getProfile().catch(() => null);
+  const publicName = profile?.publicName ?? siteProfile.publicName;
+  const professionalTitle = profile?.professionalTitle ?? siteProfile.professionalTitle;
+  const title = profile?.seo?.title?.trim() || `${publicName} — ${professionalTitle}`;
+  const description = profile?.seo?.description?.trim() || siteDescription;
+
+  return {
+    title: { absolute: title },
+    description,
+    openGraph: { type: "website", siteName: publicName, title, description, url: "/", images: [] },
+    twitter: { card: "summary", title, description, images: [] },
+  };
+}
 
 export default async function Home() {
   const [profile, allProjects, experience] = await Promise.all([
@@ -46,12 +64,7 @@ export default async function Home() {
         <SiteHeader />
         <main id="main-content" className="cms-state">
           <Container size="content">
-            <p className="cms-state__eyebrow">Portfolio content unavailable</p>
-            <h1>Ayomi&apos;s published profile is awaiting CMS configuration.</h1>
-            <p>
-              No placeholder biography or portrait has been substituted. Please
-              reconnect the published Sanity Profile and rebuild the site.
-            </p>
+            <h1>My portfolio is temporarily unavailable.</h1>
           </Container>
         </main>
       </>

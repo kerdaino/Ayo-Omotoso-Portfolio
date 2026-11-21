@@ -4,22 +4,22 @@ const proofPoints = [
   {
     value: "8+",
     label: "Years Experience",
-    context: "Across Ayomi’s career",
+    context: "Across my career",
   },
   {
     value: "$5M+",
     label: "Sales Pipeline Contribution",
-    context: "Verified WorkSpan contribution",
+    context: "At WorkSpan",
   },
   {
     value: "150%",
     label: "Webinar Programme Growth",
-    context: "Verified at WorkSpan",
+    context: "At WorkSpan",
   },
   {
     value: "$2M+",
     label: "Advocacy Pipeline Opportunities",
-    context: "Verified at WorkSpan",
+    context: "At WorkSpan",
   },
 ] as const;
 
@@ -28,8 +28,8 @@ export function ProofStrip() {
     <section id="proof" className="proof-strip" aria-labelledby="proof-title">
       <Container>
         <div className="proof-strip__heading">
-          <p>Selected proof</p>
-          <h2 id="proof-title">Verified Career</h2>
+          <p>Career highlights</p>
+          <h2 id="proof-title">My work in numbers</h2>
         </div>
 
         <dl className="proof-strip__grid">

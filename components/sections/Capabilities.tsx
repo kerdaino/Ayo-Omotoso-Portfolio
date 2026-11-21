@@ -4,48 +4,46 @@ import { useState } from "react";
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 
-// Grounded in Ayomi's supplied CV, original portfolios and the named public
-// case studies. Project planning is not represented as executed production.
 const capabilities = [
   {
     title: "Brand Strategy & Positioning",
-    description: "Defines artist positioning, visual identity, messaging and public presentation. Her work connects a clear brand direction with the content and visual world around a release.",
+    description: "I define how artists present themselves, from positioning and messaging to the visual identity and content around a release.",
     project: "Explore the Missbehave EP strategy and content plan",
     href: "/work/garvicii-ep-content-plan/",
   },
   {
     title: "Creative Direction",
-    description: "Shapes the visual language of artist projects across styling, photography, artwork and video. For Garvicii’s JO, her contribution included creative direction, art direction and set design.",
-    project: "See JO’s treatment references and executed production",
+    description: "I shape how artist projects look and feel across styling, photography, artwork and video. For Garvicii’s JO, my work covered creative direction, art direction and set design.",
+    project: "Explore the JO treatment and production",
     href: "/work/garvicii-jo-creative-direction/",
   },
   {
     title: "Integrated Campaign Development",
-    description: "Develops release campaigns from the brief and creative approach through content, publicity, partnerships and launch activity. The Missbehave case study shows her completed EP content planning, with proposed production clearly identified.",
-    project: "Inspect the completed Missbehave planning work",
+    description: "I develop release campaigns from the initial brief through content, publicity, partnerships and launch planning. For Missbehave, I put together the EP content plan and proposed rollout.",
+    project: "Explore the Missbehave rollout plan",
     href: "/work/garvicii-ep-content-plan/",
   },
   {
     title: "Content & Visual Storytelling",
-    description: "Creates and produces visual content and original entertainment formats. Shalewa brings that work into view through eight scene productions and supporting behind-the-scenes imagery.",
+    description: "I create and produce visual content and entertainment formats. For Shalewa, I worked across eight visual interpretations of the same song.",
     project: "Watch the eight Shalewa productions",
     href: "/work/garvicii-shalewa-visual-content/#video-work",
   },
   {
     title: "Event & Experiential Marketing",
-    description: "Develops creative direction for concerts, brand activations and live experiences, including set design, staging and branded audience touchpoints. The Plug & Play case study presents three set-design proposals with technical drawings, inspiration boards and 3D concepts.",
-    project: "Inspect the three Plug & Play set-design options",
+    description: "I develop creative direction for concerts, brand activations and live experiences. For Plug & Play, I developed three studio set concepts, each with an inspiration board, technical drawings and a 3D visualisation.",
+    project: "See the three Plug & Play set concepts",
     href: "/work/plug-and-play-set-design-options/",
   },
   {
     title: "Customer Marketing & Advocacy",
-    description: "Produces customer case studies and advocacy content that turn product success into brand stories. Ayomi handled the featured WorkSpan customer case studies from start to finish; customer-company results remain distinct from her contribution.",
-    project: "Explore Deepwatch’s customer story and Ayomi’s role",
+    description: "I produce customer stories and advocacy content. At WorkSpan, I took the four case studies in this portfolio from start to finish, focusing on how each customer used the platform.",
+    project: "Read the Deepwatch customer story",
     href: "/work/deepwatch-workspan/",
   },
   {
     title: "Partnerships & Audience Engagement",
-    description: "Develops brand partnership concepts connecting brands with artists and entertainment formats. Her One Take Season 2 work is a completed sponsorship proposal, presenting integration ideas and partner value rather than claiming secured sponsorship.",
+    description: "I develop partnership concepts that bring brands into artist and entertainment projects. For One Take Season 2, I proposed how sponsors could take part in the series.",
     project: "Open the One Take Season 2 partnership deck",
     href: "/work/one-take-sponsorship-deck/",
   },
@@ -100,7 +98,7 @@ export function Capabilities() {
       <Container>
         <header className="capabilities__header">
           <p>Capabilities / 04</p>
-          <h2 id="capabilities-title">What Ayomi brings to the room.</h2>
+          <h2 id="capabilities-title">What I bring to the room.</h2>
         </header>
         <ol className="capabilities__list">
           {capabilities.map((capability, index) => (

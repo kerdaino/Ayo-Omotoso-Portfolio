@@ -9,7 +9,7 @@ export const siteProfile = {
 } as const;
 
 export const siteDescription =
-  "The portfolio of Ayomi Omotoso, a Creative Brand Strategist working across culture and commerce.";
+  "I’m Ayomi Omotoso, a creative brand strategist working across culture and commerce.";
 
 export const siteUrl = new URL(
   process.env.NEXT_PUBLIC_SITE_URL || "https://ayomiomotoso.com",

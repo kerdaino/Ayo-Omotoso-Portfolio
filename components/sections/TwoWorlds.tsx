@@ -60,8 +60,8 @@ export function TwoWorlds() {
         </div>
 
         <p className="two-worlds__bridge">
-          <span>Different contexts.</span> The same job: find the strongest
-          idea, make it clear, and build the experience around it.
+          <span>Different contexts.</span> I find the strongest idea, make it clear
+          and build the experience around it.
         </p>
       </Container>
     </section>

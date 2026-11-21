@@ -107,10 +107,9 @@ export async function getProfile() {
 
   return {
     ...profile,
-    publicName: siteProfile.publicName,
-    shortBio: profile.shortBio
-      ? profile.shortBio.replaceAll("Ayo Omotoso", siteProfile.publicName)
-      : null,
+    publicName: profile.publicName === "Ayo Omotoso"
+      ? siteProfile.publicName
+      : profile.publicName,
     portraitAlt: profile.portraitAlt
       ? profile.portraitAlt.replaceAll("Ayo Omotoso", siteProfile.publicName)
       : null,

@@ -210,9 +210,7 @@ function ProjectMedia({ project }: { project: Project }) {
           key={section._key}
           title={section.title || "Project evidence"}
           description={section.description}
-          images={(technicalFirst
-            ? (section.images ?? []).toSorted((a, b) => Number(/technical/i.test(b.alt)) - Number(/technical/i.test(a.alt)))
-            : (section.images ?? []))
+          images={(section.images ?? [])
             .map((item) => evidenceImage(item.image, item._key, item.alt, item.caption))
             .filter((item): item is EvidenceImage => item !== null)}
         />
@@ -347,14 +345,14 @@ export default async function WorkPage({ params }: WorkPageProps) {
 
             {project._id === "project-garvicii-shalewa" ? (
               <>
-                <ProjectSection title="Ayomi’s role" value={project.role} />
+                <ProjectSection title="My role" value={project.role} />
                 <ProjectMedia project={project} />
               </>
             ) : null}
             <div className="case-study__details">
-              {project._id !== "project-garvicii-shalewa" ? <ProjectSection title="Ayomi’s role" value={project.role} /> : null}
+              {project._id !== "project-garvicii-shalewa" ? <ProjectSection title="My role" value={project.role} /> : null}
               <ProjectSection
-                title="Short context"
+                title="Project context"
                 value={project.projectContext}
               />
               <ProjectSection
@@ -370,7 +368,7 @@ export default async function WorkPage({ params }: WorkPageProps) {
                 value={project.execution}
               />
               <ProjectSection
-                title="Verified results"
+                title="Outcomes"
                 value={project.verifiedResults}
               />
 
